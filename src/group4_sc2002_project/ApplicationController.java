@@ -1,3 +1,5 @@
+package group4_sc2002_project;
+
 import java.time.LocalDate;
 
 public class ApplicationController {
