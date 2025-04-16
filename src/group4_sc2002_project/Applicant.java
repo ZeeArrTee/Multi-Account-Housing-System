@@ -47,10 +47,22 @@ public class Applicant extends User {
 		enquiries.add(new Enquiry(enquiryCount, this, message, LocalDate.now()));
 	}
 
-	void editEnquiry(Enquiry enquiry, String newMsg) {
+	void editEnquiry(int id, String newMsg) {
+		for (Enquiry enquiry : enquiries) {
+			if (enquiry.getId() == id) {
+				enquiry.setContent(newMsg);
+				break;
+			}
+		}
 	}
 
-	void deleteEnquiry(Enquiry enquiry) {
+	void deleteEnquiry(int id) {
+		for (Enquiry enquiry : enquiries) {
+			if (enquiry.getId() == id) {
+				enquiries.remove(enquiry);
+				break;
+			}
+		}
 	}
 
 	void displayEnquiries() {

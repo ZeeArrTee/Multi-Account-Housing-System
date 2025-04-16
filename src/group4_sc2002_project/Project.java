@@ -27,7 +27,6 @@ public class Project {
 		this.officerSlots = officerSlots;
 		this.assignedOfficers = new ArrayList<HDBOfficer>();
 		this.managerInCharge = managerInCharge;
-
 	}
 
 	List<Flat> getAvailableFlats(String flatType) {
