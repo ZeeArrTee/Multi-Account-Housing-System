@@ -30,7 +30,7 @@ public class Applicant extends User {
 
 	void applyForProject(Project project, String flatType, int id) {
 		if (isEligible(flatType)) {
-			application = new Application(id, this, project, flatType, ApplicationStatus.Pending, false);
+			application = new Application(id, this, project, flatType, ApplicationStatus.Pending);
 		}
 	}
 
@@ -44,7 +44,7 @@ public class Applicant extends User {
 
 	void submitEnquiry(String message) {
 		enquiryCount++;
-		enquiries.add(new Enquiry(enquiryCount, this, message, LocalDate.now(), ""));
+		enquiries.add(new Enquiry(enquiryCount, this, message, LocalDate.now()));
 	}
 
 	void editEnquiry(Enquiry enquiry, String newMsg) {
