@@ -1,10 +1,15 @@
 package group4_sc2002_project;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class HDBManager {
-	List<Project> managedProjects;
+	private List<Project> managedProjects;
+
+	HDBManager() {
+		managedProjects = new ArrayList<Project>();
+	}
 
 	List<Project> getManagedProjects() {
 		return managedProjects;
@@ -19,10 +24,12 @@ public class HDBManager {
 			String decision = input.next();
 			if (decision.compareTo("Y") == 0) {
 				application.setPendingWithdrawal(true);
+				input.close();
 				return true;
 
 			} else if (decision.compareTo("N") == 0) {
 				application.setPendingWithdrawal(false);
+				input.close();
 				return false;
 			}
 		}
