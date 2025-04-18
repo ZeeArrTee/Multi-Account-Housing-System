@@ -11,9 +11,8 @@ public class ApplicationController {
         }
 
         int generatedId = 0; //you can cook the hash thingy u wanted
-        Application application = new Application(generatedId, applicant, project, flatType, ApplicationStatus.Pending);
 
-        applicant.setApplication(application);
+        applicant.applyForProject(project, flatType, nextApplicationId++);
         return true;
     }
 
