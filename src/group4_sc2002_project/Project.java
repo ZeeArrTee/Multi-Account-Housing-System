@@ -34,10 +34,10 @@ public class Project {
 	}
 
 	int getAvailableUnitsCount(String flatType) {
-		return flats.stream().filter(flat -> flat.isAvailable()).toList();
+		return flats.stream().filter(flat -> flat.isAvailable()).toList().size();
 	}
 
-	boolean addOfficer(HDBOfficer officer) {
+	void addOfficer(HDBOfficer officer) {
 		assignedOfficers.add(officer);
 	}
 
