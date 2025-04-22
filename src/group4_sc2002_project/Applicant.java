@@ -43,18 +43,8 @@ public class Applicant extends User {
 		application.setPendingWithdrawal(false);
 	}
 
-	void submitEnquiry(String message) {
-		int id = applicantEnquiryController.submitEnquiry(message);
+	void updateEnquiryId(int id) {
 		enquiryId.add(id);
-
-	}
-
-	void editEnquiry(int id, String newMsg) {
-		applicantEnquiryController.editEnquiry(id, newMsg);
-	}
-
-	void deleteEnquiry(int id) {
-		applicantEnquiryController.deleteEnquiry(id);
 	}
 
 	void displayEnquiries() {

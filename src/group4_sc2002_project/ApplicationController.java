@@ -17,7 +17,7 @@ public class ApplicationController {
 	}
 
 	public boolean canApplyFor(Applicant applicant, Project project) {
-		if (applicant.viewApplication() != null) {
+		if (applicant.getApplication() != null) {
 			return false;
 		}
 
@@ -26,7 +26,7 @@ public class ApplicationController {
 	}
 
 	public void withdrawApplication(Applicant applicant) {
-		Application applic = applicant.viewApplication();
+		Application applic = applicant.getApplication();
 		if (applic != null && !applic.isWithdrawalRequested()) {
 			applic.setPendingWithdrawal(true);
 			applic.setStatus(ApplicationStatus.Withdrawal_Requested);
@@ -34,7 +34,7 @@ public class ApplicationController {
 	}
 
 	public ApplicationStatus getApplicationStatus(Applicant applicant) {
-		Application applic = applicant.viewApplication();
+		Application applic = applicant.getApplication();
 		if (applic != null) {
 			return applic.getStatus();
 		}

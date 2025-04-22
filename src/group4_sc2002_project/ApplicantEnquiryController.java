@@ -1,25 +1,28 @@
 package group4_sc2002_project;
 
-public class ApplicantEnquiryController {
-	ProjectEnquiryController projectEnquiryController;
+public class ApplicantEnquiryController extends EnquiryController {
+	// AdminEnquiryController projectEnquiryController;
 	Application application;
+	Applicant applicant;
 
 	ApplicantEnquiryController(Applicant applicant) {
-		Application application = applicant.getApplication();
-		projectEnquiryController = new ProjectEnquiryController(application);
+		this.application = applicant.getApplication();
+		this.applicant = applicant;
+		// projectEnquiryController = new AdminEnquiryController(application);
+		this.project = application.getProject();
 
 	}
 
-	public int submitEnquiry(String content) {
-		int id = projectEnquiryController.makeEnquiry(content);
-		return id;
+	public void submitEnquiry(String content) {
+		int id = project.makeEnquiry(applicant, content);
+		applicant.updateEnquiryId(id);
 	}
 
 	public void editEnquiry(int enquiryId, String newMsg) {
-		projectEnquiryController.editEnquiry(enquiryId, newMsg);
+		project.editEnquiry(enquiryId, newMsg);
 	}
 
 	public void deleteEnquiry(int enquiryId) {
-		projectEnquiryController.deleteEnquiry(enquiryId);
+		project.deleteEnquiry(enquiryId);
 	}
 }
