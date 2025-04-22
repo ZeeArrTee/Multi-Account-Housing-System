@@ -3,26 +3,24 @@ package group4_sc2002_project;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Account
-{
-    private String userID;
+public class User implements Account {
+	private String userID;
 	private String password = "password";
 	private int age;
 	private String maritalStatus;
-	private List<String> role;
+	private List<String> roles;
 
-    public User(String userID, String password, int age, String maritalStatus, String role)
-    {
-        this.userID = userID;
-        this.password = password;
-        this.age = age;
-        this.maritalStatus = maritalStatus;
-        this.role = new ArrayList<String>();
-        this.role.add("User");
-		this.role.add(role);
-    }
+	public User(String userID, String password, int age, String maritalStatus, String role) {
+		this.userID = userID;
+		this.password = password;
+		this.age = age;
+		this.maritalStatus = maritalStatus;
+		this.roles = new ArrayList<String>();
+		this.roles.add("User");
+		this.roles.add(role);
+	}
 
-    public String getUserID() {
+	public String getUserID() {
 		return userID;
 	}
 
@@ -43,12 +41,11 @@ public class User implements Account
 	}
 
 	public List<String> getRole() {
-		return role;
+		return roles;
 	}
 
-    public void modifyRole(String role) {
+	public void modifyRole(String role) {
 		roles.add(role);
 	}
-
 
 }
