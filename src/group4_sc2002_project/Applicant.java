@@ -32,12 +32,13 @@ public class Applicant extends Account {
 			application = new Application(this, project, flatType, ApplicationStatus.Pending);
 		}
 	}
+
 	public Application getApplication() {
 		return application;
 	}
 
 	public void requestWithdrawal() {
-		application.setPendingWithdrawal(false);
+		application.toggleWithdrawal();
 	}
 
 	public void addEnquiryId(int id) {
@@ -56,12 +57,12 @@ public class Applicant extends Account {
 		return bookedFlat;
 	}
 	// public void displayEnquiries() {
-	// 	for (int id : enquiryId) {
-	// 		Enquiry enquiry = application.getProject().getEnquiry(id);
-	// 		System.out.println("ID: " + id + " Created: " + enquiry.getCreatedDate());
-	// 		System.out.println(enquiry.getContent());
-	// 		System.out.println();
-	// 	}
+	// for (int id : enquiryId) {
+	// Enquiry enquiry = application.getProject().getEnquiry(id);
+	// System.out.println("ID: " + id + " Created: " + enquiry.getCreatedDate());
+	// System.out.println(enquiry.getContent());
+	// System.out.println();
+	// }
 	// }
 
 }
