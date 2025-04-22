@@ -3,13 +3,17 @@ import java.util.*;
 import java.time.*;
 
 public class ProjectService {
-	private List<Project> projectListing;
+	private static List<Project> projectListing;
 		
+	public ProjectService() {
+		projectListing = new ArrayList<Project>();
+	}
+	
 	public void createProject(Project project) {
 		projectListing.add(project);
 	}
 	
-	public List<Project> getProjectListing(){
+	public static List<Project> getProjectListing(){
 		return projectListing;
 	}
 	
