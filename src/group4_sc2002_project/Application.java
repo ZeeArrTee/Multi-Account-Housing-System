@@ -44,12 +44,4 @@ public class Application {
 		this.flatType = flatType;
 	}
 
-	void setPendingWithdrawal(boolean status) {
-		pendingWithdrawal = status;
-	}
-
-	boolean isWithdrawalRequested() {
-		return pendingWithdrawal;
-	}
-
 }
