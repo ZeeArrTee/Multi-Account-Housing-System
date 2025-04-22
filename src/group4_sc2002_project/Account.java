@@ -11,10 +11,10 @@ abstract class Account {
 	private List<String> role;
 
 	public Account(String id, String pw, int a, String marital, String role) {
-		userID = id;
-		password = pw;
-		age = a;
-		maritalStatus = marital;
+		this.userID = id;
+		this.password = pw;
+		this.age = a;
+		this.maritalStatus = marital;
 		this.role = new ArrayList<String>();
 		this.role.add("User");
 		this.role.add(role);
