@@ -1,6 +1,6 @@
 package group4_sc2002_project;
 
-public class HDBManager extends Account {
+public class HDBManager extends User {
 	private Project managedProject;
 
 	public HDBManager(String id, String pw, int age, String marital) {

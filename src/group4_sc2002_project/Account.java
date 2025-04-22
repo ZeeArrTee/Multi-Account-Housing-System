@@ -1,19 +1,20 @@
 package group4_sc2002_project;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public interface Account {
+interface Account {
 
-    String getUserID();
+	public String getUserID();
 
-    String getPassword();
+	public String getPassword();
 
-    void changePassword(String newPwd);
+	public void changePassword(String newPwd);
 
-    int getAge();
+	public int getAge();
 
-    String getMaritalStatus();
+	public String getMaritalStatus();
+
+	public List<String> getRole();
 
     List<String> getRole();
 }
