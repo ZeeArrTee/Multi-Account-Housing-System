@@ -37,7 +37,7 @@ public class Application {
 
 	public void toggleWithdrawal()
 	{
-		toggleWithdrawal = !toggleWithdrawal;
+		withdrawalRequested = !withdrawalRequested;
 	}
 
 	void setFlatType(String flatType) {
