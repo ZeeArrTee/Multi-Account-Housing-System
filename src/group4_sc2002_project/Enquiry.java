@@ -6,15 +6,12 @@ public class Enquiry {
 	private int id;
 	private Applicant applicant;
 	private String content;
-	private LocalDate createdDate;
 	private String reply;
-	private Project project;
 
-	Enquiry(int id, Applicant applicant, Project project, String message, LocalDate createdDate) {
+	Enquiry(int id, Applicant applicant, String content, Project project) {
 		this.id = id;
 		this.applicant = applicant;
-		this.content = message;
-		this.createdDate = createdDate;
+		this.content = content;
 		this.reply = "";
 		this.project = project;
 	}
@@ -35,20 +32,12 @@ public class Enquiry {
 		this.content = content;
 	}
 
-	LocalDate getCreatedDate() {
-		return createdDate;
-	}
-
 	String getReply() {
 		return reply;
 	}
 
 	void setReply(String reply) {
 		this.reply = reply;
-	}
-
-	String getProjectName() {
-		return project.getProjectName();
 	}
 
 }
