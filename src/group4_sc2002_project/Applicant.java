@@ -29,7 +29,7 @@ public class Applicant extends Account {
 
 	public void applyForProject(Project project, String flatType, int id) {
 		if (isEligible(flatType)) {
-			application = new Application(id, this, project, flatType, ApplicationStatus.Pending);
+			application = new Application(this, project, flatType, ApplicationStatus.Pending);
 		}
 	}
 	public Application getApplication() {
