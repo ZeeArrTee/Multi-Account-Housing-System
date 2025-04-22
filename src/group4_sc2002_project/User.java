@@ -46,5 +46,9 @@ public class User implements Account
 		return role;
 	}
 
+    public void modifyRole(String role) {
+		roles.add(role);
+	}
+
 
 }
