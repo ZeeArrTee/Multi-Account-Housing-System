@@ -1,20 +1,30 @@
 package group4_sc2002_project;
 
 public class Application {
-	private int id;
 	private Applicant applicant;
 	private Project project;
 	private ApplicationStatus status;
 	private String flatType;
-	private boolean pendingWithdrawal;
+	private boolean withdrawalRequested;
 
-	public Application(int id, Applicant applicant, Project proj, String fType, ApplicationStatus stat) {
-		this.id = id;
+	public Application(Applicant applicant, Project proj, String fType, ApplicationStatus stat) {
 		this.applicant = applicant;
 		this.project = proj;
 		this.flatType = fType;
 		this.status = stat;
-		this.pendingWithdrawal = false;
+		this.withdrawalRequested = false;
+	}
+
+	public Applicant getApplicant() {
+		return applicant;
+	}
+
+	public Project getProject() {
+		return project;
+	}
+
+	public String getFlatType() {
+		return flatType;
 	}
 
 	public ApplicationStatus getStatus() {
@@ -25,16 +35,13 @@ public class Application {
 		status = s;
 	}
 
-	int getId() {
-		return id;
+	public void toggleWithdrawal()
+	{
+		toggleWithdrawal = !toggleWithdrawal;
 	}
 
 	void setFlatType(String flatType) {
 		this.flatType = flatType;
-	}
-
-	String getFlatType() {
-		return flatType;
 	}
 
 	void setPendingWithdrawal(boolean status) {
@@ -45,11 +52,4 @@ public class Application {
 		return pendingWithdrawal;
 	}
 
-	Applicant getApplicant() {
-		return applicant;
-	}
-
-	Project getProject() {
-		return project;
-	}
 }
