@@ -34,6 +34,14 @@ public class Applicant extends User {
 		return bookedFlat;
 	}
 
+	public Application getApplication() {
+		return application;
+	}
+
+	public List<Integer> getEnquiryIds() {
+		return enquiryId;
+	}
+
 	public void setApplication(Application application) {
 		this.application = application;
 	}

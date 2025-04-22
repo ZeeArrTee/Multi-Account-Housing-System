@@ -15,6 +15,4 @@ interface Account {
 	public String getMaritalStatus();
 
 	public List<String> getRole();
-
-    List<String> getRole();
 }
