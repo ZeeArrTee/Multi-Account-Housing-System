@@ -1,15 +1,16 @@
 package group4_sc2002_project;
 
-public class HDBOfficer {
+public class HDBOfficer extends Account {
 	private Project handledProject;
 	private String registrationStatus;
 
-	public HDBOfficer(Project proj, String status) {
-		handledProject = proj;
-		registrationStatus = status;
+	public HDBOfficer(String userID, String password, int age, String maritalStatus, Project project) {
+		super(userID, password, age, maritalStatus,"HDBOfficer");
+		handledProject = project;
+		registrationStatus = null;
 	}
 
-	public String getRegisterationStatus() {
+	public String getRegistrationStatus() {
 		return registrationStatus;
 	}
 

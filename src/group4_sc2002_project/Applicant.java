@@ -32,7 +32,6 @@ public class Applicant extends Account {
 			application = new Application(id, this, project, flatType, ApplicationStatus.Pending);
 		}
 	}
-
 	public Application getApplication() {
 		return application;
 	}
@@ -56,5 +55,13 @@ public class Applicant extends Account {
 	public String getBookedFlat() {
 		return bookedFlat;
 	}
+	// public void displayEnquiries() {
+	// 	for (int id : enquiryId) {
+	// 		Enquiry enquiry = application.getProject().getEnquiry(id);
+	// 		System.out.println("ID: " + id + " Created: " + enquiry.getCreatedDate());
+	// 		System.out.println(enquiry.getContent());
+	// 		System.out.println();
+	// 	}
+	// }
 
 }
