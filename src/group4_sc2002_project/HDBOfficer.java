@@ -4,8 +4,8 @@ public class HDBOfficer extends Account {
 	private Project handledProject;
 	private String registrationStatus;
 
-	HDBOfficer(String userID, String password, int age, String maritalStatus, Project project) {
-		super(userID, age, maritalStatus,"HDBOfficer");
+	public HDBOfficer(String userID, String password, int age, String maritalStatus, Project project) {
+		super(userID, password, age, maritalStatus,"HDBOfficer");
 		handledProject = project;
 		registrationStatus = null;
 	}

@@ -8,36 +8,35 @@ public class Enquiry {
 	private String content;
 	private String reply;
 
-	Enquiry(int id, Applicant applicant, String content, Project project) {
+	public Enquiry(int id, Applicant applicant, Project project, String message, LocalDate createdDate) {
 		this.id = id;
 		this.applicant = applicant;
-		this.content = content;
+		this.content = message;
 		this.reply = "";
-		this.project = project;
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	Applicant getApplicant() {
+	public Applicant getApplicant() {
 		return applicant;
 	}
 
-	String getContent() {
+	public String getContent() {
 		return content;
 	}
 
-	void setContent(String content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 
-	String getReply() {
+	public String getReply() {
 		return reply;
 	}
 
-	void setReply(String reply) {
-		this.reply = reply;
+	public void setReply(String message) {
+		reply = message;
 	}
 
 }

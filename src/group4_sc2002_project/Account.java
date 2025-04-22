@@ -1,18 +1,23 @@
 package group4_sc2002_project;
 
-abstract class User {
+import java.util.ArrayList;
+import java.util.List;
+
+abstract class Account {
 	private String userID;
 	private String password = "password";
 	private int age;
 	private String maritalStatus;
-	private String role;
+	private List<String> role;
 
-	User(String id, String pw, int a, String marital, String r) {
+	public Account(String id, String pw, int a, String marital, String role) {
 		userID = id;
 		password = pw;
 		age = a;
 		maritalStatus = marital;
-		role = r;
+		this.role = new ArrayList<String>();
+		this.role.add("User");
+		this.role.add(role);
 	}
 
 	public String getUserID() {
@@ -23,8 +28,8 @@ abstract class User {
 		return password;
 	}
 
-	public void changePassword(String newPassword) {
-		password = newPassword;
+	public void changePassword(String newPwd) {
+		password = newPwd;
 	}
 
 	public int getAge() {
@@ -35,7 +40,7 @@ abstract class User {
 		return maritalStatus;
 	}
 
-	public String getRole() {
+	public List<String> getRole() {
 		return role;
 	}
 
