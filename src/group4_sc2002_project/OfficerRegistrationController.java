@@ -4,12 +4,11 @@ public class OfficerRegistrationController {
 	public void registerOfficer(HDBOfficer officer, Project project) {
 		project.addOfficer(officer);
 	}
-	
+
 	public boolean canRegister(HDBOfficer officer, Project project) {
-		if (officer.getHandledProject().isWithinApplicationPeriod(project.getOpenDate())) {
+		if (officer.getHandledProject().isWithinApplicationPeriod(project.getOpeningDate())) {
 			return false;
-		}
-		else {
+		} else {
 			return true;
 		}
 	}
