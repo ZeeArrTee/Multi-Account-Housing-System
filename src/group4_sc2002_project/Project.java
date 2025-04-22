@@ -39,6 +39,10 @@ public class Project {
 		isVisible = !isVisible;
 	}
 
+	public String getNeighbourhood() {
+		return neighbourhood;
+	}
+
 	public boolean isWithinApplicationPeriod(LocalDate date) {
 		return (date.isAfter(openDate) && date.isBefore(closeDate));
 	}
@@ -91,6 +95,10 @@ public class Project {
 		return projectName;
 	}
 
+	public Map<String, Integer> getUnits() {
+		return units;
+	}
+
 	public LocalDate getOpeningDate() {
 		return openDate;
 	}
@@ -130,5 +138,9 @@ public class Project {
 
 	public void incrementEnquiryCount() {
 		enquiryCount++;
+	}
+
+	public int getOfficerSlots() {
+		return officerSlots;
 	}
 }

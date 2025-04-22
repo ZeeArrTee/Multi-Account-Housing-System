@@ -4,7 +4,7 @@ public class HDBManager extends User {
 	private Project managedProject;
 
 	public HDBManager(String id, String pw, int age, String marital) {
-		super(id, pw, age, marital, "Applicant");
+		super(id, pw, age, marital, "Manager");
 		managedProject = null;
 	}
 
