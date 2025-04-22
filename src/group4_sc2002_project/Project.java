@@ -20,8 +20,8 @@ public class Project {
 	private List<Enquiry> enquiries;
 	private int enquiryCount;
 
-	public Project(String projectName, String neighbourhood, List<Flat> units, LocalDate openDate, LocalDate closeDate,
-			int officerSlots, HDBManager managerInCharge) {
+	public Project(String projectName, String neighbourhood, Map<String, Integer> units, LocalDate openDate,
+			LocalDate closeDate, int officerSlots, HDBManager managerInCharge) {
 		this.projectName = projectName;
 		this.neighbourhood = neighbourhood;
 		this.units = new HashMap<String, Integer>();
