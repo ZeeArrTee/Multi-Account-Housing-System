@@ -1,6 +1,6 @@
 package group4_sc2002_project;
 
-public class ApplicantEnquiryService extends EnquiryController {
+public class ApplicantEnquiryService implements ApplicantEnquiryView {
 	// AdminEnquiryController projectEnquiryController;
 	Project project;
 	Applicant applicant;
@@ -8,9 +8,23 @@ public class ApplicantEnquiryService extends EnquiryController {
 	ApplicantEnquiryService(Project project, Applicant applicant) {
 		this.project = project;
 		this.applicant = applicant;
-
 	}
-
+	
+	@Override
+	public void submitEnquiry() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void editEnquiry() {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void deleteEnquiry() {
+		// TODO Auto-generated method stub
+		
+	}
 	public void submitEnquiry(String message) {
 		Enquiry enquiry = new Enquiry(project.getEnquiryCount(), applicant, project, message);
 		project.addEnquiry(enquiry);
