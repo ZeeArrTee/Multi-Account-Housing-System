@@ -3,45 +3,17 @@ package group4_sc2002_project;
 import java.util.ArrayList;
 import java.util.List;
 
-abstract class Account {
-	private String userID;
-	private String password = "password";
-	private int age;
-	private String maritalStatus;
-	private List<String> role;
+public interface Account {
 
-	public Account(String id, String pw, int a, String marital, String role) {
-		this.userID = id;
-		this.password = pw;
-		this.age = a;
-		this.maritalStatus = marital;
-		this.role = new ArrayList<String>();
-		this.role.add("User");
-		this.role.add(role);
-	}
+    String getUserID();
 
-	public String getUserID() {
-		return userID;
-	}
+    String getPassword();
 
-	public String getPassword() {
-		return password;
-	}
+    void changePassword(String newPwd);
 
-	public void changePassword(String newPwd) {
-		password = newPwd;
-	}
+    int getAge();
 
-	public int getAge() {
-		return age;
-	}
+    String getMaritalStatus();
 
-	public String getMaritalStatus() {
-		return maritalStatus;
-	}
-
-	public List<String> getRole() {
-		return role;
-	}
-
+    List<String> getRole();
 }
