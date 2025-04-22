@@ -3,20 +3,18 @@ package group4_sc2002_project;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Applicant extends User {
+public class Applicant extends Account {
 	private Application application;
 	private List<Integer> enquiryId;
-	ApplicantEnquiryController applicantEnquiryController;
+	private String bookedFlat;
 
-	Applicant(String id, String pw, int a, String marital) {
-		super(id, pw, a, marital, "Applicant");
+	public Applicant(String id, String pw, int age, String marital) {
+		super(id, pw, age, marital, "Applicant");
 		application = null;
 		enquiryId = new ArrayList<Integer>();
-		applicantEnquiryController = new ApplicantEnquiryController(this);
-
 	}
 
-	boolean isEligible(String flatType) {
+	public boolean isEligible(String flatType) {
 		if (application != null) {
 			return false;
 		}
@@ -29,31 +27,34 @@ public class Applicant extends User {
 		}
 	}
 
-	void applyForProject(Project project, String flatType, int id) {
+	public void applyForProject(Project project, String flatType, int id) {
 		if (isEligible(flatType)) {
 			application = new Application(id, this, project, flatType, ApplicationStatus.Pending);
 		}
 	}
 
-	Application getApplication() {
+	public Application getApplication() {
 		return application;
 	}
 
-	void requestWithdrawal() {
+	public void requestWithdrawal() {
 		application.setPendingWithdrawal(false);
 	}
 
-	void updateEnquiryId(int id) {
+	public void addEnquiryId(int id) {
 		enquiryId.add(id);
 	}
 
-	void displayEnquiries() {
-		for (int id : enquiryId) {
-			Enquiry enquiry = application.getProject().getEnquiry(id);
-			System.out.println("ID: " + id + " Created: " + enquiry.getCreatedDate());
-			System.out.println(enquiry.getContent());
-			System.out.println();
-		}
+	public void removeEnquiryId(int id) {
+		enquiryId.remove(id);
+	}
+
+	public void setBookedFlat(String flatType) {
+		bookedFlat = flatType;
+	}
+
+	public String getBookedFlat() {
+		return bookedFlat;
 	}
 
 }

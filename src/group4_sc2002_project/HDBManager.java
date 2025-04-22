@@ -1,21 +1,24 @@
 package group4_sc2002_project;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
-public class HDBManager {
-	private List<Project> managedProjects;
+public class HDBManager extends Account {
+	private Project managedProject;
 
-	HDBManager() {
-		managedProjects = new ArrayList<Project>();
+	public HDBManager(String id, String pw, int age, String marital) {
+		super(id, pw, age, marital, "Applicant");
+		managedProject = null;
 	}
 
-	List<Project> getManagedProjects() {
-		return managedProjects;
+	public Project getManagedProject() {
+		return managedProject;
 	}
 
-	Boolean approveRejectWithdrawal(Application application) {
+	public void setManagedProject(Project project) {
+		managedProject = project;
+	}
+
+	public Boolean approveRejectWithdrawal(Application application) {
 		Scanner input = new Scanner(System.in);
 		System.out.println(application.getId() + application.getApplicant().getUserID()
 				+ application.getApplicant().getAge() + application.getFlatType());

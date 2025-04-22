@@ -10,7 +10,7 @@ public class Enquiry {
 	private String reply;
 	private Project project;
 
-	Enquiry(int id, Applicant applicant, Project project, String message, LocalDate createdDate) {
+	public Enquiry(int id, Applicant applicant, Project project, String message, LocalDate createdDate) {
 		this.id = id;
 		this.applicant = applicant;
 		this.content = message;
@@ -19,35 +19,35 @@ public class Enquiry {
 		this.project = project;
 	}
 
-	int getId() {
+	public int getId() {
 		return id;
 	}
 
-	Applicant getApplicant() {
+	public Applicant getApplicant() {
 		return applicant;
 	}
 
-	String getContent() {
+	public String getContent() {
 		return content;
 	}
 
-	void setContent(String content) {
+	public void setContent(String content) {
 		this.content = content;
 	}
 
-	LocalDate getCreatedDate() {
+	public LocalDate getCreatedDate() {
 		return createdDate;
 	}
 
-	String getReply() {
+	public String getReply() {
 		return reply;
 	}
 
-	void setReply(String reply) {
+	public void setReply(String reply) {
 		this.reply = reply;
 	}
 
-	String getProjectName() {
+	public String getProjectName() {
 		return project.getProjectName();
 	}
 

@@ -2,13 +2,15 @@ package group4_sc2002_project;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Project {
 
 	private String projectName;
 	private String neighbourhood;
-	private List<Flat> flats;
+	private Map<String, Integer> units;
 	private LocalDate openDate;
 	private LocalDate closeDate;
 	private boolean isVisible;
@@ -18,11 +20,11 @@ public class Project {
 	private List<Enquiry> enquiries;
 	private int enquiryCount;
 
-	Project(String projectName, String neighbourhood, List<Flat> flats, LocalDate openDate, LocalDate closeDate,
+	public Project(String projectName, String neighbourhood, List<Flat> units, LocalDate openDate, LocalDate closeDate,
 			int officerSlots, HDBManager managerInCharge) {
 		this.projectName = projectName;
 		this.neighbourhood = neighbourhood;
-		this.flats = flats;
+		this.units = new HashMap<String, Integer>();
 		this.openDate = openDate;
 		this.closeDate = closeDate;
 		this.isVisible = true;
@@ -33,64 +35,71 @@ public class Project {
 		this.enquiryCount = 0;
 	}
 
-	List<Flat> getAvailableFlats(String flatType) {
-		return flats.stream().filter(flat -> flat.getFlatType() == flatType).toList();
-	}
-
-	String getProjectName() {
-		return projectName;
-	}
-
-	int getAvailableUnitsCount(String flatType) {
-		return flats.stream().filter(flat -> flat.isAvailable()).toList().size();
-	}
-
-	void addOfficer(HDBOfficer officer) {
-		assignedOfficers.add(officer);
-	}
-
-	HDBManager getManager() {
-		return managerInCharge;
-	}
-
-	void toggleVisibility() {
+	public void toggleVisibilty() {
 		isVisible = !isVisible;
 	}
 
-	boolean isWithinApplicationPeriod(LocalDate date) {
+	public boolean isWithinApplicationPeriod(LocalDate date) {
 		return (date.isAfter(openDate) && date.isBefore(closeDate));
 	}
 
-	Enquiry getEnquiry(int id) {
-		for (Enquiry enquiry : enquiries) {
-			if (enquiry.getId() == id) {
-				return enquiry;
-			}
-		}
-		return null;
+	public void setProjectName(String newName) {
+		projectName = newName;
 	}
 
-	int makeEnquiry(Applicant applicant, String message) {
-		Enquiry enquiry = new Enquiry(enquiryCount, applicant, this, message, LocalDate.now());
-		enquiryCount++;
-		enquiries.add(enquiry);
-		return enquiryCount - 1;
+	public void setUnits(String flatType, int count) {
+		units.put(flatType, count);
 	}
 
-	void editEnquiry(int id, String message) {
-		for (Enquiry enquiry : enquiries) {
-			if (enquiry.getId() == id) {
-				enquiry.setContent(message);
-				break;
-			}
+	public void setOpenDate(LocalDate date) {
+		openDate = date;
+	}
+
+	public void setCloseDate(LocalDate date) {
+		closeDate = date;
+	}
+
+	public void addOfficer(HDBOfficer officer) {
+		if (officerSlots > 0) {
+			assignedOfficers.add(officer);
+			officerSlots--;
 		}
 	}
 
-	void deleteEnquiry(int id) {
-		for (Enquiry enquiry : enquiries) {
-			if (enquiry.getId() == id) {
-				enquiries.remove(enquiry);
+	public void removeOfficer(HDBOfficer officer) {
+		for (HDBOfficer off : assignedOfficers) {
+			if (off.getUserID().compareTo(officer.getUserID()) == 0) {
+				assignedOfficers.remove(off);
 			}
 		}
 	}
+
+	public int getAvailableUnitsCount(String flatType) {
+		return units.get(flatType);
+	}
+
+	public String getProjectName() {
+		return projectName;
+	}
+
+	public LocalDate getOpeningDate() {
+		return openDate;
+	}
+
+	public LocalDate getClosingDate() {
+		return closeDate;
+	}
+
+	public HDBManager getManager() {
+		return managerInCharge;
+	}
+
+	public List<HDBOfficer> getOfficers() {
+		return assignedOfficers;
+	}
+
+	public List<Enquiry> getEnquiries() {
+		return enquiries;
+	}
+
 }

@@ -4,7 +4,7 @@ public class HDBOfficer {
 	private Project handledProject;
 	private String registrationStatus;
 
-	HDBOfficer(Project proj, String status) {
+	public HDBOfficer(Project proj, String status) {
 		handledProject = proj;
 		registrationStatus = status;
 	}
