@@ -1,17 +1,18 @@
 package group4_sc2002_project;
 
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Applicant extends User {
 	private Application application;
-	private List<Enquiry> enquiries;
-	private int enquiryCount;
+	private List<Integer> enquiryId;
+	ApplicantEnquiryController applicantEnquiryController;
 
 	Applicant(String id, String pw, int a, String marital) {
 		super(id, pw, a, marital, "Applicant");
 		application = null;
-		enquiryCount = 0;
+		enquiryId = new ArrayList<Integer>();
+		applicantEnquiryController = new ApplicantEnquiryController(this);
 
 	}
 
@@ -34,7 +35,7 @@ public class Applicant extends User {
 		}
 	}
 
-	Application viewApplication() {
+	Application getApplication() {
 		return application;
 	}
 
@@ -43,31 +44,23 @@ public class Applicant extends User {
 	}
 
 	void submitEnquiry(String message) {
-		enquiryCount++;
-		enquiries.add(new Enquiry(enquiryCount, this, message, LocalDate.now()));
+		int id = applicantEnquiryController.submitEnquiry(message);
+		enquiryId.add(id);
+
 	}
 
 	void editEnquiry(int id, String newMsg) {
-		for (Enquiry enquiry : enquiries) {
-			if (enquiry.getId() == id) {
-				enquiry.setContent(newMsg);
-				break;
-			}
-		}
+		applicantEnquiryController.editEnquiry(id, newMsg);
 	}
 
 	void deleteEnquiry(int id) {
-		for (Enquiry enquiry : enquiries) {
-			if (enquiry.getId() == id) {
-				enquiries.remove(enquiry);
-				break;
-			}
-		}
+		applicantEnquiryController.deleteEnquiry(id);
 	}
 
 	void displayEnquiries() {
-		for (Enquiry enquiry : enquiries) {
-			System.out.println("ID: " + enquiry.getId() + " Created: " + enquiry.getCreatedDate());
+		for (int id : enquiryId) {
+			Enquiry enquiry = application.getProject().getEnquiry(id);
+			System.out.println("ID: " + id + " Created: " + enquiry.getCreatedDate());
 			System.out.println(enquiry.getContent());
 			System.out.println();
 		}

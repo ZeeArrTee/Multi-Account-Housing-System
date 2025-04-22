@@ -15,6 +15,8 @@ public class Project {
 	private int officerSlots;
 	private List<HDBOfficer> assignedOfficers;
 	private HDBManager managerInCharge;
+	private List<Enquiry> enquiries;
+	private int enquiryCount;
 
 	Project(String projectName, String neighbourhood, List<Flat> flats, LocalDate openDate, LocalDate closeDate,
 			int officerSlots, HDBManager managerInCharge) {
@@ -27,10 +29,16 @@ public class Project {
 		this.officerSlots = officerSlots;
 		this.assignedOfficers = new ArrayList<HDBOfficer>();
 		this.managerInCharge = managerInCharge;
+		this.enquiries = new ArrayList<Enquiry>();
+		this.enquiryCount = 0;
 	}
 
 	List<Flat> getAvailableFlats(String flatType) {
 		return flats.stream().filter(flat -> flat.getFlatType() == flatType).toList();
+	}
+
+	String getProjectName() {
+		return projectName;
 	}
 
 	int getAvailableUnitsCount(String flatType) {
@@ -51,5 +59,38 @@ public class Project {
 
 	boolean isWithinApplicationPeriod(LocalDate date) {
 		return (date.isAfter(openDate) && date.isBefore(closeDate));
+	}
+
+	Enquiry getEnquiry(int id) {
+		for (Enquiry enquiry : enquiries) {
+			if (enquiry.getId() == id) {
+				return enquiry;
+			}
+		}
+		return null;
+	}
+
+	int makeEnquiry(Applicant applicant, String message) {
+		Enquiry enquiry = new Enquiry(enquiryCount, applicant, this, message, LocalDate.now());
+		enquiryCount++;
+		enquiries.add(enquiry);
+		return enquiryCount - 1;
+	}
+
+	void editEnquiry(int id, String message) {
+		for (Enquiry enquiry : enquiries) {
+			if (enquiry.getId() == id) {
+				enquiry.setContent(message);
+				break;
+			}
+		}
+	}
+
+	void deleteEnquiry(int id) {
+		for (Enquiry enquiry : enquiries) {
+			if (enquiry.getId() == id) {
+				enquiries.remove(enquiry);
+			}
+		}
 	}
 }

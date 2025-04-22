@@ -10,6 +10,16 @@ public class Receipt {
 	private String unitId;
 	private LocalDate bookingDate;
 
+	Receipt(int receiptId, Applicant applicant, Project project, String flatType, String unitId,
+			LocalDate bookingDate) {
+		this.receiptId = receiptId;
+		this.applicant = applicant;
+		this.project = project;
+		this.flatType = flatType;
+		this.unitId = unitId;
+		this.bookingDate = bookingDate;
+	}
+
 	public int getReceiptId() {
 		return receiptId;
 	}
