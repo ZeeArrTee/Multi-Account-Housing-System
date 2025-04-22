@@ -74,6 +74,15 @@ public class Project {
 		}
 	}
 
+	public void removeEnquiry(int enquiryId) {
+		for (Enquiry enquiry : enquiries) {
+			if (enquiry.getId() == enquiryId) {
+				enquiries.remove(enquiry);
+				break;
+			}
+		}
+	}
+
 	public int getAvailableUnitsCount(String flatType) {
 		return units.get(flatType);
 	}
@@ -102,4 +111,24 @@ public class Project {
 		return enquiries;
 	}
 
+	public Enquiry getEnquiry(int enquiryId) {
+		for (Enquiry enquiry : enquiries) {
+			if (enquiry.getId() == enquiryId) {
+				return enquiry;
+			}
+		}
+		return null;
+	}
+
+	public void addEnquiry(Enquiry enquiry) {
+		enquiries.add(enquiry);
+	}
+
+	public int getEnquiryCount() {
+		return enquiryCount;
+	}
+
+	public void incrementEnquiryCount() {
+		enquiryCount++;
+	}
 }
