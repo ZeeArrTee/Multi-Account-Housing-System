@@ -1,5 +1,6 @@
 package group4_sc2002_project;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -43,10 +44,9 @@ public class OfficerService extends OfficerDisplay {
 
 	}
 
-	@Override
-	public Application retrieveApplicationDetails(String userID) {
-		// TODO Auto-generated method stub
-		return null;
+	public Receipt generateReceipt(Application application) {
+		Receipt receipt = new Receipt(application.getApplicant(), application.getProject(), application.getFlatType(),
+				LocalDate.now());
+		return receipt;
 	}
-
 }
