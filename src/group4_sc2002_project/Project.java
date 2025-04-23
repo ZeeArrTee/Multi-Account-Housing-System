@@ -37,7 +37,7 @@ public class Project {
 		this.assignedOfficers = new ArrayList<HDBOfficer>();
 	}
 
-	public void toggleVisibilty() {
+	public void toggleVisibility() {
 		isVisible = !isVisible;
 	}
 
@@ -168,5 +168,15 @@ public class Project {
 
 	public int getOfficerSlots() {
 		return officerSlots;
+	}
+
+	public void setNeighbourhood(String neighbourhood) 
+	{
+		this.neighbourhood = neighbourhood;
+	}
+	
+	public void setOfficerSlots(int slots) 
+	{
+		this.officerSlots = slots;
 	}
 }
