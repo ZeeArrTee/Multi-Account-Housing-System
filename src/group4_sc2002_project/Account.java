@@ -4,6 +4,8 @@ import java.util.List;
 
 interface Account {
 
+	public String getName();
+
 	public String getUserID();
 
 	public String getPassword();

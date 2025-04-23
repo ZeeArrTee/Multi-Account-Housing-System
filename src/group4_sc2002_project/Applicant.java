@@ -8,8 +8,8 @@ public class Applicant extends User {
 	private List<Integer> enquiryId;
 	private String bookedFlat;
 
-	public Applicant(String name, String id, String pw, int age, String marital) {
-		super(name, id, pw, age, marital, "Applicant");
+	public Applicant(String name, String userID, String password, int age, String maritalStatus) {
+		super(name, userID, password, age, maritalStatus, "Applicant");
 		application = null;
 		enquiryId = new ArrayList<Integer>();
 	}

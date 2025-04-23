@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ManagerService {
-	HDBManager manager;
-	Project project;
-	List<Application> apps;
+	private HDBManager manager;
+	private Project project;
+	private List<Application> apps;
 
 	private static Map<Project, ArrayList<User>> registrations;
 
