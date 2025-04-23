@@ -66,7 +66,8 @@ public class Project {
 	}
 
 	public boolean isWithinApplicationPeriod(LocalDate date) {
-		return (date.isAfter(openDate) && date.isBefore(closeDate));
+		return ((date.isAfter(openDate) || date.isEqual(openDate))
+				&& (date.isBefore(closeDate) || date.isEqual(closeDate)));
 	}
 
 	public void setProjectName(String newName) {

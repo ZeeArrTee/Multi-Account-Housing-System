@@ -18,7 +18,7 @@ public abstract class ApplicationView {
 	public Applicant applyForProject(String flatType) {
 		Applicant applicant = new Applicant(user.getName(), user.getUserID(), user.getPassword(), user.getAge(),
 				user.getMaritalStatus());
-		if (isEligible(flatType)) {
+		if (isEligible(user, flatType)) {
 			application = new Application(applicant, project, flatType, ApplicationStatus.Pending);
 		}
 		applicant.setApplication(application);
@@ -26,7 +26,7 @@ public abstract class ApplicationView {
 		return applicant;
 	}
 
-	public boolean isEligible(String flatType) {
+	public static boolean isEligible(User user, String flatType) {
 		if (user.getMaritalStatus() == "Single" && user.getAge() >= 35) {
 			return flatType == "2-Room";
 		} else if (user.getMaritalStatus() == "Married" && user.getAge() >= 21) {

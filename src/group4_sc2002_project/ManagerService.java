@@ -1,6 +1,9 @@
 package group4_sc2002_project;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class ManagerService {
@@ -8,10 +11,13 @@ public class ManagerService {
 	Project project;
 	List<Application> apps;
 
+	private static Map<Project, ArrayList<User>> registrations;
+
 	ManagerService(HDBManager manager, Project project) {
 		this.manager = manager;
 		this.project = project;
 		this.apps = project.getApplications();
+		registrations = new HashMap<Project, ArrayList<User>>();
 	}
 
 	public boolean processWithdrawal(Application application) {
@@ -33,6 +39,20 @@ public class ManagerService {
 			}
 		}
 
+	}
+
+	public static Map<Project, ArrayList<User>> getRegistrations() {
+		return registrations;
+	}
+
+	public static void processRegistration(User user, Project project) {
+		ArrayList<User> temp = registrations.get(project);
+		temp.remove(user);
+		registrations.put(project, temp);
+	}
+
+	public static List<User> getPendingRegistration(Project project) {
+		return registrations.get(project);
 	}
 
 	public boolean processApplication(Application application, boolean decision) {
@@ -71,6 +91,18 @@ public class ManagerService {
 
 	public void replyEnquiry(Enquiry enquiry, String message) {
 		enquiry.setReply(message);
+	}
+
+	public boolean registerOfficer(User user, Project project) {
+		if (project.getManager() != manager) {
+			System.out.println("Access Denied");
+			return false;
+		}
+		HDBOfficer officer = new HDBOfficer(user.getName(), user.getUserID(), user.getPassword(), user.getAge(),
+				user.getMaritalStatus(), project);
+		boolean success = project.addOfficer(officer);
+		processRegistration(user, project);
+		return success;
 	}
 
 }

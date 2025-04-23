@@ -5,7 +5,7 @@ public class HDBOfficer extends Applicant {
 	private String registrationStatus;
 
 	public HDBOfficer(String name, String userID, String password, int age, String maritalStatus, Project project) {
-		super(name,userID, password, age, maritalStatus);
+		super(name, userID, password, age, maritalStatus);
 		super.modifyRole("HDBOfficer");
 		handledProject = project;
 		registrationStatus = null;
