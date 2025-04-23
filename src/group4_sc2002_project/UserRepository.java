@@ -5,104 +5,92 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-public class UserRepository
-{
-    private static final String applicantFile = "ApplicantList.csv";
-    private static final String officerFile = "OfficerList.csv";
-    private static final String managerFile = "ManagerList.csv";
+public class UserRepository {
+	private static final String applicantFile = "ApplicantList.csv";
+	private static final String officerFile = "OfficerList.csv";
+	private static final String managerFile = "ManagerList.csv";
 
-    public List<User> loadAllUsers() 
-    {
-        List<User> users = new ArrayList<>();
-        users.addAll(loadUsersFromFile(applicantFile));
-        users.addAll(loadUsersFromFile(officerFile));
-        users.addAll(loadUsersFromFile(managerFile));
-        return users;
-    }
+	public List<User> loadAllUsers() {
+		List<User> users = new ArrayList<>();
+		users.addAll(loadUsersFromFile(applicantFile));
+		users.addAll(loadUsersFromFile(officerFile));
+		users.addAll(loadUsersFromFile(managerFile));
+		return users;
+	}
 
-    private List<User> loadUsersFromFile(String fileName) {
-        List<User> loaded = new ArrayList<>();
+	private List<User> loadUsersFromFile(String fileName) {
+		List<User> loaded = new ArrayList<>();
+		System.out.println(System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + fileName);
+		try (BufferedReader br = new BufferedReader(
+				new FileReader(System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + fileName))) {
+			String line;
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) 
-        {
-            String line;
+			while ((line = br.readLine()) != null) {
+				String[] parts = line.split(",");
+				if (parts.length < 6)
+					continue;
 
-            while ((line = br.readLine()) != null) 
-            {
-                String[] parts = line.split(",");
-                if (parts.length < 6) continue;
+				String name = parts[0];
+				String id = parts[1];
+				String pw = parts[2];
+				int age = Integer.parseInt(parts[3]);
+				String status = parts[4];
+				String role = parts[5];
 
-                String name = parts[0];
-                String id = parts[1];
-                String pw = parts[2];
-                int age = Integer.parseInt(parts[3]);
-                String status = parts[4];
-                String role = parts[5];
+				loaded.add(new User(name, id, pw, age, status, role));
+			}
+		} catch (IOException e) {
+			System.out.println("Failed to load: " + fileName);
+		}
 
-                loaded.add(new User(name, id, pw, age, status, role));
-            }
-        } 
-        catch (IOException e) 
-        {
-            System.out.println("Failed to load: " + fileName);
-        }
+		return loaded;
+	}
 
-        return loaded;
-    }
+	public void saveUser(User user) {
+		String file = getFileForRole(user.getRole().get(1));
+		try (FileWriter fw = new FileWriter(file, true)) {
+			fw.write(String.join(",", user.getName(), user.getUserID(), user.getPassword(),
+					String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)) + "\n");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-    public void saveUser(User user) 
-    {
-        String file = getFileForRole(user.getRole().get(1));
-        try (FileWriter fw = new FileWriter(file, true)) 
-        {
-            fw.write(String.join(",", user.getName(), user.getUserID(), user.getPassword(), String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)) + "\n");
-        } 
-        catch (IOException e) 
-        {
-            e.printStackTrace();
-        }
-    }
+	public void overwriteAllUsers(List<User> users) {
+		Map<String, List<User>> roleMap = new HashMap<>();
+		roleMap.put(applicantFile, new ArrayList<>());
+		roleMap.put(officerFile, new ArrayList<>());
+		roleMap.put(managerFile, new ArrayList<>());
 
-    public void overwriteAllUsers(List<User> users) 
-    {
-        Map<String, List<User>> roleMap = new HashMap<>();
-        roleMap.put(applicantFile, new ArrayList<>());
-        roleMap.put(officerFile, new ArrayList<>());
-        roleMap.put(managerFile, new ArrayList<>());
+		for (User user : users) {
+			String file = getFileForRole(user.getRole().get(1));
+			roleMap.get(file).add(user);
+		}
 
-        for (User user : users) 
-        {
-            String file = getFileForRole(user.getRole().get(1));
-            roleMap.get(file).add(user);
-        }
+		for (String file : roleMap.keySet()) {
+			try (PrintWriter pw = new PrintWriter(new FileWriter(file))) {
+				for (User user : roleMap.get(file)) {
+					pw.println(String.join(",", user.getName(), user.getUserID(), user.getPassword(),
+							String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)));
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
-        for (String file : roleMap.keySet()) 
-        {
-            try (PrintWriter pw = new PrintWriter(new FileWriter(file))) 
-            {
-                for (User user : roleMap.get(file)) 
-                {
-                    pw.println(String.join(",", user.getName(), user.getUserID(), user.getPassword(), String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)));
-                }
-            } 
-            catch (IOException e) 
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private String getFileForRole(String role) 
-    {
-        return switch (role) 
-        {
-            case "Applicant" -> applicantFile;
-            case "HDBOfficer" -> officerFile;
-            case "HDBManager" -> managerFile;
-            default -> throw new IllegalArgumentException("Invalid role: " + role);
-        };
-    }
+	private String getFileForRole(String role) {
+		return switch (role) {
+		case "Applicant" -> applicantFile;
+		case "HDBOfficer" -> officerFile;
+		case "HDBManager" -> managerFile;
+		default -> throw new IllegalArgumentException("Invalid role: " + role);
+		};
+	}
 
 }
