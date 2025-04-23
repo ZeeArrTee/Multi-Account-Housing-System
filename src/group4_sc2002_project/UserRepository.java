@@ -96,6 +96,7 @@ public class UserRepository {
 
 	private String getFileForRole(String role) {
 		return switch (role) {
+		case "User" -> applicantFile;
 		case "Applicant" -> applicantFile;
 		case "HDBOfficer" -> officerFile;
 		case "HDBManager" -> managerFile;
