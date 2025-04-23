@@ -34,18 +34,19 @@ public class AuthenticationService
         }
     }
 
-    public void createUser(String name, String userID, String password, int age, String maritalStatus, String role) 
+    public User createUser(String name, String userID, String password, int age, String maritalStatus, String role) 
     {
         if (findUserById(userID) != null) 
         {
             System.out.println("User already exists.");
-            return;
+            return null;
         }
 
         User newUser = new User(name, userID, password, age, maritalStatus, role);
         users.add(newUser);
         userRepo.saveUser(newUser);
         System.out.println("User created successfully.");
+        return newUser;
     }
 
     public void changePassword(String userID, String newPassword) 
