@@ -12,8 +12,7 @@ public class ProjectService implements ProjectView {
 		projectListing = new ArrayList<Project>();
 	}
 
-	@Override
-	public void displayProjects() {
+	public static void displayProjects() {
 		for (Project project : projectListing) {
 			Map<String, Integer> units = project.getUnits();
 			System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
@@ -113,6 +112,16 @@ public class ProjectService implements ProjectView {
 			if (project.getProjectName() == projectName)
 				projectListing.remove(project);
 		}
+	}
+
+	@Override
+	public void displayProject(String name) {
+		Project project = findProjectName(name);
+		Map<String, Integer> units = project.getUnits();
+		System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
+				+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()
+				+ " Remaining Officer Slots: " + project.getOfficerSlots() + " Flats "
+				+ units.keySet().stream().map(key -> key + ": " + units.get(key)));
 	}
 
 }
