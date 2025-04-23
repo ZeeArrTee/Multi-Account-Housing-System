@@ -1,40 +1,39 @@
 package group4_sc2002_project;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-public class AuthenticationService {
-	private List<User> users = new ArrayList<>();
-	private final UserRepository userRepo;
+public class AuthenticationService
+{
+    private List<User> users = new ArrayList<>();
+    private final UserRepository userRepo;
 
-	public AuthenticationService() {
-		userRepo = new UserRepository();
-		users = userRepo.loadAllUsers();
-	}
+    public AuthenticationService()
+    {
+        userRepo = new UserRepository();
+        users = userRepo.loadAllUsers();
+    }
 
-	public User loginUser(String userID, String password) {
-		User user = findUserById(userID);
-		if (user == null) {
-			System.out.println("User not found.");
-			return null;
-		}
+    public User loginUser(String userID, String password) 
+    {
+        User user = findUserById(userID);
+        if (user == null) 
+        {
+            System.out.println("User not found.");
+            return null;
+        }
 
-		if (user.getPassword().equals(password)) {
-			System.out.println("Login successful. Role: " + user.getRole().get(1));
-			return user;
-		} else {
-			System.out.println("Incorrect password.");
-			return null;
-		}
-	}
 
-	public void createUser(String name, String userID, String password, int age, String maritalStatus, String role) {
-		if (findUserById(userID) != null) {
-			System.out.println("User already exists.");
-			return;
-		}
+        if (user.getPassword().equals(password)) 
+        {
+            System.out.println("Login successful. Role: " + user.getRole().get(1));
+            return user;
+        } else 
+        {
+            System.out.println("Incorrect password.");
+            return null;
+        }
+    }
 
-<<<<<<< HEAD
     public User createUser(String name, String userID, String password, int age, String maritalStatus, String role) 
     {
         if (findUserById(userID) != null) 
@@ -49,33 +48,34 @@ public class AuthenticationService {
         System.out.println("User created successfully.");
         return newUser;
     }
-=======
-		User newUser = new User(name, userID, password, age, maritalStatus, role);
-		users.add(newUser);
-		userRepo.saveUser(newUser);
-		System.out.println("User created successfully.");
-	}
 
-	public void changePassword(String userID, String newPassword) {
-		User user = findUserById(userID);
->>>>>>> 9ca250bc3df1ab7286ca38d3f4efe87cc56cbeb1
+    public void changePassword(String userID, String newPassword) 
+    {
+        User user = findUserById(userID);
 
-		if (user != null) {
-			user.changePassword(newPassword);
-			userRepo.overwriteAllUsers(users);
-			System.out.println("Password changed successfully.");
-		} else {
-			System.out.println("User not found.");
-		}
-	}
+        if (user != null) 
+        {
+            user.changePassword(newPassword);
+            userRepo.overwriteAllUsers(users);
+            System.out.println("Password changed successfully.");
+        } else 
+        {
+            System.out.println("User not found.");
+        }
+    }
 
-	private User findUserById(String userID) {
-		for (User user : users) {
-			if (user.getUserID().equals(userID)) {
-				return user;
-			}
-		}
-		return null;
-	}
+    private User findUserById(String userID) 
+    {
+        for (User user : users) 
+        {
+            if (user.getUserID().equals(userID)) 
+            {
+                return user;
+            }
+        }
+        return null;
+    }
 
+
+    
 }
