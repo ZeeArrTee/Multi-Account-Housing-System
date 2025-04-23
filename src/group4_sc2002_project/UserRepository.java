@@ -25,21 +25,29 @@ public class UserRepository
     private List<User> loadUsersFromFile(String fileName) {
         List<User> loaded = new ArrayList<>();
 
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) 
+        try (BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + fileName))) 
         {
             String line;
-
+            boolean isFirstLine = true;
+            
             while ((line = br.readLine()) != null) 
             {
+            	if (isFirstLine) {
+            		isFirstLine = false;
+            		continue;
+            	}
                 String[] parts = line.split(",");
                 if (parts.length < 6) continue;
 
                 String name = parts[0];
                 String id = parts[1];
-                String pw = parts[2];
-                int age = Integer.parseInt(parts[3]);
-                String status = parts[4];
+                int age = Integer.parseInt(parts[2]);
+                String status = parts[3];
+                String pw = parts[4];
                 String role = parts[5];
+                if (role.equals("")) {
+                	role = "User";
+                }
 
                 loaded.add(new User(name, id, pw, age, status, role));
             }

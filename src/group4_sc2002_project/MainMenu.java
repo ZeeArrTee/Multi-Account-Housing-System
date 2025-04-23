@@ -11,7 +11,7 @@ public class MainMenu {
 		while (true) {
 			System.out.println("Key in your userID: (Key in # to go back)");
 			userID = s.next();
-			if (userID == "#") {
+			if (userID.equals("#")) {
 				break;
 			}
 			System.out.println("Key in your password:");
