@@ -1,17 +1,21 @@
 package group4_sc2002_project;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class MainMenu {
 	public static Scanner s = new Scanner(System.in);
+
 	public static User Login() {
 		AuthenticationService service = new AuthenticationService();
 		String userID, password;
 		User check = null;
 		int choice;
 		do {
-		System.out.println("Enter your choice:\n1) Login\n2) Create User\n3) Reset Password\n4) Exit");
-		choice = s.nextInt();
-		switch(choice) {
+			System.out.println("Enter your choice:\n1) Login\n2) Create User\n3) Reset Password\n4) Exit");
+			choice = s.nextInt();
+			switch (choice) {
 			case 1:
 				while (true) {
 					System.out.println("Key in your userID: (Key in # to go back)");
@@ -48,7 +52,7 @@ public class MainMenu {
 				while (!married.contains(maritalStatus)) {
 					System.out.println("Key in your marital status(Single/Married):");
 					maritalStatus = s.next();
-					if (!married.contains(maritalStatus)){
+					if (!married.contains(maritalStatus)) {
 						System.out.println("Invalid marital status!");
 					}
 				}
@@ -67,17 +71,17 @@ public class MainMenu {
 			case 4:
 				System.out.println("Returning to main menu...");
 				break;
-		}
+			}
 		} while (choice < 4);
 		return check;
 	}
-	
+
 	public static void viewProjects() {
-		
+
 	}
-	
+
 	public static void viewApplications() {
-		
+
 	}
 
 	public static void main(String[] args) {
@@ -85,9 +89,9 @@ public class MainMenu {
 		int choice;
 		User user = null;
 		do {
-		System.out.println("Enter your choice:\n1) Login\n2) Projects\n3) Applications\n4) Exit");
-		choice = s.nextInt();
-		switch(choice) {
+			System.out.println("Enter your choice:\n1) Login\n2) Projects\n3) Applications\n4) Exit");
+			choice = s.nextInt();
+			switch (choice) {
 			case 1:
 				user = Login();
 				break;
@@ -108,9 +112,9 @@ public class MainMenu {
 			case 4:
 				System.out.println("Exiting...");
 				break;
-		}
+			}
 		} while (choice < 4);
-		
+
 	}
-	
+
 }

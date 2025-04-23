@@ -15,14 +15,20 @@ public class UserRepository {
 	private static final String officerFile = "OfficerList.csv";
 	private static final String managerFile = "ManagerList.csv";
 	private static final String userFile = "UserList.csv";
+	private static List<User> users;
 
 	public List<User> loadAllUsers() {
-		List<User> users = new ArrayList<>();
+		users = new ArrayList<>();
 		users.addAll(loadUsersFromFile(applicantFile));
 		users.addAll(loadUsersFromFile(officerFile));
 		users.addAll(loadUsersFromFile(managerFile));
 		users.addAll(loadUsersFromFile(userFile));
 		return users;
+	}
+
+	public static void updateUsers(User oldUser, User newUser) {
+		users.remove(oldUser);
+		users.add(newUser);
 	}
 
 	private List<User> loadUsersFromFile(String fileName) {

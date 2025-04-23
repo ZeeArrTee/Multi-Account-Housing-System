@@ -1,5 +1,6 @@
 package group4_sc2002_project;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 public class OfficerService extends OfficerDisplay {
@@ -12,8 +13,10 @@ public class OfficerService extends OfficerDisplay {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void registerOfficer(HDBOfficer officer, Project project) {
-		project.addOfficer(officer);
+	public static void createRegistration(User user, Project project) {
+		ArrayList<User> temp = ManagerService.getRegistrations().get(project);
+		temp.add(user);
+		ManagerService.getRegistrations().put(project, temp);
 	}
 
 	public boolean canRegister(HDBOfficer officer, Project project) {

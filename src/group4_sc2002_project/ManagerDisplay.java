@@ -47,6 +47,34 @@ public class ManagerDisplay extends Display {
 
 	}
 
+	public void processRegistrations() {
+		List<User> pending = ManagerService.getPendingRegistration(project);
+		if (pending == null) {
+			System.out.println("No pending registrations");
+			return;
+		}
+		for (int i = 1; i <= pending.size(); i++) {
+			User user = pending.get(i);
+			System.out.println(i + ". " + user.getName() + " Open Date: " + project.getOpeningDate() + " Close Date: "
+					+ project.getClosingDate());
+		}
+
+		int chosen = MainMenu.s.nextInt() - 1;
+		while (chosen > pending.size() - 1 || chosen < 0) {
+			chosen = MainMenu.s.nextInt() - 1;
+		}
+		System.out.println("Approve? (Y/N)");
+		String decision = MainMenu.s.next();
+		while (!(decision == "Y" || decision == "N")) {
+			System.out.println("Invalid Choice");
+			System.out.println("Approve? (Y/N)");
+			decision = MainMenu.s.next();
+		}
+		ManagerService.processRegistration(pending.get(chosen), project);
+		service.registerOfficer(pending.get(chosen), project);
+
+	}
+
 	public void withdrawalMenu() {
 		if (project == null) {
 			System.out.println("No project selected");
@@ -55,13 +83,13 @@ public class ManagerDisplay extends Display {
 		List<Application> pending = project.getApplications().stream().filter(app -> app.getPendingWithdrawal())
 				.toList();
 		System.out.println("Choose application number");
-		for (int i = 0; i < pending.size(); i++) {
+		for (int i = 1; i <= pending.size(); i++) {
 			System.out.println(i + ". " + pending.get(i).getApplicant().getName());
 		}
-		int choice = MainMenu.s.nextInt();
-		while (choice > pending.size() || choice < 0) {
+		int choice = MainMenu.s.nextInt() - 1;
+		while (choice > pending.size() - 1 || choice < 0) {
 			System.out.println("Invalid choice");
-			choice = MainMenu.s.nextInt();
+			choice = MainMenu.s.nextInt() - 1;
 		}
 		service.processWithdrawal(pending.get(choice));
 	}
@@ -98,11 +126,11 @@ public class ManagerDisplay extends Display {
 				System.out.println(i + ". " + application.getApplicant().getUserID()
 						+ application.getApplicant().getAge() + application.getFlatType());
 			}
-			int chosen = MainMenu.s.nextInt();
+			int chosen = MainMenu.s.nextInt() - 1;
 
-			while (chosen > apps.size() || chosen < 1) {
+			while (chosen > apps.size() - 1 || chosen < 0) {
 				System.out.println("Invalid Choice");
-				chosen = MainMenu.s.nextInt();
+				chosen = MainMenu.s.nextInt() - 1;
 			}
 			System.out.println("Approve? (Y/N)");
 			String decision = MainMenu.s.next();
