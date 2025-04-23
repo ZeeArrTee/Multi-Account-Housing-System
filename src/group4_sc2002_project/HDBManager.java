@@ -1,39 +1,22 @@
 package group4_sc2002_project;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HDBManager extends User {
-	private Project managedProject;
+	private List<Project> managedProjects;
 
-	public HDBManager(String name,String id, String pw, int age, String marital) {
-		super(name,id, pw, age, marital, "Manager");
-		managedProject = null;
+	public HDBManager(String name, String id, String pw, int age, String marital) {
+		super(name, id, pw, age, marital, "Manager");
+		managedProjects = new ArrayList<Project>();
 	}
 
-	public Project getManagedProject() {
-		return managedProject;
+	public List<Project> getManagedProject() {
+		return managedProjects;
 	}
 
-	public void setManagedProject(Project project) {
-		managedProject = project;
+	public void addManagedProject(Project project) {
+		managedProjects.add(project);
 	}
 
-//	public Boolean approveRejectWithdrawal(Application application) {
-//		Scanner input = new Scanner(System.in);
-//		System.out.println(application.getId() + application.getApplicant().getUserID()
-//				+ application.getApplicant().getAge() + application.getFlatType());
-//		System.out.println("Approve? (Y/N)");
-//		while (true) {
-//			String decision = input.next();
-//			if (decision.compareTo("Y") == 0) {
-//				application.setPendingWithdrawal(true);
-//				input.close();
-//				return true;
-//
-//			} else if (decision.compareTo("N") == 0) {
-//				application.setPendingWithdrawal(false);
-//				input.close();
-//				return false;
-//			}
-//		}
-//
-//	}
 }

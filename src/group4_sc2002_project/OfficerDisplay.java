@@ -12,6 +12,7 @@ public abstract class OfficerDisplay extends Display {
 	}
 
 	public void displayOfficerRegistrationStatus() {
+		System.out.println("Registration Status: " + officer.getRegistrationStatus());
 	}
 
 	public void displayProjectDetails() {

@@ -45,6 +45,10 @@ public class Project {
 		return neighbourhood;
 	}
 
+	public List<Application> getApplications() {
+		return apps;
+	}
+
 	public void addApplication(Application application) {
 		if (application != null) {
 			apps.add(application);
@@ -81,11 +85,14 @@ public class Project {
 		closeDate = date;
 	}
 
-	public void addOfficer(HDBOfficer officer) {
+	public boolean addOfficer(HDBOfficer officer) {
+		boolean success = false;
 		if (officerSlots > 0) {
 			assignedOfficers.add(officer);
 			officerSlots--;
+			success = true;
 		}
+		return success;
 	}
 
 	public void removeOfficer(HDBOfficer officer) {

@@ -35,9 +35,8 @@ public class Application {
 		status = s;
 	}
 
-	public void toggleWithdrawal()
-	{
-		withdrawalRequested = !withdrawalRequested;
+	public void setPendingWithdrawal(boolean value) {
+		withdrawalRequested = value;
 	}
 
 	void setFlatType(String flatType) {

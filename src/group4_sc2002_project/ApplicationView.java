@@ -1,22 +1,22 @@
 package group4_sc2002_project;
 
-public class ApplicationService {
+public abstract class ApplicationView {
 	private Project project;
 	private User user;
 	private Application application;
 
-	ApplicationService(Project project, User user) {
+	ApplicationView(Project project, User user) {
 		this.project = project;
 		this.user = user;
 		this.application = null;
 	}
 
 	public void requestWithdrawal() {
-		application.toggleWithdrawal();
+		application.setPendingWithdrawal(true);
 	}
 
 	public Applicant applyForProject(String flatType) {
-		Applicant applicant = new Applicant(user.getName(),user.getUserID(), user.getPassword(), user.getAge(),
+		Applicant applicant = new Applicant(user.getName(), user.getUserID(), user.getPassword(), user.getAge(),
 				user.getMaritalStatus());
 		if (isEligible(flatType)) {
 			application = new Application(applicant, project, flatType, ApplicationStatus.Pending);

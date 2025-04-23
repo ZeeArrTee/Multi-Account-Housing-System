@@ -14,12 +14,14 @@ public class UserRepository {
 	private static final String applicantFile = "ApplicantList.csv";
 	private static final String officerFile = "OfficerList.csv";
 	private static final String managerFile = "ManagerList.csv";
+	private static final String userFile = "UserList.csv";
 
 	public List<User> loadAllUsers() {
 		List<User> users = new ArrayList<>();
 		users.addAll(loadUsersFromFile(applicantFile));
 		users.addAll(loadUsersFromFile(officerFile));
 		users.addAll(loadUsersFromFile(managerFile));
+		users.addAll(loadUsersFromFile(userFile));
 		return users;
 	}
 
@@ -61,7 +63,15 @@ public class UserRepository {
 	}
 
 	public void saveUser(User user) {
-		String file = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
+		String file = userFile;
+		if (user.getRole().contains("Manager")) {
+			file = managerFile;
+		} else if (user.getRole().contains("Officer")) {
+			file = officerFile;
+		} else if (user.getRole().contains("Applicant")) {
+			file = applicantFile;
+		}
+		file = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 		try (FileWriter fw = new FileWriter(file, true)) {
 			fw.write(String.join(",", user.getName(), user.getUserID(), user.getPassword(),
 					String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)) + "\n");
@@ -96,7 +106,7 @@ public class UserRepository {
 
 	private String getFileForRole(String role) {
 		return switch (role) {
-		case "User" -> applicantFile;
+		case "User" -> userFile;
 		case "Applicant" -> applicantFile;
 		case "HDBOfficer" -> officerFile;
 		case "HDBManager" -> managerFile;

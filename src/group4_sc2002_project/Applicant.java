@@ -9,13 +9,13 @@ public class Applicant extends User {
 	private String bookedFlat;
 
 	public Applicant(String name, String id, String pw, int age, String marital) {
-		super(name ,id, pw, age, marital, "Applicant");
+		super(name, id, pw, age, marital, "Applicant");
 		application = null;
 		enquiryId = new ArrayList<Integer>();
 	}
 
 	public void requestWithdrawal() {
-		application.toggleWithdrawal();
+		application.setPendingWithdrawal(true);
 	}
 
 	public void addEnquiryId(int id) {
