@@ -16,7 +16,7 @@ public class AuthenticationService
 
     private void loadUsers(String fileName)
     {
-        try(BufferReader br = new BufferReader(new FileReader(fileName)))
+        try(BufferedReader br = new BufferedReader(new FileReader(fileName)))
         {
             String line;
 
@@ -24,18 +24,19 @@ public class AuthenticationService
             {
                 String[] parts = line.split(",");
 
-                if (part.length<5) 
+                if (parts.length<6) 
                 {
                     continue;
                 }
 
-                String id = parts[0];
-                String password = parts[1];
-                int age = Integer.parseInt(parts[2]);
-                String status = parts[3];
-                String role = parts[4];
+                String name = parts[0];
+                String id = parts[1];
+                String password = parts[2];
+                int age = Integer.parseInt(parts[3]);
+                String status = parts[4];
+                String role = parts[5];
 
-                users.add(new User(id,password,age,status,role));
+                users.add(new User(name,id,password,age,status,role));
             }
         }
         catch (IOException e)
@@ -46,16 +47,17 @@ public class AuthenticationService
 
     private void saveUserToCSV(User user) 
     {
-        String fileName = switch (user.getRole()) {
+        String role = user.getRole().get(1);//index 1 cus 0 is the general user
+        String fileName = switch (role) {
             case "Applicant" -> "applicants.csv";
             case "HDBOfficer" -> "officers.csv";
             case "HDBManager" -> "managers.csv";
-            default -> ("Unknown role: " + user.getRole());
+            default -> throw new IllegalArgumentException("Unknown role: " + user.getRole());
         };
 
         try (FileWriter fw = new FileWriter(fileName, true)) 
         {
-            fw.write(String.join(",", user.getUserID(), user.getPassword(), String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole()) + "\n");
+            fw.write(String.join(",", user.getName(),user.getUserID(), user.getPassword(), String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)) + "\n");
         } catch (IOException e) 
         {
             e.printStackTrace();
@@ -81,7 +83,7 @@ public class AuthenticationService
         System.out.println("User not found.");           
     }
 
-    public void createUser (String userID, String password, int age, String maritalStatus, String role)
+    public void createUser (String name,String userID, String password, int age, String maritalStatus, String role)
     {
         for (User user : users) 
         {
@@ -92,7 +94,7 @@ public class AuthenticationService
             }
         }
 
-        User newUser = new User(userID, password, age, maritalStatus, role);
+        User newUser = new User(name, userID, password, age, maritalStatus, role);
         users.add(newUser);
         saveUserToCSV(newUser);
         System.out.println("User created successfully.");
@@ -111,6 +113,17 @@ public class AuthenticationService
                 break;
             }
         }
+
+        if (found) 
+        {
+            overwriteAllCSVs();
+            System.out.println("Password changed successfully.");
+        } 
+        else
+        {
+            System.out.println("User not found.");
+        }
+        
     }
 
     private void overwriteAllCSVs() 
@@ -122,7 +135,8 @@ public class AuthenticationService
 
         for (User user : users) 
         {
-            switch (user.getRole()) 
+            String role = user.getRole().get(1);
+            switch (role) 
             {
                 case "Applicant" -> roleMap.get("applicants.csv").add(user);
                 case "HDBOfficer" -> roleMap.get("officers.csv").add(user);
@@ -136,7 +150,7 @@ public class AuthenticationService
             {
                 for (User user : roleMap.get(file)) 
                 {
-                    pw.println(String.join(",", user.getUserID(), user.getPassword(), String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole()));
+                    pw.println(String.join(",",user.getName() ,user.getUserID(), user.getPassword(), String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)));
                 }
             } catch (IOException e) 
             {

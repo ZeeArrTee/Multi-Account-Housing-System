@@ -16,7 +16,7 @@ public class ApplicationService {
 	}
 
 	public Applicant applyForProject(String flatType) {
-		Applicant applicant = new Applicant(user.getUserID(), user.getPassword(), user.getAge(),
+		Applicant applicant = new Applicant(user.getName(),user.getUserID(), user.getPassword(), user.getAge(),
 				user.getMaritalStatus());
 		if (isEligible(flatType)) {
 			application = new Application(applicant, project, flatType, ApplicationStatus.Pending);

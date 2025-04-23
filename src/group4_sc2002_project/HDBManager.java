@@ -3,8 +3,8 @@ package group4_sc2002_project;
 public class HDBManager extends User {
 	private Project managedProject;
 
-	public HDBManager(String id, String pw, int age, String marital) {
-		super(id, pw, age, marital, "Manager");
+	public HDBManager(String name,String id, String pw, int age, String marital) {
+		super(name,id, pw, age, marital, "Manager");
 		managedProject = null;
 	}
 

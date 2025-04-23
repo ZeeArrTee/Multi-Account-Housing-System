@@ -4,13 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class User implements Account {
+	private String name;
 	private String userID;
 	private String password = "password";
 	private int age;
 	private String maritalStatus;
 	private List<String> roles;
 
-	public User(String userID, String password, int age, String maritalStatus, String role) {
+	public User(String name, String userID, String password, int age, String maritalStatus, String role) {
+		this.name = name;
 		this.userID = userID;
 		this.password = password;
 		this.age = age;
@@ -18,6 +20,11 @@ public class User implements Account {
 		this.roles = new ArrayList<String>();
 		this.roles.add("User");
 		this.roles.add(role);
+	}
+
+	public String getName()
+	{
+		return name;
 	}
 
 	public String getUserID() {
