@@ -12,17 +12,6 @@ public class ProjectService implements ProjectView {
 		projectListing = new ArrayList<Project>();
 	}
 
-	public static void displayProjects() {
-		for (Project project : projectListing) {
-			Map<String, Integer> units = project.getUnits();
-			System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
-					+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()
-					+ " Remaining Officer Slots: " + project.getOfficerSlots() + " Flats "
-					+ units.keySet().stream().map(key -> key + ": " + units.get(key)));
-		}
-
-	}
-
 	@Override
 	public void createProject(String projectName, String neighbourhood, Map<String, Integer> units, LocalDate openDate,
 			LocalDate closeDate, int officerSlots, HDBManager managerInCharge) {
@@ -114,7 +103,6 @@ public class ProjectService implements ProjectView {
 		}
 	}
 
-	@Override
 	public void displayProject(String name) {
 		Project project = findProjectName(name);
 		Map<String, Integer> units = project.getUnits();
