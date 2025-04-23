@@ -1,0 +1,108 @@
+package group4_sc2002_project;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.*;
+
+public class UserRepository
+{
+    private static final String applicantFile = "applicants.csv";
+    private static final String officerFile = "officers.csv";
+    private static final String managerFile = "managers.csv";
+
+    public List<User> loadAllUsers() 
+    {
+        List<User> users = new ArrayList<>();
+        users.addAll(loadUsersFromFile(applicantFile));
+        users.addAll(loadUsersFromFile(officerFile));
+        users.addAll(loadUsersFromFile(managerFile));
+        return users;
+    }
+
+    private List<User> loadUsersFromFile(String fileName) {
+        List<User> loaded = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) 
+        {
+            String line;
+
+            while ((line = br.readLine()) != null) 
+            {
+                String[] parts = line.split(",");
+                if (parts.length < 6) continue;
+
+                String name = parts[0];
+                String id = parts[1];
+                String pw = parts[2];
+                int age = Integer.parseInt(parts[3]);
+                String status = parts[4];
+                String role = parts[5];
+
+                loaded.add(new User(name, id, pw, age, status, role));
+            }
+        } 
+        catch (IOException e) 
+        {
+            System.out.println("Failed to load: " + fileName);
+        }
+
+        return loaded;
+    }
+
+    public void saveUser(User user) 
+    {
+        String file = getFileForRole(user.getRole().get(1));
+        try (FileWriter fw = new FileWriter(file, true)) 
+        {
+            fw.write(String.join(",", user.getName(), user.getUserID(), user.getPassword(), String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)) + "\n");
+        } 
+        catch (IOException e) 
+        {
+            e.printStackTrace();
+        }
+    }
+
+    public void overwriteAllUsers(List<User> users) 
+    {
+        Map<String, List<User>> roleMap = new HashMap<>();
+        roleMap.put(applicantFile, new ArrayList<>());
+        roleMap.put(officerFile, new ArrayList<>());
+        roleMap.put(managerFile, new ArrayList<>());
+
+        for (User user : users) 
+        {
+            String file = getFileForRole(user.getRole().get(1));
+            roleMap.get(file).add(user);
+        }
+
+        for (String file : roleMap.keySet()) 
+        {
+            try (PrintWriter pw = new PrintWriter(new FileWriter(file))) 
+            {
+                for (User user : roleMap.get(file)) 
+                {
+                    pw.println(String.join(",", user.getName(), user.getUserID(), user.getPassword(), String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)));
+                }
+            } 
+            catch (IOException e) 
+            {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String getFileForRole(String role) 
+    {
+        return switch (role) 
+        {
+            case "Applicant" -> applicantFile;
+            case "HDBOfficer" -> officerFile;
+            case "HDBManager" -> managerFile;
+            default -> throw new IllegalArgumentException("Invalid role: " + role);
+        };
+    }
+
+}
