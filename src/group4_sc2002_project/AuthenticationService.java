@@ -34,6 +34,22 @@ public class AuthenticationService {
 			return;
 		}
 
+<<<<<<< HEAD
+    public User createUser(String name, String userID, String password, int age, String maritalStatus, String role) 
+    {
+        if (findUserById(userID) != null) 
+        {
+            System.out.println("User already exists.");
+            return null;
+        }
+
+        User newUser = new User(name, userID, password, age, maritalStatus, role);
+        users.add(newUser);
+        userRepo.saveUser(newUser);
+        System.out.println("User created successfully.");
+        return newUser;
+    }
+=======
 		User newUser = new User(name, userID, password, age, maritalStatus, role);
 		users.add(newUser);
 		userRepo.saveUser(newUser);
@@ -42,6 +58,7 @@ public class AuthenticationService {
 
 	public void changePassword(String userID, String newPassword) {
 		User user = findUserById(userID);
+>>>>>>> 9ca250bc3df1ab7286ca38d3f4efe87cc56cbeb1
 
 		if (user != null) {
 			user.changePassword(newPassword);
