@@ -4,8 +4,9 @@ public class AdminEnquiryController extends EnquiryController {
 	Application application;
 
 	AdminEnquiryController(Application application) {
+		super(application.getProject());
 		this.application = application;
-		this.project = application.getProject();
+
 	}
 
 	Enquiry getEnquiry(int id) {

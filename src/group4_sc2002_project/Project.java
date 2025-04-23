@@ -18,21 +18,23 @@ public class Project {
 	private List<HDBOfficer> assignedOfficers;
 	private HDBManager managerInCharge;
 	private List<Enquiry> enquiries;
+	private List<Application> apps;
 	private int enquiryCount;
 
 	public Project(String projectName, String neighbourhood, Map<String, Integer> units, LocalDate openDate,
 			LocalDate closeDate, int officerSlots, HDBManager managerInCharge) {
-		this.projectName = projectName;
-		this.neighbourhood = neighbourhood;
-		this.units = new HashMap<String, Integer>();
+		this.isVisible = true;
+		this.enquiryCount = 0;
 		this.openDate = openDate;
 		this.closeDate = closeDate;
-		this.isVisible = true;
+		this.projectName = projectName;
 		this.officerSlots = officerSlots;
-		this.assignedOfficers = new ArrayList<HDBOfficer>();
+		this.neighbourhood = neighbourhood;
 		this.managerInCharge = managerInCharge;
+		this.apps = new ArrayList<Application>();
 		this.enquiries = new ArrayList<Enquiry>();
-		this.enquiryCount = 0;
+		this.units = new HashMap<String, Integer>();
+		this.assignedOfficers = new ArrayList<HDBOfficer>();
 	}
 
 	public void toggleVisibilty() {
@@ -41,6 +43,22 @@ public class Project {
 
 	public String getNeighbourhood() {
 		return neighbourhood;
+	}
+
+	public void addApplication(Application application) {
+		if (application != null) {
+			apps.add(application);
+		}
+	}
+
+	public Application getApplication(String uid) {
+		for (Application app : apps) {
+			if (app.getApplicant().getUserID().compareTo(uid) == 0) {
+				return app;
+			}
+		}
+		return null;
+
 	}
 
 	public boolean isWithinApplicationPeriod(LocalDate date) {

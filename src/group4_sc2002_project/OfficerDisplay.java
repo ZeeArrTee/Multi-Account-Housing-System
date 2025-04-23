@@ -2,15 +2,16 @@ package group4_sc2002_project;
 
 import java.util.Map;
 
-public class OfficerDisplay extends Display {
+public abstract class OfficerDisplay extends Display {
 	private HDBOfficer officer;
+	private Project project;
 
 	OfficerDisplay(HDBOfficer officer) {
 		this.officer = officer;
+		this.project = officer.getHandledProject();
 	}
 
-	String displayRegistrationStatus() {
-
+	public void displayOfficerRegistrationStatus() {
 	}
 
 	public void displayProjectDetails() {
@@ -22,7 +23,11 @@ public class OfficerDisplay extends Display {
 				+ units.keySet().stream().map(key -> key + ": " + units.get(key)));
 	}
 
-	Application retrieveApplicationDetails(String userID) {
-
+	public Application retrieveApplicationDetails(String userId) {
+		Application app = project.getApplication(userId);
+		if (app == null) {
+			System.out.println("User not found");
+		}
+		return app;
 	}
 }

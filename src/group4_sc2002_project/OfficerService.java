@@ -2,7 +2,16 @@ package group4_sc2002_project;
 
 import java.util.Map;
 
-public class OfficerService implements OfficerDisplay {
+public class OfficerService extends OfficerDisplay {
+	private HDBOfficer officer;
+
+	OfficerService(HDBOfficer officer) {
+		super(officer);
+		this.officer = officer;
+
+		// TODO Auto-generated constructor stub
+	}
+
 	public void registerOfficer(HDBOfficer officer, Project project) {
 		project.addOfficer(officer);
 	}
@@ -16,9 +25,9 @@ public class OfficerService implements OfficerDisplay {
 	}
 
 	@Override
-	public String displayRegistrationStatus() {
+	public void displayOfficerRegistrationStatus() {
 		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Officer Registration Status: " + this.officer.getRegistrationStatus());
 	}
 
 	@Override

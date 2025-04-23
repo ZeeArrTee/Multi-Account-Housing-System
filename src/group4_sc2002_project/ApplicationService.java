@@ -22,6 +22,7 @@ public class ApplicationService {
 			application = new Application(applicant, project, flatType, ApplicationStatus.Pending);
 		}
 		applicant.setApplication(application);
+		project.addApplication(application);
 		return applicant;
 	}
 
