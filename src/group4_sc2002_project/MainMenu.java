@@ -46,7 +46,7 @@ public class MainMenu {
 						System.out.println("Invalid marital status!");
 					}
 				}
-				check = service.createUser(name, userID, password, choice, maritalStatus, "User");
+				service.createUser(name, userID, password, choice, maritalStatus, "User");
 				break;
 			case 3:
 				System.out.println("Key in your userID: (Key in # to go back)");
