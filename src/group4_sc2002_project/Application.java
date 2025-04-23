@@ -39,6 +39,10 @@ public class Application {
 		withdrawalRequested = value;
 	}
 
+	public boolean getPendingWithdrawal() {
+		return withdrawalRequested;
+	}
+
 	void setFlatType(String flatType) {
 		this.flatType = flatType;
 	}

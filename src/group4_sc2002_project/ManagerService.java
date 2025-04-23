@@ -35,26 +35,20 @@ public class ManagerService {
 
 	}
 
-	public boolean processApplication(Application application) {
+	public boolean processApplication(Application application, boolean decision) {
 		if (application.getStatus() == ApplicationStatus.Booked
 				|| application.getStatus() == ApplicationStatus.Successful) {
 			System.out.println("Application already approved");
 			return true;
 		}
-		Scanner input = new Scanner(System.in);
-		System.out.println(application.getApplicant().getUserID() + application.getApplicant().getAge()
-				+ application.getFlatType());
-		System.out.println("Approve? (Y/N)");
+
 		while (true) {
-			String decision = input.next();
-			if (decision.compareTo("Y") == 0) {
+			if (decision) {
 				application.setStatus(ApplicationStatus.Successful);
-				input.close();
 				return true;
 
-			} else if (decision.compareTo("N") == 0) {
+			} else {
 				application.setStatus(ApplicationStatus.Unsuccessful);
-				input.close();
 				return false;
 			}
 		}
