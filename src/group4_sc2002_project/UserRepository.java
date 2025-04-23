@@ -61,7 +61,7 @@ public class UserRepository {
 	}
 
 	public void saveUser(User user) {
-		String file = getFileForRole(user.getRole().get(1));
+		String file = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 		try (FileWriter fw = new FileWriter(file, true)) {
 			fw.write(String.join(",", user.getName(), user.getUserID(), user.getPassword(),
 					String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)) + "\n");
@@ -82,7 +82,8 @@ public class UserRepository {
 		}
 
 		for (String file : roleMap.keySet()) {
-			try (PrintWriter pw = new PrintWriter(new FileWriter(file))) {
+			String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
+			try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
 				for (User user : roleMap.get(file)) {
 					pw.println(String.join(",", user.getName(), user.getUserID(), user.getPassword(),
 							String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)));
@@ -95,6 +96,7 @@ public class UserRepository {
 
 	private String getFileForRole(String role) {
 		return switch (role) {
+		case "User" -> applicantFile;
 		case "Applicant" -> applicantFile;
 		case "HDBOfficer" -> officerFile;
 		case "HDBManager" -> managerFile;
