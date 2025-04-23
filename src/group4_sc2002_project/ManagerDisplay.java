@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 public class ManagerDisplay extends Display {
-	HDBManager manager;
-	Project project;
-	List<Project> projectListing;
-	ManagerService service;
+	private HDBManager manager;
+	private Project project;
+	private List<Project> projectListing;
+	private ManagerService service;
 
 	ManagerDisplay(HDBManager manager) {
 		this.manager = manager;

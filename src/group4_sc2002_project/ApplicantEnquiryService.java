@@ -2,8 +2,8 @@ package group4_sc2002_project;
 
 public class ApplicantEnquiryService implements ApplicantEnquiryView {
 	// AdminEnquiryController projectEnquiryController;
-	Project project;
-	Applicant applicant;
+	private Project project;
+	private Applicant applicant;
 
 	ApplicantEnquiryService(Project project, Applicant applicant) {
 		this.project = project;

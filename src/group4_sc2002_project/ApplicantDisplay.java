@@ -3,8 +3,8 @@ package group4_sc2002_project;
 import java.util.List;
 
 public class ApplicantDisplay extends Display {
-	Applicant applicant;
-	Application application;
+	private Applicant applicant;
+	private Application application;
 
 	ApplicantDisplay(Applicant applicant) {
 		this.applicant = applicant;

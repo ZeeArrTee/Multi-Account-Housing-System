@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.util.Map;
 
 public interface ProjectView {
-	void displayProject(String name);
+	public void displayProject(String name);
 
-	void createProject(String projectName, String neighbourhood, Map<String, Integer> units, LocalDate openDate,
+	public void createProject(String projectName, String neighbourhood, Map<String, Integer> units, LocalDate openDate,
 			LocalDate closeDate, int officerSlots, HDBManager managerInCharge);
 
-	void editProject(Project project);
+	public void editProject(Project project);
 }

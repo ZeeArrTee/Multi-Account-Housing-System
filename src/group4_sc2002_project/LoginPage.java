@@ -2,9 +2,9 @@ package group4_sc2002_project;
 
 public interface LoginPage 
 {
-    void LoginUser();
+    public void LoginUser();
 
-    void CreateUser();
+    public void CreateUser();
 
-    void ChangePassword();
+    public void ChangePassword();
 }

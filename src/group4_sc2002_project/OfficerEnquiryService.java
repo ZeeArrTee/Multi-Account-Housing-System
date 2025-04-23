@@ -2,7 +2,7 @@ package group4_sc2002_project;
 import java.util.*;
 
 public class OfficerEnquiryService implements OfficerEnquiryView {
-	Project project;
+	private Project project;
 
 	@Override
 	public void displayEnquiries() {	
@@ -10,12 +10,6 @@ public class OfficerEnquiryService implements OfficerEnquiryView {
 		for (Enquiry enquiry: enquiries) {
 			System.out.println("Enquiry ID: " +enquiry.getId() + ", Applicant: "+ enquiry.getApplicant().getUserID() + ", Enquiry:" + enquiry.getContent() +", Reply: " + enquiry.getReply());
 		}
-	}
-
-	@Override
-	public void replyEnquiries() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	public void replyEnquiries(int EnquiryID, String reply) {
