@@ -22,12 +22,16 @@ public class MainMenu {
 					System.out.println("Key in your password:");
 					password = s.next();
 					check = service.loginUser(userID, password);
+					if (check != null) {
+						break;
+					}
 				}
 				break;
 			case 2:
 				List<String> married = new ArrayList<String>(2);
 				married.add("Married");
 				married.add("Single");
+				int age = 0;
 				String name = "\0";
 				String maritalStatus = "\0";
 				System.out.println("Key in your Name: (Key in # to go back)");
@@ -39,6 +43,8 @@ public class MainMenu {
 				userID = s.next();
 				System.out.println("Key in your password:");
 				password = s.next();
+				System.out.println("Key in your age:");
+				age = s.nextInt();
 				while (!married.contains(maritalStatus)) {
 					System.out.println("Key in your marital status(Single/Married):");
 					maritalStatus = s.next();
@@ -46,7 +52,7 @@ public class MainMenu {
 						System.out.println("Invalid marital status!");
 					}
 				}
-				service.createUser(name, userID, password, choice, maritalStatus, "User");
+				service.createUser(name, userID, password, age, maritalStatus, "User");
 				break;
 			case 3:
 				System.out.println("Key in your userID: (Key in # to go back)");
