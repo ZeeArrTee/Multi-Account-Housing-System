@@ -13,23 +13,24 @@ public class AuthenticationService
         users = userRepo.loadAllUsers();
     }
 
-    public void loginUser(String userID, String password) 
+    public User loginUser(String userID, String password) 
     {
         User user = findUserById(userID);
-
         if (user == null) 
         {
             System.out.println("User not found.");
-            return;
+            return null;
         }
 
 
         if (user.getPassword().equals(password)) 
         {
             System.out.println("Login successful. Role: " + user.getRole().get(1));
+            return user;
         } else 
         {
             System.out.println("Incorrect password.");
+            return null;
         }
     }
 

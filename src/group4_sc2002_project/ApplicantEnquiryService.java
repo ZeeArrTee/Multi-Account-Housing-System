@@ -15,16 +15,19 @@ public class ApplicantEnquiryService implements ApplicantEnquiryView {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	@Override
 	public void editEnquiry() {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	@Override
 	public void deleteEnquiry() {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	public void submitEnquiry(String message) {
 		Enquiry enquiry = new Enquiry(project.getEnquiryCount(), applicant, project, message);
 		project.addEnquiry(enquiry);

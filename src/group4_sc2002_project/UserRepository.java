@@ -9,9 +9,9 @@ import java.util.*;
 
 public class UserRepository
 {
-    private static final String applicantFile = "applicants.csv";
-    private static final String officerFile = "officers.csv";
-    private static final String managerFile = "managers.csv";
+    private static final String applicantFile = "ApplicantList.csv";
+    private static final String officerFile = "OfficerList.csv";
+    private static final String managerFile = "ManagerList.csv";
 
     public List<User> loadAllUsers() 
     {
