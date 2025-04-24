@@ -10,6 +10,7 @@ import java.util.Scanner;
 public class MainMenu {
 	public static Scanner s = new Scanner(System.in);
 	public static AuthenticationService service = new AuthenticationService();
+
 	public static User Login() {
 		String userID, password;
 		User check = null;
@@ -140,6 +141,46 @@ public class MainMenu {
 				}
 			}
 		}
+	}
+
+	public static void projectsMenu(User user) {
+		int choice;
+		String projectName;
+		do {
+			System.out.println("Projects Page:");
+			System.out.println("Enter your choice:");
+			System.out.println("1) View Projects");
+			System.out.println("2) Apply for project");
+			System.out.println("3) Exit");
+			choice = s.nextInt();
+			switch (choice) {
+			case 1:
+				viewProjects(user);
+				break;
+			case 2:
+				System.out.println("Project Name: ");
+				projectName = s.next();
+				Project project = ProjectRepository.getProject(projectName);
+				ProjectService.displayProject(project);
+				ApplicationView appView = new ApplicationView(project, user);
+				System.out.println("Choose the flat type");
+				String flatType = s.next();
+				while (!project.getUnits().keySet().contains(flatType)) {
+					System.out.println("Invalid flat type");
+					flatType = s.next();
+				}
+				Applicant applicant = appView.applyForProject(flatType);
+				if (applicant == null) {
+					System.out.println("You are not eligible for this flat type");
+					break;
+				}
+				UserRepository.updateUsers(user, applicant);
+				user = applicant;
+				break;
+			default:
+				return;
+			}
+		} while (choice < 3);
 	}
 
 	public static void viewApplications(Applicant applicant) {
@@ -445,6 +486,7 @@ public class MainMenu {
 		manager.addManagedProject(project);
 		ProjectRepository.createProject(project);
 		UserRepository.updateUsers(user, manager);
+		user = manager;
 	}
 
 	public static void main(String[] args) {
@@ -488,7 +530,7 @@ public class MainMenu {
 					System.out.println("Login to access!");
 					break;
 				}
-				viewProjects(user);
+				projectsMenu(user);
 				break;
 			case 3:
 				if (user == null) {
