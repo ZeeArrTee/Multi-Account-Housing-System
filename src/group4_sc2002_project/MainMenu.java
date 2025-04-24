@@ -501,13 +501,13 @@ public class MainMenu {
 		}
 		while (true) {
 			System.out.print("Enter flat type (e.g., 2-Room, 3-Room): ");
-			String flatType = MainMenu.s.nextLine();
+			String flatType = s.next();
 			if (flatType.equals("#"))
 				break;
 
 			System.out.print("Enter number of units for " + flatType + ": ");
 			try {
-				int count = Integer.parseInt(MainMenu.s.nextLine());
+				int count = Integer.parseInt(s.next());
 				units.put(flatType, count);
 			} catch (NumberFormatException e) {
 				System.out.println("Invalid number. Try again.");

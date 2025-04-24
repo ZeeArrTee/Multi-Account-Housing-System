@@ -66,14 +66,17 @@ public class ProjectRepository {
 				LocalDate closeDate = LocalDate.parse(parts[4]);
 				int officerSlots = Integer.parseInt(parts[5]);
 				Manager managerInCharge = (Manager) AuthenticationService.getUser(parts[6]);
-				String[] officerIds = parts[7].split(";");
+
 				managerInCharge.addManagedProject(null);
 				Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots,
 						managerInCharge);
-				for (String id : officerIds) {
-					Officer officer = (Officer) UserRepository.getUser(id);
-					project.addOfficer(officer);
-					officer.addProject(project);
+				if (parts.length == 8) {
+					String[] officerIds = parts[7].split(";");
+					for (String id : officerIds) {
+						Officer officer = (Officer) UserRepository.getUser(id);
+						project.addOfficer(officer);
+						officer.addProject(project);
+					}
 				}
 				managerInCharge.addManagedProject(project);
 				projects.add(project);
