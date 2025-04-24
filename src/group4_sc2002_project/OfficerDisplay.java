@@ -2,7 +2,7 @@ package group4_sc2002_project;
 
 import java.util.*;
 
-public abstract class OfficerDisplay extends Display {
+public class OfficerDisplay extends Display {
 	private Officer officer;
 	private List<Project> projects = new ArrayList<Project>();
 
