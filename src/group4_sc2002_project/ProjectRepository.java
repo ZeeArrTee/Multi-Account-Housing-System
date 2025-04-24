@@ -6,11 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.ArrayList;
 
 public class ProjectRepository {
 	private final String projectFile = "ProjectList.csv";
@@ -39,7 +39,7 @@ public class ProjectRepository {
 	}
 
 	public List<Project> loadProjectsFromFile(String fileName) {
-		
+
 		try (BufferedReader br = new BufferedReader(
 				new FileReader(System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + fileName))) {
 			String line;
@@ -66,9 +66,13 @@ public class ProjectRepository {
 				LocalDate closeDate = LocalDate.parse(parts[4]);
 				int officerSlots = Integer.parseInt(parts[5]);
 				Manager managerInCharge = (Manager) AuthenticationService.getUser(parts[6]);
+				String[] officerIds = parts[7].split(";");
 				managerInCharge.addManagedProject(null);
 				Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots,
 						managerInCharge);
+				for (String id : officerIds) {
+					project.addOfficer((Officer) UserRepository.getUser(id));
+				}
 				managerInCharge.addManagedProject(project);
 				projects.add(project);
 
@@ -87,14 +91,17 @@ public class ProjectRepository {
 			for (Project project : projects) {
 				if (isFirstLine) {
 					isFirstLine = false;
-					pw.println("Project Name, Neighbourhood, Opening Date, Closing Date, Officer Slots Remaining, Manager-In-Charge");
+					pw.println(
+							"Project Name, Neighbourhood, Opening Date, Closing Date, Officer Slots Remaining, Manager-In-Charge");
 				}
 				String units = project.getUnits().keySet().stream()
 						.map(key -> key + "=" + project.getUnits().get(key).toString())
 						.collect(Collectors.joining(";"));
+				String officers = project.getOfficers().stream().map(key -> key.getUserID())
+						.collect(Collectors.joining(";"));
 				pw.println(String.join(",", project.getProjectName(), project.getNeighbourhood(), units,
 						project.getOpeningDate().toString(), project.getClosingDate().toString(),
-						String.valueOf(project.getOfficerSlots()), project.getManager().getUserID()));
+						String.valueOf(project.getOfficerSlots()), project.getManager().getUserID(), officers));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
