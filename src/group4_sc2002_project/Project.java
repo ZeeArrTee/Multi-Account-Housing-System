@@ -44,15 +44,6 @@ public class Project {
 	public String getNeighbourhood() {
 		return neighbourhood;
 	}
-	
-	public String getVisibility() {
-		if (isVisible) {
-			return "Visible";
-		}
-		else {
-			return "Not Visible";
-		}
-	}
 
 	public List<Application> getApplications() {
 		return apps;

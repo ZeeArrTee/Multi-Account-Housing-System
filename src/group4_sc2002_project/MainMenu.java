@@ -402,7 +402,10 @@ public class MainMenu {
 					System.out.println("Login to access!");
 					break;
 				}
-				viewApplications(user);
+				if (user.getRole().contains("Applicant") || user.getRole().contains("Officer")) {
+					viewApplications((Applicant) user);
+				}
+
 				break;
 			case 4:
 				if (user == null) {
