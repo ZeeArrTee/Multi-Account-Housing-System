@@ -1,6 +1,7 @@
 package group4_sc2002_project;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -9,6 +10,7 @@ public class ProjectService implements ProjectView {
 	private static List<Project> projectListing;
 
 	ProjectService() {
+		projectListing = new ArrayList<Project>();
 		projectListing = ProjectRepository.getProjects();
 	}
 

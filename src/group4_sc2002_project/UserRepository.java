@@ -62,7 +62,6 @@ public class UserRepository {
 				String[] parts = line.split(",");
 				if (parts.length <= 5)
 					continue;
-				System.out.println(parts[4]);
 				String name = parts[0];
 				String id = parts[1];
 				int age = Integer.parseInt(parts[2]);

@@ -16,6 +16,7 @@ public class AuthenticationService {
 		projRepo = new ProjectRepository();
 		appRepo = new ApplicationRepository();
 		regRepo = new RegistrationRepository();
+		ProjectService projService = new ProjectService();
 
 	}
 

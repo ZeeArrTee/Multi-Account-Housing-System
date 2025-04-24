@@ -59,7 +59,7 @@ public class ProjectRepository {
 				Map<String, Integer> units = new HashMap<String, Integer>();
 				String[] pairs = parts[2].split(";");
 				for (String pair : pairs) {
-					String[] kv = parts[2].split("=");
+					String[] kv = pair.split("=");
 					units.put(kv[0], Integer.parseInt(kv[1]));
 				}
 				LocalDate openDate = LocalDate.parse(parts[3]);

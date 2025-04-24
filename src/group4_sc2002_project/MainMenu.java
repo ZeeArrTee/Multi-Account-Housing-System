@@ -278,20 +278,20 @@ public class MainMenu {
 				switch (choice2) {
 				case 1:
 					System.out.print("Enter project name: ");
-					String name = MainMenu.s.nextLine();
+					String name = s.next();
 
 					System.out.print("Enter neighbourhood: ");
-					String neighbourhood = MainMenu.s.nextLine();
+					String neighbourhood = s.next();
 					System.out.println("Enter units by flat type. Enter '#' to stop.");
 					Map<String, Integer> units = new HashMap<String, Integer>();
 					while (true) {
 						System.out.print("Enter flat type (e.g., 2-Room, 3-Room): ");
-						String flatType = s.nextLine();
+						String flatType = s.next();
 						if (flatType.equals("#"))
 							break;
 						System.out.print("Enter number of units for " + flatType + "->");
 						try {
-							int count = Integer.parseInt(s.nextLine());
+							int count = s.nextInt();
 							units.put(flatType, count);
 						} catch (NumberFormatException e) {
 							System.out.println("Invalid number. Try again.");
@@ -303,7 +303,7 @@ public class MainMenu {
 					while (!done) {
 						try {
 							System.out.print("Enter open date (yyyy-mm-dd): ");
-							open = LocalDate.parse(s.nextLine());
+							open = LocalDate.parse(s.next());
 							done = true;
 						} catch (Exception e) {
 							System.out.print("Invalid format");
@@ -313,15 +313,17 @@ public class MainMenu {
 					while (!done) {
 						try {
 							System.out.print("Enter close date (yyyy-mm-dd): ");
-							close = LocalDate.parse(s.nextLine());
+							close = LocalDate.parse(s.next());
 							done = true;
 						} catch (Exception e) {
 							System.out.print("Invalid format");
 						}
 					}
 					System.out.print("Enter officer slot count: ");
-					int slots = MainMenu.s.nextInt();
+					int slots = s.nextInt();
+
 					ProjectService.createProject(name, neighbourhood, units, open, close, slots, manager);
+					System.out.println("Project " + name + " created!");
 					break;
 				case 2:
 					if (chosen == null) {
