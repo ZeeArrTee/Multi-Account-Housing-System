@@ -8,21 +8,19 @@ import java.util.Map;
 public class ProjectService implements ProjectView {
 	private static List<Project> projectListing;
 
-	public ProjectService() {
+	ProjectService() {
 		projectListing = new ArrayList<Project>();
 	}
 
-	@Override
-	public void createProject(String projectName, String neighbourhood, Map<String, Integer> units, LocalDate openDate,
-			LocalDate closeDate, int officerSlots, Manager managerInCharge) {
+	public static void createProject(String projectName, String neighbourhood, Map<String, Integer> units,
+			LocalDate openDate, LocalDate closeDate, int officerSlots, Manager managerInCharge) {
 		Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots,
 				managerInCharge);
 		projectListing.add(project);
 
 	}
 
-	@Override
-	public void editProject(Project project) {
+	public static void editProject(Project project) {
 		// menu style pick which fields to edit
 		int choice;
 
@@ -169,11 +167,14 @@ public class ProjectService implements ProjectView {
 		}
 	}
 
-	public void deleteProject(String projectName) {
+	public static boolean deleteProject(String projectName) {
 		for (Project project : projectListing) {
-			if (project.getProjectName() == projectName)
+			if (project.getProjectName() == projectName) {
 				projectListing.remove(project);
+				return true;
+			}
 		}
+		return false;
 	}
 
 	public void displayProject(String name) {
