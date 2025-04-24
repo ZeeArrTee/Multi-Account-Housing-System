@@ -37,9 +37,9 @@ public class ApplicationView {
 	}
 
 	public static boolean isEligible(User user, String flatType) {
-		if (user.getMaritalStatus() == "Single" && user.getAge() >= 35) {
-			return flatType == "2-Room";
-		} else if (user.getMaritalStatus() == "Married" && user.getAge() >= 21) {
+		if (user.getMaritalStatus().compareTo("Single") == 0 && user.getAge() >= 35) {
+			return flatType.compareTo("2-Room")==0;
+		} else if (user.getMaritalStatus().compareTo("Married") == 0 && user.getAge() >= 21) {
 			return true;
 		} else {
 			return false;
