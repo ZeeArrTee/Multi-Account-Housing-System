@@ -87,15 +87,11 @@ public class ProjectRepository {
 	}
 
 	public void saveProjects() {
-		boolean isFirstLine = true;
 		String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + projectFile;
 		try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
+			pw.println(
+					"Project Name,Neighbourhood,Remaining Units,Opening Date,Closing Date,Officer Slots Remaining,Manager-In-Charge");
 			for (Project project : projects) {
-				if (isFirstLine) {
-					isFirstLine = false;
-					pw.println(
-							"Project Name, Neighbourhood, Remaining Units, Opening Date, Closing Date, Officer Slots Remaining, Manager-In-Charge");
-				}
 				String units = project.getUnits().keySet().stream()
 						.map(key -> key + "=" + project.getUnits().get(key).toString())
 						.collect(Collectors.joining(";"));

@@ -58,14 +58,10 @@ public class EnquiryRepository {
 	}
 
 	public void saveEnquiries() {
-		boolean isFirstLine = true;
 		String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + enquiryFile;
 		try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
+			pw.println("Enquiry ID, Applicant ID, Content, Reply");
 			for (Enquiry enquiry : enquiries) {
-				if (isFirstLine) {
-					isFirstLine = false;
-					pw.println("Enquiry ID, Applicant ID, Content, Reply");
-				}
 
 				pw.println(String.join(",", String.valueOf(enquiry.getId()), enquiry.getApplicant().getUserID(),
 						enquiry.getContent(), enquiry.getReply()));

@@ -125,13 +125,9 @@ public class UserRepository {
 		for (String file : roleMap.keySet()) {
 			String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 			try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
-				isFirstLine = true;
+				pw.println("Name,UserID,Age,Marital Status,Password,Roles");
 				for (User user : roleMap.get(file)) {
-					if (isFirstLine) {
-						isFirstLine = false;
-						pw.println("Name,UserID,Age,Marital Status,Password,Roles");
 
-					}
 					pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
 							user.getMaritalStatus(), user.getPassword(),
 							user.getRole().get(user.getRole().size() - 1)));

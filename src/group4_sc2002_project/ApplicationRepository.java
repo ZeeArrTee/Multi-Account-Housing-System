@@ -1,11 +1,11 @@
 package group4_sc2002_project;
 
-import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationRepository {
@@ -63,14 +63,10 @@ public class ApplicationRepository {
 	}
 
 	public void saveApplications() {
-		boolean isFirstLine = true;
 		String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + applicationFile;
 		try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
+			pw.println("UserID, Flat Type, Withdrawal Requested?, Withdrawal Status, Project Name");
 			for (Application app : applications) {
-				if (isFirstLine) {
-					isFirstLine = false;
-					pw.println("UserID, Flat Type, Withdrawal Requested?, Withdrawal Status, Project Name");
-				}
 				pw.println(String.join(",", app.getApplicant().getUserID(), app.getFlatType(),
 						String.valueOf(app.getPendingWithdrawal()), app.getStatus().toString(),
 						app.getProject().getProjectName()));

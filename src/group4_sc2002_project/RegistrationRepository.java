@@ -61,19 +61,15 @@ public class RegistrationRepository {
 	}
 
 	public void saveregistrations() {
-		boolean isFirstLine = true;
 		String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + regFile;
 		try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
+			pw.println("Project Name, UserIDs");
 			for (Project project : registrations.keySet()) {
-				if (isFirstLine) {
-					isFirstLine = false;
-					pw.println("Project Name, UserIDs");
-				}
 				String values = registrations.get(project).stream().map(user -> user.getUserID())
 						.collect(Collectors.joining(";"));
 				pw.println(String.join(",", project.getProjectName(), values));
 			}
-		} catch (IOException e) { 
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
