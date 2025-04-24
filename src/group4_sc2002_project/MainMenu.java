@@ -410,6 +410,32 @@ public class MainMenu {
 		} while (choice < 4);
 	}
 
+	public static void projectCreation(User user) {
+		Manager manager = new Manager(user.getName(), user.getUserID(), user.getAge(), user.getMaritalStatus(),
+				user.getPassword());
+
+		Map<String, Integer> units = new HashMap<String, Integer>();
+		System.out.println("Project Name: ");
+		String projectName = s.next();
+		System.out.println("Neighbourhood: ");
+		String neighbourhood = s.next();
+		System.out.println("Open Date (YYYY-MM-DD): ");
+		LocalDate openDate = LocalDate.parse(s.next());
+		System.out.println("Close Date (YYYY-MM-DD): ");
+		LocalDate closeDate = LocalDate.parse(s.next());
+		System.out.println("Officer Slots (max 10): ");
+		int officerSlots = s.nextInt();
+		while (officerSlots < 1 || officerSlots > 10) {
+			System.out.println("Invalid");
+			System.out.println("Officer Slots (max 10): ");
+			officerSlots = s.nextInt();
+		}
+		Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots, manager);
+		manager.addManagedProject(project);
+		ProjectRepository.createProject(project);
+		UserRepository.updateUsers(user, manager);
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int choice;
@@ -422,7 +448,8 @@ public class MainMenu {
 			System.out.println("3) Applicant Menu");
 			System.out.println("4) Officer Dashboard");
 			System.out.println("5) Manager Dashboard");
-			System.out.println("6) Exit");
+			System.out.println("6) Apply to be manager");
+			System.out.println("7) Exit");
 			System.out.println();
 			if (user == null) {
 				System.out.println("Currently logged out.");
@@ -482,6 +509,16 @@ public class MainMenu {
 				}
 				managerDashboard(user);
 			case 6:
+				if (user.getRole().contains("Manager")) {
+					System.out.println("Already a manger");
+					break;
+				} else if (user.getRole().contains("Applicant")) {
+					System.out.println("Already an applicant, cannot be a manager");
+					break;
+				} else {
+					projectCreation(user);
+				}
+			case 7:
 				System.out.println("Exiting...");
 				break;
 			}

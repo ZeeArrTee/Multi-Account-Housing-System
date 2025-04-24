@@ -32,6 +32,10 @@ public class ProjectRepository {
 		return null;
 	}
 
+	public static void createProject(Project project) {
+		projects.add(project);
+	}
+
 	public List<Project> loadProjectsFromFile(String fileName) {
 
 		try (BufferedReader br = new BufferedReader(
