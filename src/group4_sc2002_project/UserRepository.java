@@ -111,10 +111,12 @@ public class UserRepository {
 		roleMap.put(officerFile, new ArrayList<User>());
 		roleMap.put(managerFile, new ArrayList<User>());
 		roleMap.put(userFile, new ArrayList<User>());
+		
 		for (User user : users) {
 			String file = getFileForRole(user.getRole().get(user.getRole().size()-1));
 			roleMap.get(file).add(user);
 		}
+		System.out.println(roleMap);
 		for (String file : roleMap.keySet()) {
 			String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 			try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
@@ -126,11 +128,17 @@ public class UserRepository {
 							pw.println("Name, UserID, Age, Marital Status, Password, Roles");
 						}
 						else {
-							pw.println("Name, UserID, Age, Marital Status, Password");
+							pw.println("Name, UserID, Age, Marital Status, Password");	
 						}
 					}
+					if (user.getRole().getLast().equals("User")) {
 					pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
 							user.getMaritalStatus(), user.getPassword(), user.getRole().get(user.getRole().size()-1)));
+					}
+					else {
+						pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
+								user.getMaritalStatus(), user.getPassword()));
+					}
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
