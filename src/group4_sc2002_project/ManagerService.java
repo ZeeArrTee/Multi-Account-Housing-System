@@ -61,16 +61,14 @@ public class ManagerService {
 			System.out.println("Application already approved");
 			return true;
 		}
+		if (decision) {
+			application.setStatus(ApplicationStatus.Successful);
+			return true;
 
-		while (true) {
-			if (decision) {
-				application.setStatus(ApplicationStatus.Successful);
-				return true;
+		} else {
+			application.setStatus(ApplicationStatus.Unsuccessful);
+			return false;
 
-			} else {
-				application.setStatus(ApplicationStatus.Unsuccessful);
-				return false;
-			}
 		}
 
 	}
@@ -98,8 +96,8 @@ public class ManagerService {
 			System.out.println("Access Denied");
 			return false;
 		}
-		Officer officer = new Officer(user.getName(), user.getUserID(), user.getAge(),
-				user.getMaritalStatus(), user.getPassword(), project);
+		Officer officer = new Officer(user.getName(), user.getUserID(), user.getAge(), user.getMaritalStatus(),
+				user.getPassword(), project);
 		boolean success = project.addOfficer(officer);
 		processRegistration(user, project);
 		return success;
