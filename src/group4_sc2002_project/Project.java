@@ -2,7 +2,6 @@ package group4_sc2002_project;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -108,6 +107,7 @@ public class Project {
 		for (Enquiry enquiry : enquiries) {
 			if (enquiry.getId() == enquiryId) {
 				enquiries.remove(enquiry);
+				EnquiryRepository.removeEnquiry(enquiry);
 				break;
 			}
 		}

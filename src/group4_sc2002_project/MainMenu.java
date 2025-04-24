@@ -142,7 +142,7 @@ public class MainMenu {
 		System.out.println();
 	}
 
-	public static void projectsMenu(User user) {
+	public static Applicant projectsMenu(User user) {
 		int choice;
 		String projectName;
 		do {
@@ -155,7 +155,7 @@ public class MainMenu {
 			switch (choice) {
 			case 1:
 				viewProjects(user);
-				break;
+				return null;
 			case 2:
 				System.out.println("Project Name: ");
 				projectName = s.next();
@@ -174,12 +174,12 @@ public class MainMenu {
 					break;
 				}
 				UserRepository.updateUsers(user, applicant);
-				user = applicant;
-				break;
+				return applicant;
 			default:
-				return;
+				return null;
 			}
 		} while (choice < 3);
+		return null;
 	}
 
 	public static void viewApplications(Applicant applicant) {
@@ -564,7 +564,7 @@ public class MainMenu {
 					System.out.println("Login to access!");
 					break;
 				}
-				projectsMenu(user);
+				user = projectsMenu(user);
 				break;
 			case 3:
 				if (user == null) {

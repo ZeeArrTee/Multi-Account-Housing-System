@@ -14,6 +14,7 @@ public class ApplicantEnquiryService implements ApplicantEnquiryView {
 		Enquiry enquiry = new Enquiry(project.getEnquiryCount(), applicant, message);
 		project.addEnquiry(enquiry);
 		project.incrementEnquiryCount();
+		EnquiryRepository.addEnquiry(enquiry);
 	}
 
 	public void editEnquiry(int enquiryId, String message) {

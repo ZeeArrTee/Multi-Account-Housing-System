@@ -9,6 +9,7 @@ public class AuthenticationService {
 	private final ProjectRepository projRepo;
 	private final ApplicationRepository appRepo;
 	private final RegistrationRepository regRepo;
+	private final EnquiryRepository enqRepo;
 
 	public AuthenticationService() {
 		userRepo = new UserRepository();
@@ -16,6 +17,7 @@ public class AuthenticationService {
 		projRepo = new ProjectRepository();
 		appRepo = new ApplicationRepository();
 		regRepo = new RegistrationRepository();
+		enqRepo = new EnquiryRepository();
 		ProjectService projService = new ProjectService();
 
 	}
@@ -29,6 +31,7 @@ public class AuthenticationService {
 		projRepo.saveProjects();
 		appRepo.saveApplications();
 		regRepo.saveregistrations();
+		enqRepo.saveEnquiries();
 	}
 
 	public static User getUser(String userId) {
