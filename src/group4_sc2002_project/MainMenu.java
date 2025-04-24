@@ -157,21 +157,68 @@ public class MainMenu {
 	
 	public static void OfficerProjectMenu(Officer officer) {
 		int choice;
-		ProjectService projects = new ProjectService();
+		OfficerDisplay display = new OfficerDisplay(officer);
 		System.out.println("Enter your choice:");
+		int i;
 		do {
+			System.out.println("Project Menu:");
 			System.out.println("1) View project listing");
 			System.out.println("2) View managed projects");
 			System.out.println("3) Exit");
+			System.out.println();
 			choice = s.nextInt();
 			switch(choice) {
 				case 1:
-					int i = 0;
-					for (Project project: projects.getProjectListing()) {
+					i = 1;
+					for (Project project: ProjectService.getProjectListing()) {
 						System.out.println(i + ": " +project.getProjectName());
+						i++;
+					}
+					if (i == 1) {
+						System.out.println("There are no ongoing or upcoming projects!");
 					}
 					break;
 				case 2:
+					i = 1;
+					System.out.println("Choose a project to view:");
+					for (Project project: officer.getHandledProjects()) {
+						System.out.println(i + ": " + project.getProjectName());
+						i++;
+					}
+					if (i == 1) {
+						System.out.println("You are not currently managing any projects!");
+						break;
+					}
+					
+					else {
+						i = s.nextInt();
+						choice = s.nextInt();
+						Project project = officer.getHandledProjects().get(i);
+						do {
+							System.out.println("Select your desired action: ");
+							System.out.println("1) View project details");
+							System.out.println("2) Handle project enquiries");
+							System.out.println("3) Handle application matters");
+							System.out.println("4) Back");
+							switch(choice) {
+								case 1:
+									System.out.println("Project Name:  " + project.getProjectName());
+									System.out.println("Neighbourhood " + project.getNeighbourhood());
+									System.out.println("Flats left: " + project.getAvailableUnitsCount("2-room") + "");
+									System.out.println();
+									System.out.println();
+									System.out.println();
+									break;
+								case 2:
+									break;
+								case 3:
+									break;
+								case 4:
+									break;
+							}
+						} while (choice < 4);
+					
+					}
 					break;
 				case 3:
 					System.out.println("Returning to dashboard...");

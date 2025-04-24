@@ -16,7 +16,7 @@ public class OfficerEnquiryService implements OfficerEnquiryView {
 					+ ", Enquiry:" + enquiry.getContent() + ", Reply: " + enquiry.getReply());
 		}
 	}
-
+	
 	public void replyEnquiries(int EnquiryID, String reply) {
 		List<Enquiry> enquiries = project.getEnquiries();
 		for (Enquiry enquiry : enquiries) {
