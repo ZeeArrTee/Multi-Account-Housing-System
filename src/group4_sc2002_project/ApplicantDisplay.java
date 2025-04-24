@@ -10,6 +10,7 @@ public class ApplicantDisplay extends Display {
 	ApplicantDisplay(Applicant applicant) {
 		this.applicant = applicant;
 		application = applicant.getApplication();
+		System.out.println(application.getFlatType());
 		eCon = new EnquiryController(application.getProject());
 	}
 
