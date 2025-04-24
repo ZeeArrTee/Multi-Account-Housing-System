@@ -35,7 +35,6 @@ public class UserRepository {
 	public static void updateUsers(User oldUser, User newUser) {
 		users.remove(oldUser);
 		users.add(newUser);
-		System.out.println(newUser.getRole());
 	}
 
 	public static User getUser(String userId) {
@@ -63,7 +62,7 @@ public class UserRepository {
 				String[] parts = line.split(",");
 				if (parts.length <= 5)
 					continue;
-
+				System.out.println(parts[4]);
 				String name = parts[0];
 				String id = parts[1];
 				int age = Integer.parseInt(parts[2]);
@@ -75,13 +74,13 @@ public class UserRepository {
 					loaded.add(new User(name, id, age, status, pw, role));
 					break;
 				case "Applicant":
-					loaded.add(new Applicant(name, id, age, pw, status));
+					loaded.add(new Applicant(name, id, age, status, pw));
 					break;
 				case "Officer":
-					loaded.add(new Officer(name, id, age, pw, status, null)); // add code to find their project
+					loaded.add(new Officer(name, id, age, status, pw, null)); // add code to find their project
 					break;
 				case "Manager":
-					loaded.add(new Manager(name, id, age, pw, status));
+					loaded.add(new Manager(name, id, age, status, pw));
 					break;
 				}
 
@@ -123,7 +122,6 @@ public class UserRepository {
 			String file = getFileForRole(user.getRole().get(user.getRole().size() - 1));
 			roleMap.get(file).add(user);
 		}
-//		System.out.println(roleMap);
 		for (String file : roleMap.keySet()) {
 			String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 			try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
@@ -131,25 +129,19 @@ public class UserRepository {
 				for (User user : roleMap.get(file)) {
 					if (isFirstLine) {
 						isFirstLine = false;
-						if (user.getRole().getLast().equals("User")) {
-							pw.println("Name, UserID, Age, Marital Status, Password, Roles");
-						} else {
-							pw.println("Name, UserID, Age, Marital Status, Password");
-						}
+						pw.println("Name,UserID,Age,Marital Status,Password,Roles");
+
 					}
-					if (user.getRole().getLast().equals("User")) {
-						pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
-								user.getMaritalStatus(), user.getPassword(),
-								user.getRole().get(user.getRole().size() - 1)));
-					} else {
-						pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
-								user.getMaritalStatus(), user.getPassword()));
-					}
+					pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
+							user.getMaritalStatus(), user.getPassword(),
+							user.getRole().get(user.getRole().size() - 1)));
+
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 	private String getFileForRole(String role) {

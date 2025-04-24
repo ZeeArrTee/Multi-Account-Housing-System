@@ -288,13 +288,12 @@ public class MainMenu {
 					Map<String, Integer> units = new HashMap<String, Integer>();
 					while (true) {
 						System.out.print("Enter flat type (e.g., 2-Room, 3-Room): ");
-						String flatType = MainMenu.s.nextLine();
+						String flatType = s.nextLine();
 						if (flatType.equals("#"))
 							break;
-
 						System.out.print("Enter number of units for " + flatType + ": ");
 						try {
-							int count = Integer.parseInt(MainMenu.s.nextLine());
+							int count = Integer.parseInt(s.nextLine());
 							units.put(flatType, count);
 						} catch (NumberFormatException e) {
 							System.out.println("Invalid number. Try again.");
@@ -463,7 +462,7 @@ public class MainMenu {
 		} while (choice < 4);
 	}
 
-	public static void projectCreation(User user) {
+	public static Manager projectCreation(User user) {
 		Manager manager = new Manager(user.getName(), user.getUserID(), user.getAge(), user.getMaritalStatus(),
 				user.getPassword());
 
@@ -472,12 +471,6 @@ public class MainMenu {
 		String projectName = s.next();
 		System.out.println("Neighbourhood: ");
 		String neighbourhood = s.next();
-		System.out.println("Number of 2-room flats:");
-		int flattwo = s.nextInt();
-		System.out.println("Number of 3-room flats:");
-		int flatthree = s.nextInt();
-		units.put("2-room", flattwo);
-		units.put("3-room", flatthree);
 		System.out.println("Open Date (YYYY-MM-DD): ");
 		LocalDate openDate = LocalDate.parse(s.next());
 		System.out.println("Close Date (YYYY-MM-DD): ");
@@ -489,14 +482,28 @@ public class MainMenu {
 			System.out.println("Officer Slots (max 10): ");
 			officerSlots = s.nextInt();
 		}
-		System.out.println(units);
+		while (true) {
+			System.out.print("Enter flat type (e.g., 2-Room, 3-Room): ");
+			String flatType = MainMenu.s.nextLine();
+			if (flatType.equals("#"))
+				break;
+
+			System.out.print("Enter number of units for " + flatType + ": ");
+			try {
+				int count = Integer.parseInt(MainMenu.s.nextLine());
+				units.put(flatType, count);
+			} catch (NumberFormatException e) {
+				System.out.println("Invalid number. Try again.");
+			}
+		}
 		Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots, manager);
 		System.out.println(project.getAvailableUnitsCount("2-room"));
 		manager.addManagedProject(project);
 		ProjectRepository.createProject(project);
 		UserRepository.updateUsers(user, manager);
-		user = manager;
+
 		System.out.println("Project " + projectName + " created!");
+		return manager;
 	}
 
 	public static void main(String[] args) {
@@ -583,7 +590,7 @@ public class MainMenu {
 					System.out.println("Already an applicant, cannot be a manager");
 					break;
 				} else {
-					projectCreation(user);
+					user = projectCreation(user);
 					break;
 				}
 			case 7:
