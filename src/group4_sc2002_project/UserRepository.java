@@ -48,7 +48,7 @@ public class UserRepository {
 
 	private List<User> loadUsersFromFile(String fileName) {
 		List<User> loaded = new ArrayList<>();
-		System.out.println(System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + fileName);
+
 		try (BufferedReader br = new BufferedReader(
 				new FileReader(System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + fileName))) {
 			String line;

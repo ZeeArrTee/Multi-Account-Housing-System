@@ -573,6 +573,8 @@ public class MainMenu {
 				}
 				if (user.getRole().contains("Applicant") || user.getRole().contains("Officer")) {
 					applicantMenu((Applicant) user);
+				} else {
+					System.out.println("Not an applicant");
 				}
 
 				break;
