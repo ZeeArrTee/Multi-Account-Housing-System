@@ -33,7 +33,7 @@ public class AuthenticationService {
 		}
 
 		if (user.getPassword().equals(password)) {
-			System.out.println("Login successful. Role: " + user.getRole().get(1));
+			System.out.println("Login successful. Role: " + user.getRole().get(user.getRole().size()-1));
 			return user;
 		} else {
 			System.out.println("Incorrect password.");
@@ -49,7 +49,6 @@ public class AuthenticationService {
 
 		User newUser = new User(name, userID, age, maritalStatus, password, role);
 		users.add(newUser);
-		userRepo.saveUser(newUser);
 		System.out.println("User created successfully.");
 		return newUser;
 	}
@@ -59,7 +58,6 @@ public class AuthenticationService {
 
 		if (user != null) {
 			user.changePassword(newPassword);
-			userRepo.overwriteAllUsers(users);
 			System.out.println("Password changed successfully.");
 		} else {
 			System.out.println("User not found.");

@@ -66,7 +66,7 @@ public class RegistrationRepository {
 						.collect(Collectors.joining(";"));
 				pw.println(String.join(",", project.getProjectName(), values));
 			}
-		} catch (IOException e) {
+		} catch (IOException e) { 
 			e.printStackTrace();
 		}
 
