@@ -1,4 +1,5 @@
 package group4_sc2002_project;
+import java.util.*;
 
 public class Officer extends Applicant {
 	private Project handledProject;
@@ -15,8 +16,8 @@ public class Officer extends Applicant {
 		return registrationStatus;
 	}
 
-	public Project getHandledProject() {
-		return handledProject;
+	public List<Project> getHandledProjects() {
+		return handledProjects;
 	}
 
 }

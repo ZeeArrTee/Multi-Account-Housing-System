@@ -90,8 +90,7 @@ public class UserRepository {
 		file = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 		try (FileWriter fw = new FileWriter(file, true)) {
 			fw.write(String.join(",", user.getName(), user.getUserID(), user.getPassword(),
-					String.valueOf(user.getAge()), user.getMaritalStatus(),
-					user.getRole().get(user.getRole().size() - 1)) + "\n");
+					String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)) + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

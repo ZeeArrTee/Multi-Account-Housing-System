@@ -28,13 +28,13 @@ public class AuthenticationService {
 		}
 	}
 
-	public User createUser(String name, String userID, String password, int age, String maritalStatus, String role) {
+	public User createUser(String name, String userID, int age, String maritalStatus, String password, String role) {
 		if (findUserById(userID) != null) {
 			System.out.println("User already exists.");
 			return null;
 		}
 
-		User newUser = new User(name, userID, password, age, maritalStatus, role);
+		User newUser = new User(name, userID, age, maritalStatus, password, role);
 		users.add(newUser);
 		userRepo.saveUser(newUser);
 		System.out.println("User created successfully.");

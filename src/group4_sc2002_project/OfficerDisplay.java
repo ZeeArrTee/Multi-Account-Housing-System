@@ -8,7 +8,7 @@ public abstract class OfficerDisplay extends Display {
 
 	OfficerDisplay(Officer officer) {
 		this.officer = officer;
-		this.project = officer.getHandledProject();
+		this.project = officer.getHandledProjects();
 	}
 
 	public void displayOfficerRegistrationStatus() {
@@ -16,7 +16,7 @@ public abstract class OfficerDisplay extends Display {
 	}
 
 	public void displayProjectDetails() {
-		Project project = officer.getHandledProject();
+		Project project = officer.getHandledProjects();
 		Map<String, Integer> units = project.getUnits();
 		System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
 				+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()
