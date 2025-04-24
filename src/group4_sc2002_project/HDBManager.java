@@ -6,7 +6,7 @@ import java.util.List;
 public class HDBManager extends User {
 	private List<Project> managedProjects;
 
-	public HDBManager(String name, String userID, String password, int age, String maritalStatus) {
+	public HDBManager(String name, String userID, int age, String maritalStatus, String password) {
 		super(name, userID, age, maritalStatus, password, "Manager");
 		managedProjects = new ArrayList<Project>();
 	}
