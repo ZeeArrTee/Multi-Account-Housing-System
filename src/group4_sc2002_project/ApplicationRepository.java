@@ -1,5 +1,6 @@
 package group4_sc2002_project;
 
+import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -12,6 +13,7 @@ public class ApplicationRepository {
 	private static List<Application> applications;
 
 	ApplicationRepository() {
+		applications = new ArrayList<Application>();
 		loadApplicationsFromFile(applicationFile);
 	}
 

@@ -11,9 +11,6 @@ public class MainMenu {
 	public static Scanner s = new Scanner(System.in);
 	public static AuthenticationService service = new AuthenticationService();
 	public static User Login() {
-		for (User user: service.getUsers()) {
-			System.out.println(user.getUserID() + " " + user.getPassword());
-		}
 		String userID, password;
 		User check = null;
 		int choice;
@@ -509,8 +506,12 @@ public class MainMenu {
 				}
 				managerDashboard(user);
 			case 6:
+				if (user == null) {
+					System.out.println("Login to access!");
+					break;
+				}
 				if (user.getRole().contains("Manager")) {
-					System.out.println("Already a manger");
+					System.out.println("Already a manager");
 					break;
 				} else if (user.getRole().contains("Applicant")) {
 					System.out.println("Already an applicant, cannot be a manager");

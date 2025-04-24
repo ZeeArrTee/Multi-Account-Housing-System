@@ -10,12 +10,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.ArrayList;
 
 public class ProjectRepository {
 	private final String projectFile = "ProjectList.csv";
 	private static List<Project> projects;
 
 	ProjectRepository() {
+		projects = new ArrayList<Project>();
 		projects = loadProjectsFromFile(projectFile);
 	}
 
@@ -37,7 +39,7 @@ public class ProjectRepository {
 	}
 
 	public List<Project> loadProjectsFromFile(String fileName) {
-
+		
 		try (BufferedReader br = new BufferedReader(
 				new FileReader(System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + fileName))) {
 			String line;
