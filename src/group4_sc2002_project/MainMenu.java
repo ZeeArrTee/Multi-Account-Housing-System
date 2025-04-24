@@ -579,7 +579,7 @@ public class MainMenu {
 				System.out.println("Exiting...");
 				break;
 			}
-		} while (choice < 6);
+		} while (choice < 7);
 		service.SaveAll();
 	}
 
