@@ -134,6 +134,59 @@ public class MainMenu {
 		ApplicationView.displayApplication(app);
 	}
 
+	public static void applicantMenu(Applicant applicant) {
+		int choice = 7;
+		ApplicantDisplay display = new ApplicantDisplay(applicant);
+		ApplicantEnquiryService service = new ApplicantEnquiryService(applicant.getApplication().getProject(),
+				applicant);
+		String message = "";
+		int id;
+		do {
+			System.out.println("Applicant Dashboard:");
+			System.out.println("Enter your choice:");
+			System.out.println("1) View Applications");
+			System.out.println("2) Make Enquiry");
+			System.out.println("3) Edit Enquiry");
+			System.out.println("4) View Enquiry");
+			System.out.println("5) View All Enquiries");
+			System.out.println("6) Delete Enquiry");
+			System.out.println("7) Exit");
+			choice = s.nextInt();
+			switch (choice) {
+			case 1:
+				viewApplications(applicant);
+				break;
+			case 2:
+				System.out.println("Message:");
+				message = s.next();
+				service.submitEnquiry(message);
+				break;
+			case 3:
+				System.out.println("Message:");
+				message = s.next();
+				System.out.println("Enquiry ID:");
+				id = s.nextInt();
+				service.editEnquiry(id, message);
+				break;
+			case 4:
+				System.out.println("Enquiry ID:");
+				id = s.nextInt();
+				display.displayEnquiry(id);
+				break;
+			case 5:
+				display.displayEnquiries();
+				break;
+			case 6:
+				System.out.println("Enquiry ID:");
+				id = s.nextInt();
+				service.deleteEnquiry(id);
+			default:
+				System.out.println("Invalid option, exiting");
+				break;
+			}
+		} while (choice < 7);
+	}
+
 	public static void managerDashboard(User user) {
 		Manager manager = (Manager) user;
 		ManagerDisplay display = new ManagerDisplay(manager);
@@ -364,7 +417,7 @@ public class MainMenu {
 			System.out.println("Enter your choice:");
 			System.out.println("1) Login");
 			System.out.println("2) Projects");
-			System.out.println("3) Applications");
+			System.out.println("3) Applicant Menu");
 			System.out.println("4) Officer Dashboard");
 			System.out.println("5) Manager Dashboard");
 			System.out.println("6) Exit");
@@ -403,7 +456,7 @@ public class MainMenu {
 					break;
 				}
 				if (user.getRole().contains("Applicant") || user.getRole().contains("Officer")) {
-					viewApplications((Applicant) user);
+					applicantMenu((Applicant) user);
 				}
 
 				break;
