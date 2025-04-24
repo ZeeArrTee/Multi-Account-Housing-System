@@ -386,7 +386,7 @@ public class MainMenu {
 				System.out.println("Exiting...");
 				break;
 			}
-		} while (choice < 4);
+		} while (choice < 6);
 
 	}
 
