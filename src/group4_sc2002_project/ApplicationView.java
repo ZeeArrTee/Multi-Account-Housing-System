@@ -19,6 +19,7 @@ public class ApplicationView {
 		Applicant applicant = new Applicant(user.getName(), user.getUserID(), user.getAge(), user.getMaritalStatus(),
 				user.getPassword());
 		if (isEligible(user, flatType)) {
+			System.out.println("I'm here");
 			application = new Application(applicant, project, flatType, ApplicationStatus.Pending);
 			applicant.setApplication(application);
 			project.addApplication(application);
