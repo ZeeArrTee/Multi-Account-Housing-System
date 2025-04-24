@@ -2,6 +2,7 @@ package group4_sc2002_project;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ManagerDisplay extends Display {
 	private Manager manager;
@@ -78,10 +79,10 @@ public class ManagerDisplay extends Display {
 		}
 		for (Project project : projectListing) {
 			Map<String, Integer> units = project.getUnits();
-			System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
+			System.out.println("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
 					+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()
 					+ " Remaining Officer Slots: " + project.getOfficerSlots() + " Flats "
-					+ units.keySet().stream().map(key -> key + ": " + units.get(key)));
+					+ units.keySet().stream().map(key -> key + ": " + units.get(key)).collect(Collectors.joining(" ")));
 		}
 
 	}
