@@ -32,7 +32,7 @@ public class AuthenticationService {
 
 	public static User getUser(String userId) {
 		for (User user : users) {
-			if (user.getUserID() == userId) {
+			if (user.getUserID().compareTo(userId) == 0) {
 				return user;
 			}
 		}

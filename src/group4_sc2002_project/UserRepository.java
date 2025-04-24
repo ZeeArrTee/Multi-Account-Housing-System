@@ -39,7 +39,7 @@ public class UserRepository {
 
 	public static User getUser(String userId) {
 		for (User user : users) {
-			if (user.getUserID() == userId) {
+			if (user.getUserID().compareTo(userId) == 0) {
 				return user;
 			}
 		}
@@ -111,7 +111,6 @@ public class UserRepository {
 	}
 
 	public void overwriteAllUsers(List<User> users) {
-		boolean isFirstLine = true;
 		Map<String, List<User>> roleMap = new HashMap<>();
 		roleMap.put(applicantFile, new ArrayList<User>());
 		roleMap.put(officerFile, new ArrayList<User>());
