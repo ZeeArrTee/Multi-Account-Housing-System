@@ -18,7 +18,6 @@ public class ManagerDisplay extends Display {
 	}
 
 	public void displayProjects() {
-
 		for (Project project : projectListing) {
 			Map<String, Integer> units = project.getUnits();
 			System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
@@ -29,7 +28,7 @@ public class ManagerDisplay extends Display {
 
 	}
 
-	public void chooseCurrentProject() {
+	public Project chooseCurrentProject() {
 		System.out.println("Choose Project (Key in name of project)");
 		boolean found = false;
 		String name = MainMenu.s.next();
@@ -44,6 +43,7 @@ public class ManagerDisplay extends Display {
 		if (!found) {
 			System.out.println("Project not found");
 		}
+		return this.project;
 
 	}
 
@@ -147,4 +147,23 @@ public class ManagerDisplay extends Display {
 		}
 	}
 
+	public void enquiryMenu() {
+		List<Enquiry> enquiries = project.getEnquiries().stream().filter(enq -> enq.getReply().isEmpty()).toList();
+		for (int i = 1; i <= enquiries.size(); i++) {
+			Enquiry enquiry = enquiries.get(i);
+			System.out.println("Enquiry ID: " + enquiry.getId() + ", Applicant: " + enquiry.getApplicant().getUserID()
+					+ ", Enquiry:" + enquiry.getContent());
+		}
+		System.out.println("Choose enquiryID to reply to");
+		int choice = MainMenu.s.nextInt();
+		while (choice < 1 || choice > enquiries.size()) {
+			System.out.println("Invalid Choice");
+			choice = MainMenu.s.nextInt();
+		}
+		System.out.println("Reply:");
+		String reply = MainMenu.s.next();
+		OfficerEnquiryService eService = new OfficerEnquiryService(project);
+		eService.replyEnquiries(enquiries.get(choice).getId(), reply);
+
+	}
 }

@@ -5,8 +5,11 @@ import java.util.List;
 public class OfficerEnquiryService implements OfficerEnquiryView {
 	private Project project;
 
-	@Override
-	public void displayEnquiries() {
+	OfficerEnquiryService(Project project) {
+		this.project = project;
+	}
+
+	public static void displayEnquiries(Project project) {
 		List<Enquiry> enquiries = project.getEnquiries();
 		for (Enquiry enquiry : enquiries) {
 			System.out.println("Enquiry ID: " + enquiry.getId() + ", Applicant: " + enquiry.getApplicant().getUserID()
