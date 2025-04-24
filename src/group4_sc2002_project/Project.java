@@ -170,13 +170,15 @@ public class Project {
 		return officerSlots;
 	}
 
-	public void setNeighbourhood(String neighbourhood) 
-	{
+	public void setNeighbourhood(String neighbourhood) {
 		this.neighbourhood = neighbourhood;
 	}
-	
-	public void setOfficerSlots(int slots) 
-	{
+
+	public void setOfficerSlots(int slots) {
 		this.officerSlots = slots;
+	}
+
+	public boolean getVisibility() {
+		return isVisible;
 	}
 }

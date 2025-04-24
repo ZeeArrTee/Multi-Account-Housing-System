@@ -1,7 +1,6 @@
 package group4_sc2002_project;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,7 +8,7 @@ public class ProjectService implements ProjectView {
 	private static List<Project> projectListing;
 
 	ProjectService() {
-		projectListing = new ArrayList<Project>();
+		projectListing = ProjectRepository.getProjects();
 	}
 
 	public static void createProject(String projectName, String neighbourhood, Map<String, Integer> units,
@@ -179,6 +178,14 @@ public class ProjectService implements ProjectView {
 
 	public void displayProject(String name) {
 		Project project = findProjectName(name);
+		Map<String, Integer> units = project.getUnits();
+		System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
+				+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()
+				+ " Remaining Officer Slots: " + project.getOfficerSlots() + " Flats "
+				+ units.keySet().stream().map(key -> key + ": " + units.get(key)));
+	}
+
+	public static void displayProject(Project project) {
 		Map<String, Integer> units = project.getUnits();
 		System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
 				+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()

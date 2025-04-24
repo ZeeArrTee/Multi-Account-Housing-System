@@ -87,6 +87,46 @@ public class MainMenu {
 	}
 
 	public static void viewProjects(User user) {
+		List<Project> projects = ProjectRepository.getProjects();
+		if (user.getRole().contains("Manager")) {
+			for (Project project : projects) {
+				ProjectService.displayProject(project);
+			}
+		} else if (user.getRole().contains("Officer")) {
+			Officer off = (Officer) user;
+			for (Project project : projects) {
+				Map<String, Integer> units = project.getUnits();
+				boolean visible = project.getVisibility();
+				for (String key : units.keySet()) {
+					if (off.getMaritalStatus() == "Single" && units.keySet().contains("3-Room")) {
+						visible = false;
+					}
+				}
+				if (!visible) {
+					visible = off.getHandledProjects().contains(project);
+				}
+				if (visible) {
+					ProjectService.displayProject(project);
+				}
+			}
+		} else if (user.getRole().contains("Applicant")) {
+			Applicant app = (Applicant) user;
+			for (Project project : projects) {
+				Map<String, Integer> units = project.getUnits();
+				boolean visible = project.getVisibility();
+				for (String key : units.keySet()) {
+					if (app.getMaritalStatus() == "Single" && units.keySet().contains("3-Room")) {
+						visible = false;
+					}
+				}
+				if (!visible) {
+					visible = project.getApplications().contains(app.getApplication());
+				}
+				if (visible) {
+					ProjectService.displayProject(project);
+				}
+			}
+		}
 	}
 
 	public static void viewApplications(User user) {

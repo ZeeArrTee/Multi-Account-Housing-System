@@ -18,6 +18,64 @@ public class ManagerDisplay extends Display {
 	}
 
 	public void displayProjects() {
+		System.out.println("Filter projects? (Y/N)");
+		String choice = MainMenu.s.next();
+		if (choice == "Y") {
+			System.out.println("Choose Field");
+			System.out.println("1. Name");
+			System.out.println("2. Neighbourhood");
+			System.out.println("3. Opening Date");
+			System.out.println("4. Closing Date");
+			System.out.println("5. Officer Slots");
+			System.out.println("6. Flat types");
+			System.out.println("7. None");
+			int filter = MainMenu.s.nextInt();
+			while (filter < 1 || filter > 7) {
+				System.out.println("Invalid option");
+				filter = MainMenu.s.nextInt();
+			}
+			String date;
+			switch (filter) {
+			case 1:
+				System.out.println("What value are you looking for?");
+				String name = MainMenu.s.next();
+				projectListing = projectListing.stream().filter(proj -> proj.getProjectName().compareTo(name) == 0)
+						.toList();
+				break;
+			case 2:
+				System.out.println("What neighbourhood are you looking for?");
+				String neighbourhood = MainMenu.s.next();
+				projectListing = projectListing.stream()
+						.filter(proj -> proj.getNeighbourhood().compareTo(neighbourhood) == 0).toList();
+				break;
+			case 3:
+				System.out.println("Format: YYYY-MM-DD");
+				date = MainMenu.s.next();
+				projectListing = projectListing.stream()
+						.filter(proj -> proj.getOpeningDate().toString().compareTo(date) == 0).toList();
+				break;
+			case 4:
+				System.out.println("Format: YYYY-MM-DD");
+				date = MainMenu.s.next();
+				projectListing = projectListing.stream()
+						.filter(proj -> proj.getClosingDate().toString().compareTo(date) == 0).toList();
+				break;
+			case 5:
+				System.out.println("What minimum officer count?");
+				int count = MainMenu.s.nextInt();
+				projectListing = projectListing.stream().filter(proj -> proj.getOfficerSlots() >= count).toList();
+				break;
+			case 6:
+				System.out.println("Flat type: ");
+				String type = MainMenu.s.next();
+				count = MainMenu.s.nextInt();
+				projectListing = projectListing.stream().filter(proj -> proj.getUnits().get(type) >= count).toList();
+				break;
+			default:
+
+				break;
+			}
+		}
 		for (Project project : projectListing) {
 			Map<String, Integer> units = project.getUnits();
 			System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
