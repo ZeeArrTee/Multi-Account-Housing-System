@@ -16,14 +16,19 @@ public class ApplicationView {
 	}
 
 	public Applicant applyForProject(String flatType) {
-		Applicant applicant = new Applicant(user.getName(), user.getUserID(), user.getAge(),
-				user.getMaritalStatus(), user.getPassword());
+		Applicant applicant = new Applicant(user.getName(), user.getUserID(), user.getAge(), user.getMaritalStatus(),
+				user.getPassword());
 		if (isEligible(user, flatType)) {
 			application = new Application(applicant, project, flatType, ApplicationStatus.Pending);
 		}
 		applicant.setApplication(application);
 		project.addApplication(application);
 		return applicant;
+	}
+
+	public static void displayApplication(Application app) {
+		System.out.println("Project: " + app.getProject().getProjectName() + "Flat Type: " + app.getFlatType()
+				+ " Pending Withdrawal: " + app.getPendingWithdrawal() + " Status: " + app.getStatus());
 	}
 
 	public static boolean isEligible(User user, String flatType) {
