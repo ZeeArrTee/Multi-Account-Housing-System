@@ -6,14 +6,28 @@ import java.util.List;
 public class AuthenticationService {
 	private static List<User> users = new ArrayList<>();
 	private final UserRepository userRepo;
+	private final ProjectRepository projRepo;
+	private final ApplicationRepository appRepo;
+	private final RegistrationRepository regRepo;
 
 	public AuthenticationService() {
 		userRepo = new UserRepository();
 		users = userRepo.loadAllUsers();
-		ProjectRepository projRepo = new ProjectRepository();
-		ApplicationRepository appRepo = new ApplicationRepository();
-		RegistrationRepository regRepo = new RegistrationRepository();
+		projRepo = new ProjectRepository();
+		appRepo = new ApplicationRepository();
+		regRepo = new RegistrationRepository();
 
+	}
+	
+	public List<User> getUsers(){
+		return users;
+	}
+	
+	public void SaveAll() {
+		userRepo.overwriteAllUsers(users);
+		projRepo.saveProjects();
+		appRepo.saveApplications();
+		regRepo.saveregistrations();
 	}
 
 	public static User getUser(String userId) {
