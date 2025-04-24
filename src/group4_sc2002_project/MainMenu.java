@@ -1,7 +1,10 @@
 package group4_sc2002_project;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MainMenu {
@@ -91,7 +94,6 @@ public class MainMenu {
 	}
 
 	public static void managerDashboard(User user) {
-		String userID, password;
 		Manager manager = (Manager) user;
 		ManagerDisplay display = new ManagerDisplay(manager);
 		ManagerService service = null;
@@ -125,7 +127,72 @@ public class MainMenu {
 				System.out.println("4) Change Project Visibility");
 				System.out.println("5) View Created Projects");
 				System.out.println("6) Exit");
-				choice = s.nextInt();
+				int choice2 = s.nextInt();
+				switch (choice2) {
+				case 1:
+					System.out.print("Enter project name: ");
+					String name = MainMenu.s.nextLine();
+
+					System.out.print("Enter neighbourhood: ");
+					String neighbourhood = MainMenu.s.nextLine();
+					System.out.println("Enter units by flat type. Enter '#' to stop.");
+					Map<String, Integer> units = new HashMap<String, Integer>();
+					while (true) {
+						System.out.print("Enter flat type (e.g., 2-Room, 3-Room): ");
+						String flatType = MainMenu.s.nextLine();
+						if (flatType.equals("#"))
+							break;
+
+						System.out.print("Enter number of units for " + flatType + ": ");
+						try {
+							int count = Integer.parseInt(MainMenu.s.nextLine());
+							units.put(flatType, count);
+						} catch (NumberFormatException e) {
+							System.out.println("Invalid number. Try again.");
+						}
+					}
+
+					System.out.print("Enter open date (yyyy-mm-dd): ");
+					LocalDate open = LocalDate.parse(MainMenu.s.nextLine());
+					System.out.print("Enter close date (yyyy-mm-dd): ");
+					LocalDate close = LocalDate.parse(MainMenu.s.nextLine());
+					System.out.print("Enter officer slot count: ");
+					int slots = MainMenu.s.nextInt();
+					ProjectService.createProject(name, neighbourhood, units, open, close, slots, manager);
+					break;
+				case 2:
+					if (chosen == null) {
+						System.out.println("Select a project first");
+						break;
+					}
+					ProjectService.editProject(chosen);
+					break;
+				case 3:
+					System.out.println("Key in Project Name");
+					String projectName = s.next();
+					boolean success = ProjectService.deleteProject(projectName);
+					if (!success) {
+						System.out.println("Project not found");
+					} else {
+						System.out.println("Project removed");
+					}
+					break;
+				case 4:
+					if (chosen == null) {
+						System.out.println("Choose a project first");
+					}
+					chosen.toggleVisibility();
+					break;
+				case 5:
+					display.displayProjects();
+					break;
+				case 6:
+					break;
+				default:
+					System.out.println("Invalid option, exiting");
+					break;
+				}
+
 				break;
 			case 3:
 				display.processRegistrations();
@@ -148,6 +215,12 @@ public class MainMenu {
 				display.enquiryMenu();
 				break;
 			case 8:
+				for (Applicant app : service.getApplicants()) {
+					service.displayApplicant(app);
+
+				}
+				break;
+			case 9:
 				System.out.println("Returning to main menu...");
 				break;
 			}
