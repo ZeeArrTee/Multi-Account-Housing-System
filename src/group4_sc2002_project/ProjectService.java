@@ -182,7 +182,7 @@ public class ProjectService implements ProjectView {
 	public void displayProject(String name) {
 		Project project = findProjectName(name);
 		Map<String, Integer> units = project.getUnits();
-		System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
+		System.out.println("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
 				+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()
 				+ " Remaining Officer Slots: " + project.getOfficerSlots() + " Flats "
 				+ units.keySet().stream().map(key -> key + ": " + units.get(key)).collect(Collectors.joining(" ")));
@@ -190,7 +190,7 @@ public class ProjectService implements ProjectView {
 
 	public static void displayProject(Project project) {
 		Map<String, Integer> units = project.getUnits();
-		System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
+		System.out.println("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
 				+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()
 				+ " Remaining Officer Slots: " + project.getOfficerSlots() + " Flats "
 				+ units.keySet().stream().map(key -> key + ": " + units.get(key)).collect(Collectors.joining(" ")));
