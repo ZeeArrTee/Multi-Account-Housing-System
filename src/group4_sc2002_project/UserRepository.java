@@ -22,6 +22,9 @@ public class UserRepository {
 
 	public List<User> loadAllUsers() {
 		users = new ArrayList<>();
+		applicants = new ArrayList<>();
+		officers = new ArrayList<>();
+		managers = new ArrayList<>();
 		users.addAll(loadUsersFromFile(applicantFile));
 		users.addAll(loadUsersFromFile(officerFile));
 		users.addAll(loadUsersFromFile(managerFile));
@@ -104,7 +107,7 @@ public class UserRepository {
 		file = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 		try (FileWriter fw = new FileWriter(file, true)) {
 			fw.write(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
-					user.getMaritalStatus(), user.getPassword(), user.getRole().get(user.getRole().size()-1)) + "\n");
+					user.getMaritalStatus(), user.getPassword(), user.getRole().get(user.getRole().size() - 1)) + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -117,9 +120,9 @@ public class UserRepository {
 		roleMap.put(officerFile, new ArrayList<User>());
 		roleMap.put(managerFile, new ArrayList<User>());
 		roleMap.put(userFile, new ArrayList<User>());
-		
+
 		for (User user : users) {
-			String file = getFileForRole(user.getRole().get(user.getRole().size()-1));
+			String file = getFileForRole(user.getRole().get(user.getRole().size() - 1));
 			roleMap.get(file).add(user);
 		}
 		System.out.println(roleMap);
@@ -132,16 +135,15 @@ public class UserRepository {
 						isFirstLine = false;
 						if (user.getRole().getLast().equals("User")) {
 							pw.println("Name, UserID, Age, Marital Status, Password, Roles");
-						}
-						else {
-							pw.println("Name, UserID, Age, Marital Status, Password");	
+						} else {
+							pw.println("Name, UserID, Age, Marital Status, Password");
 						}
 					}
 					if (user.getRole().getLast().equals("User")) {
-					pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
-							user.getMaritalStatus(), user.getPassword(), user.getRole().get(user.getRole().size()-1)));
-					}
-					else {
+						pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
+								user.getMaritalStatus(), user.getPassword(),
+								user.getRole().get(user.getRole().size() - 1)));
+					} else {
 						pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
 								user.getMaritalStatus(), user.getPassword()));
 					}
