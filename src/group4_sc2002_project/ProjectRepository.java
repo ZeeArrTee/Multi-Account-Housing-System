@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +34,6 @@ public class ProjectRepository {
 
 	public List<Project> loadProjectsFromFile(String fileName) {
 
-		List<Project> loaded = new ArrayList<Project>();
-
 		try (BufferedReader br = new BufferedReader(
 				new FileReader(System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + fileName))) {
 			String line;
@@ -63,16 +60,18 @@ public class ProjectRepository {
 				LocalDate closeDate = LocalDate.parse(parts[4]);
 				int officerSlots = Integer.parseInt(parts[5]);
 				Manager managerInCharge = (Manager) AuthenticationService.getUser(parts[6]);
+				managerInCharge.addManagedProject(null);
 				Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots,
 						managerInCharge);
-				loaded.add(project);
+				managerInCharge.addManagedProject(project);
+				projects.add(project);
 
 			}
 		} catch (IOException e) {
 			System.out.println("Failed to load: " + fileName);
 		}
 
-		return loaded;
+		return projects;
 	}
 
 	public void saveProjects() {

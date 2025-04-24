@@ -121,8 +121,15 @@ public class ManagerDisplay extends Display {
 		case 2:
 			System.out.println("Choose application");
 			List<Application> apps = this.project.getApplications();
+			for (Application application : apps) {
+				if (application.getProject().getUnits().get(application.getFlatType()) == 0) {
+					apps.remove(application);
+					service.processApplication(application, false);
+				}
+			}
 			for (int i = 1; i <= apps.size(); i++) {
 				Application application = apps.get(i);
+
 				System.out.println(i + ". " + application.getApplicant().getUserID()
 						+ application.getApplicant().getAge() + application.getFlatType());
 			}

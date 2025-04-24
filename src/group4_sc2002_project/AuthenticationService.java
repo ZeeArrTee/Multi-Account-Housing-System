@@ -10,6 +10,8 @@ public class AuthenticationService {
 	public AuthenticationService() {
 		userRepo = new UserRepository();
 		users = userRepo.loadAllUsers();
+		ProjectRepository projRepo = new ProjectRepository();
+		ApplicationRepository appRepo = new ApplicationRepository();
 	}
 
 	public static User getUser(String userId) {

@@ -5,7 +5,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 public class ApplicationRepository {
@@ -13,7 +12,7 @@ public class ApplicationRepository {
 	private static List<Application> applications;
 
 	ApplicationRepository() {
-		applications = loadApplicationsFromFile(applicationFile);
+		loadApplicationsFromFile(applicationFile);
 	}
 
 	public static List<Application> getApplications() {
@@ -21,8 +20,6 @@ public class ApplicationRepository {
 	}
 
 	public List<Application> loadApplicationsFromFile(String fileName) {
-
-		List<Application> loaded = new ArrayList<Application>();
 
 		try (BufferedReader br = new BufferedReader(
 				new FileReader(System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + fileName))) {
@@ -52,14 +49,15 @@ public class ApplicationRepository {
 				Application app = new Application((Applicant) AuthenticationService.getUser(userId),
 						ProjectRepository.getProject(projectName), flatType, status);
 				app.setPendingWithdrawal(pendingWithdrawal);
-				loaded.add(app);
+				applications.add(app);
+				ProjectRepository.getProject(projectName).addApplication(app);
 
 			}
 		} catch (IOException e) {
 			System.out.println("Failed to load: " + fileName);
 		}
 
-		return loaded;
+		return applications;
 	}
 
 	public void saveApplications() {
