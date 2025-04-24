@@ -35,6 +35,7 @@ public class UserRepository {
 	public static void updateUsers(User oldUser, User newUser) {
 		users.remove(oldUser);
 		users.add(newUser);
+		System.out.println(newUser.getRole());
 	}
 
 	public static User getUser(String userId) {

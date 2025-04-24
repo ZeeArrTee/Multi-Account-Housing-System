@@ -7,7 +7,7 @@ public class Manager extends User {
 	private List<Project> managedProjects;
 
 	public Manager(String name, String userID, int age, String maritalStatus, String password) {
-		super(name, userID, age, maritalStatus, "Manager", password);
+		super(name, userID, age, maritalStatus, password, "Manager");
 		managedProjects = new ArrayList<Project>();
 	}
 

@@ -71,7 +71,9 @@ public class ProjectRepository {
 				Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots,
 						managerInCharge);
 				for (String id : officerIds) {
-					project.addOfficer((Officer) UserRepository.getUser(id));
+					Officer officer = (Officer) UserRepository.getUser(id);
+					project.addOfficer(officer);
+					officer.addProject(project);
 				}
 				managerInCharge.addManagedProject(project);
 				projects.add(project);

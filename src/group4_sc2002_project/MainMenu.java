@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 public class MainMenu {
 	public static Scanner s = new Scanner(System.in);
+	public static Scanner menu = new Scanner(System.in);
 	public static AuthenticationService service = new AuthenticationService();
 
 	public static User Login() {
@@ -126,9 +127,8 @@ public class MainMenu {
 					ProjectService.displayProject(project);
 				}
 			}
-		}
-		else {
-			for (Project project: projects) {
+		} else {
+			for (Project project : projects) {
 				Map<String, Integer> units = project.getUnits();
 				boolean visible = project.getVisibility();
 				for (String key : units.keySet()) {
@@ -444,7 +444,7 @@ public class MainMenu {
 			System.out.println("2) Project Officer Registration");
 			System.out.println("3) Project Menu");
 			System.out.println("4) Exit");
-			choice = s.nextInt();
+			choice = menu.nextInt();
 			switch (choice) {
 			case 1:
 				display.ApplicationMenu();
@@ -487,6 +487,7 @@ public class MainMenu {
 		ProjectRepository.createProject(project);
 		UserRepository.updateUsers(user, manager);
 		user = manager;
+		System.out.println("Project " + projectName + " created!");
 	}
 
 	public static void main(String[] args) {
@@ -510,7 +511,7 @@ public class MainMenu {
 				System.out.println("Currently logged in as: " + user.getName());
 				System.out.println("Role: " + user.getRole().get(user.getRole().size() - 1));
 			}
-			choice = s.nextInt();
+			choice = menu.nextInt();
 			String log;
 			switch (choice) {
 			case 1:
@@ -574,6 +575,7 @@ public class MainMenu {
 					break;
 				} else {
 					projectCreation(user);
+					break;
 				}
 			case 7:
 				System.out.println("Exiting...");

@@ -1,5 +1,7 @@
 package group4_sc2002_project;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Officer extends Applicant {
 	private List<Project> handledProject = new ArrayList<Project>();
@@ -18,6 +20,10 @@ public class Officer extends Applicant {
 
 	public List<Project> getHandledProjects() {
 		return handledProject;
+	}
+
+	public void addProject(Project project) {
+		handledProject.add(project);
 	}
 
 }

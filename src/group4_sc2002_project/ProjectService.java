@@ -3,6 +3,7 @@ package group4_sc2002_project;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ProjectService implements ProjectView {
 	private static List<Project> projectListing;
@@ -182,7 +183,7 @@ public class ProjectService implements ProjectView {
 		System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
 				+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()
 				+ " Remaining Officer Slots: " + project.getOfficerSlots() + " Flats "
-				+ units.keySet().stream().map(key -> key + ": " + units.get(key)));
+				+ units.keySet().stream().map(key -> key + ": " + units.get(key)).collect(Collectors.joining(" ")));
 	}
 
 	public static void displayProject(Project project) {
@@ -190,7 +191,7 @@ public class ProjectService implements ProjectView {
 		System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
 				+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()
 				+ " Remaining Officer Slots: " + project.getOfficerSlots() + " Flats "
-				+ units.keySet().stream().map(key -> key + ": " + units.get(key)));
+				+ units.keySet().stream().map(key -> key + ": " + units.get(key)).collect(Collectors.joining(" ")));
 	}
 
 }
