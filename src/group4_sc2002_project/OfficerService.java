@@ -21,11 +21,12 @@ public class OfficerService extends OfficerDisplay {
 	}
 
 	public boolean canRegister(Officer officer, Project project) {
-		if (officer.getHandledProject().isWithinApplicationPeriod(project.getOpeningDate())) {
-			return false;
-		} else {
-			return true;
+		for (Project proj: officer.getHandledProjects()) {
+			if (proj.isWithinApplicationPeriod(project.getOpeningDate())) {
+				return false;
+			}
 		}
+		return true;
 	}
 
 	@Override

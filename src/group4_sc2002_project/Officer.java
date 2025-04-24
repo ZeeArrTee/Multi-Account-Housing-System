@@ -2,13 +2,13 @@ package group4_sc2002_project;
 import java.util.*;
 
 public class Officer extends Applicant {
-	private Project handledProject;
+	private List<Project> handledProject = new ArrayList<Project>();
 	private String registrationStatus;
 
-	public Officer(String name, String userID, String password, int age, String maritalStatus, Project project) {
-		super(name, userID, password, age, maritalStatus);
+	public Officer(String name, String userID, int age, String maritalStatus, String password, Project project) {
+		super(name, userID, age, maritalStatus, password);
 		super.modifyRole("Officer");
-		handledProject = project;
+		handledProject.add(project);
 		registrationStatus = null;
 	}
 
@@ -17,7 +17,7 @@ public class Officer extends Applicant {
 	}
 
 	public List<Project> getHandledProjects() {
-		return handledProjects;
+		return handledProject;
 	}
 
 }

@@ -6,8 +6,8 @@ import java.util.List;
 public class Manager extends User {
 	private List<Project> managedProjects;
 
-	public Manager(String name, String userID, String password, int age, String maritalStatus) {
-		super(name, userID, password, age, maritalStatus, "Manager");
+	public Manager(String name, String userID, int age, String maritalStatus, String password) {
+		super(name, userID, age, maritalStatus, "Manager", password);
 		managedProjects = new ArrayList<Project>();
 	}
 
