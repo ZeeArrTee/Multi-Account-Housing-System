@@ -94,7 +94,7 @@ public class ProjectRepository {
 				if (isFirstLine) {
 					isFirstLine = false;
 					pw.println(
-							"Project Name, Neighbourhood, Opening Date, Closing Date, Officer Slots Remaining, Manager-In-Charge");
+							"Project Name, Neighbourhood, Remaining Units, Opening Date, Closing Date, Officer Slots Remaining, Manager-In-Charge");
 				}
 				String units = project.getUnits().keySet().stream()
 						.map(key -> key + "=" + project.getUnits().get(key).toString())

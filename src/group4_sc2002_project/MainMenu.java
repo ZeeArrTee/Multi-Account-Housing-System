@@ -141,6 +141,7 @@ public class MainMenu {
 				}
 			}
 		}
+		System.out.println();
 	}
 
 	public static void projectsMenu(User user) {
@@ -513,6 +514,7 @@ public class MainMenu {
 			}
 		}
 		Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots, manager);
+		System.out.println(project.getAvailableUnitsCount("2-room"));
 		manager.addManagedProject(project);
 		ProjectRepository.createProject(project);
 		UserRepository.updateUsers(user, manager);
