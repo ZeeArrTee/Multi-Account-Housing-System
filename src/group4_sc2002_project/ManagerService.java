@@ -49,6 +49,8 @@ public class ManagerService {
 		ArrayList<User> temp = registrations.get(project);
 		temp.remove(user);
 		registrations.put(project, temp);
+		UserRepository.updateUsers(user, new Officer(user.getName(), user.getUserID(), user.getAge(),
+				user.getMaritalStatus(), user.getPassword(), project));
 	}
 
 	public static List<User> getPendingRegistration(Project project) {

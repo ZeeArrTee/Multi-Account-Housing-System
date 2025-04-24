@@ -16,6 +16,7 @@ public class ProjectService implements ProjectView {
 		Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots,
 				managerInCharge);
 		projectListing.add(project);
+		ProjectRepository.createProject(project);
 
 	}
 
