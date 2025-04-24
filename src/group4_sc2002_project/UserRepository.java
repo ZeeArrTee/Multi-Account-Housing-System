@@ -105,6 +105,7 @@ public class UserRepository {
 	}
 
 	public void overwriteAllUsers(List<User> users) {
+		boolean isFirstLine = true;
 		Map<String, List<User>> roleMap = new HashMap<>();
 		roleMap.put(applicantFile, new ArrayList<User>());
 		roleMap.put(officerFile, new ArrayList<User>());
@@ -118,6 +119,10 @@ public class UserRepository {
 			String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 			try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
 				for (User user : roleMap.get(file)) {
+					if (isFirstLine) {
+						isFirstLine = false;
+						pw.println("Name, UserID, Age, Marital Status, Password, Roles");
+					}
 					pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
 							user.getMaritalStatus(), user.getPassword(), user.getRole().get(user.getRole().size()-1)));
 				}

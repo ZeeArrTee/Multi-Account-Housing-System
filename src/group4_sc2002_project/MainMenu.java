@@ -11,6 +11,9 @@ public class MainMenu {
 	public static Scanner s = new Scanner(System.in);
 	public static AuthenticationService service = new AuthenticationService();
 	public static User Login() {
+		for (User user: service.getUsers()) {
+			System.out.println(user.getUserID() + " " + user.getPassword());
+		}
 		String userID, password;
 		User check = null;
 		int choice;
@@ -483,7 +486,7 @@ public class MainMenu {
 				break;
 			}
 		} while (choice < 6);
-
+		service.SaveAll();
 	}
 
 }

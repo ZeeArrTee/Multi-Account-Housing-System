@@ -61,9 +61,14 @@ public class ApplicationRepository {
 	}
 
 	public void saveApplications() {
+		boolean isFirstLine = true;
 		String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + applicationFile;
 		try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
 			for (Application app : applications) {
+				if (isFirstLine) {
+					isFirstLine = false;
+					pw.println("UserID, Flat Type, Withdrawal Requested?, Withdrawal Status, Project Name");
+				}
 				pw.println(String.join(",", app.getApplicant().getUserID(), app.getFlatType(),
 						String.valueOf(app.getPendingWithdrawal()), app.getStatus().toString(),
 						app.getProject().getProjectName()));

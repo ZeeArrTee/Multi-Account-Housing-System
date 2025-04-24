@@ -69,7 +69,7 @@ public class OfficerService extends OfficerDisplay {
 			}
 			app.applyForProject(room);
 			System.out.println("Successfully registered for project!");
-			
+				
 		}
 	}
 	
