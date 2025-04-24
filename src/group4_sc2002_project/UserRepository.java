@@ -125,7 +125,7 @@ public class UserRepository {
 			String file = getFileForRole(user.getRole().get(user.getRole().size() - 1));
 			roleMap.get(file).add(user);
 		}
-		System.out.println(roleMap);
+//		System.out.println(roleMap);
 		for (String file : roleMap.keySet()) {
 			String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 			try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
