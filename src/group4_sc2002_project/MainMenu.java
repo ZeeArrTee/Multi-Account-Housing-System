@@ -267,9 +267,91 @@ public class MainMenu {
 		} while (choice < 4);
 
 	}
+	
+	public static void OfficerProjectMenu(Officer officer) {
+		int choice;
+		OfficerService display = new OfficerService(officer);
+		System.out.println("Enter your choice:");
+		int i;
+		do {
+			System.out.println("Project Menu:");
+			System.out.println("1) View project listing");
+			System.out.println("2) View managed projects");
+			System.out.println("3) Exit");
+			System.out.println();
+			choice = s.nextInt();
+			switch(choice) {
+				case 1:
+					i = 1;
+					for (Project project: ProjectService.getProjectListing()) {
+						System.out.println(i + ": " +project.getProjectName());
+						i++;
+					}
+					if (i == 1) {
+						System.out.println("There are no ongoing or upcoming projects!");
+					}
+					break;
+				case 2:
+						System.out.println("Your registration status is currently: " + officer.getRegistrationStatus());
+						choice = s.nextInt();
+						do {
+							System.out.println("Select your desired action: ");
+							System.out.println("1) View project details");
+							System.out.println("2) Handle project enquiries");
+							System.out.println("3) Handle application matters");
+							System.out.println("4) Back");
+							switch(choice) {
+								case 1:
+									display.displayProjectDetails();
+									break;
+								case 2:
+									display.enquiryMenu();
+									break;
+								case 3:
+									display.displayOutstanding();
+									break;
+								case 4:
+									break;
+							}
+						} while (choice < 4);
+					break;
+					
+				case 3:
+					
+					System.out.println("Returning to dashboard...");
+					break;
+			}
+		} while (choice < 3);
+	}
 
-	public static void officerDashboard() {
-
+	public static void officerDashboard(User user) {
+			int choice;
+			Officer officer = (Officer) user;
+			OfficerService display = new OfficerService(officer);
+			System.out.println("Currently logged in as: " + user.getName());
+			do {
+				System.out.println("Officer Dashboard:");
+				System.out.println("Enter your choice:");
+				System.out.println("1) Apply for a Project as an Applicant");
+				System.out.println("2) Project Officer Registration");
+				System.out.println("3) Project Menu");
+				System.out.println("4) Exit");
+				choice = s.nextInt();
+				switch(choice) {
+					case 1:
+						display.ApplicationMenu();
+						break;
+					case 2:
+						display.RegistrationMenu();
+						break;
+					case 3:
+						OfficerProjectMenu(officer);
+						break;
+					case 4:
+						System.out.println("Returning to main menu...");
+						break;
+				}
+			} while (choice < 4);
 	}
 
 	public static void main(String[] args) {
@@ -329,7 +411,7 @@ public class MainMenu {
 					System.out.println("Access Denied");
 					break;
 				}
-				officerDashboard();
+				officerDashboard(user);
 				break;
 			case 5:
 				if (user == null) {
@@ -344,7 +426,7 @@ public class MainMenu {
 				System.out.println("Exiting...");
 				break;
 			}
-		} while (choice < 4);
+		} while (choice < 6);
 
 	}
 
