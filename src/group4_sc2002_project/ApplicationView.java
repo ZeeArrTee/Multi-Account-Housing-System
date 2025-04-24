@@ -1,6 +1,6 @@
 package group4_sc2002_project;
 
-public abstract class ApplicationView {
+public class ApplicationView {
 	private Project project;
 	private User user;
 	private Application application;

@@ -5,6 +5,7 @@ import java.util.*;
 public class OfficerDisplay extends Display {
 	private Officer officer;
 	private List<Project> projects = new ArrayList<Project>();
+	private List<Project> outprojects = new ArrayList<Project>();
 
 	OfficerDisplay(Officer officer) {
 		this.officer = officer;
@@ -40,47 +41,94 @@ public class OfficerDisplay extends Display {
 				+ " Remaining Officer Slots: " + project.getOfficerSlots() + " Flats "
 				+ units.keySet().stream().map(key -> key + ": " + units.get(key)));
 	}
-
-	public Application retrieveApplicationDetails() {
+	
+	public void enquiryMenu() {
 		System.out.println("Select your project:");
-		int i = 1;
+		int j = 1;
 		int choice = Integer.MAX_VALUE;
 		
 		for (Project project: projects) {
-			System.out.println(i + ": "+ project.getProjectName());
-			i++;
+			System.out.println(j + ": "+ project.getProjectName());
+			j++;
 		}
-		if (i == 1) {
-			System.out.println("No projects found.");
-			return null;
-		}
+		
 		System.out.println();
 		
-		while (choice > i||choice < 0) {
+		while (choice > j||choice < 0) {
 			choice = MainMenu.s.nextInt();
-			if (choice > i||choice < 0) {
+			if (choice > j||choice < 0) {
 				System.out.println("Invalid choice!");
 			}
 		}
+		
 		Project project = projects.get(choice-1);
-		
-		System.out.println("Select your application:");
-		i = 1;
-		for (Application application: project.getApplications()) {
-			System.out.println(i + ": " + application.getApplicant());
-			i++;
+		List<Enquiry> enquiries = project.getEnquiries().stream().filter(enq -> enq.getReply().isEmpty()).toList();
+		for (int i = 1; i <= enquiries.size(); i++) {
+			Enquiry enquiry = enquiries.get(i);
+			System.out.println("Enquiry ID: " + enquiry.getId() + ", Applicant: " + enquiry.getApplicant().getUserID()
+					+ ", Enquiry:" + enquiry.getContent());
 		}
 		
-		if (i == 1) {
-			System.out.println("No applicationss found.");
-			return null;
-		}
-		while (choice > i||choice < 0) {
+		System.out.println("Choose enquiryID to reply to");
+		choice = MainMenu.s.nextInt();
+		while (choice < 1 || choice > enquiries.size()) {
+			System.out.println("Invalid Choice");
 			choice = MainMenu.s.nextInt();
-			if (choice > i||choice < 0) {
-				System.out.println("Invalid choice!");
-			}
 		}
-		return project.getApplications().get(choice-1);
+		System.out.println("Reply:");
+		String reply = MainMenu.s.next();
+		OfficerEnquiryService eService = new OfficerEnquiryService(project);
+		eService.replyEnquiries(enquiries.get(choice).getId(), reply);
+
+	}
+	 	
+	
+	public void displayOutstanding() {
+		int totout = 0;
+		for (Project project: projects) {
+			boolean add = false;
+			int out = 0;
+			for (Application application: project.getApplications()) {
+				if (application.getStatus().equals(ApplicationStatus.Successful)) {
+					if (!add) {
+						add = true;
+						this.outprojects.add(project);
+					}
+					out++;
+					totout++;
+				}
+				System.out.println(project.getProjectName() + " has " + out + " outstanding applications!");
+			}
+		System.out.println("You have " + totout + " outstanding applications remaining!");
+		}
+		
+		String decision;
+		for (Project project: outprojects) {
+			List<Application> apps = project.getApplications();
+			for (int i = 1; i <= apps.size(); i++) {
+				Application application = apps.get(i);
+				System.out.println(i + ". " + application.getApplicant().getUserID()
+						+ application.getApplicant().getAge() + application.getFlatType());
+				
+				System.out.println("Resolve? (Y/N)");
+				decision = MainMenu.s.next();
+				while (!(decision.equals("Y")|| decision.equals("N"))) {
+					System.out.println("Invalid Choice");
+					System.out.println("Resolve? (Y/N)");
+					decision = MainMenu.s.next();
+				}
+				
+				if (decision.equals("Y")) {
+					String flatType = application.getFlatType();
+					int flatCount = project.getAvailableUnitsCount(flatType);
+					
+					application.setStatus(ApplicationStatus.Booked);
+					project.setUnits(flatType, flatCount-1);
+				}
+			}
+			
+		}
+		
+		
 	}
 }

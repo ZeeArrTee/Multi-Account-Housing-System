@@ -230,7 +230,7 @@ public class MainMenu {
 	
 	public static void OfficerProjectMenu(Officer officer) {
 		int choice;
-		OfficerDisplay display = new OfficerDisplay(officer);
+		OfficerService display = new OfficerService(officer);
 		System.out.println("Enter your choice:");
 		int i;
 		do {
@@ -252,21 +252,8 @@ public class MainMenu {
 					}
 					break;
 				case 2:
-					i = 1;
-					System.out.println("Choose a project to view:");
-					for (Project project: officer.getHandledProjects()) {
-						System.out.println(i + ": " + project.getProjectName());
-						i++;
-					}
-					if (i == 1) {
-						System.out.println("You are not currently managing any projects!");
-						break;
-					}
-					
-					else {
-						i = s.nextInt();
+						System.out.println("Your registration status is currently: " + officer.getRegistrationStatus());
 						choice = s.nextInt();
-						Project project = officer.getHandledProjects().get(i);
 						do {
 							System.out.println("Select your desired action: ");
 							System.out.println("1) View project details");
@@ -275,25 +262,22 @@ public class MainMenu {
 							System.out.println("4) Back");
 							switch(choice) {
 								case 1:
-									System.out.println("Project Name:  " + project.getProjectName());
-									System.out.println("Neighbourhood " + project.getNeighbourhood());
-									System.out.println("Flats left: " + project.getAvailableUnitsCount("2-room") + "");
-									System.out.println();
-									System.out.println();
-									System.out.println();
+									display.displayProjectDetails();
 									break;
 								case 2:
+									display.enquiryMenu();
 									break;
 								case 3:
+									display.displayOutstanding();
 									break;
 								case 4:
 									break;
 							}
 						} while (choice < 4);
-					
-					}
 					break;
+					
 				case 3:
+					
 					System.out.println("Returning to dashboard...");
 					break;
 			}
@@ -303,7 +287,7 @@ public class MainMenu {
 	public static void officerDashboard(User user) {
 			int choice;
 			Officer officer = (Officer) user;
-			OfficerDisplay display = new OfficerDisplay(officer);
+			OfficerService display = new OfficerService(officer);
 			System.out.println("Currently logged in as: " + user.getName());
 			do {
 				System.out.println("Officer Dashboard:");
@@ -315,11 +299,12 @@ public class MainMenu {
 				choice = s.nextInt();
 				switch(choice) {
 					case 1:
+						display.ApplicationMenu();
 						break;
 					case 2:
+						display.RegistrationMenu();
 						break;
 					case 3:
-						
 						OfficerProjectMenu(officer);
 						break;
 					case 4:
