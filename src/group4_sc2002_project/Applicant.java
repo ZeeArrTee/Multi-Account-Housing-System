@@ -45,5 +45,9 @@ public class Applicant extends User {
 	public void setApplication(Application application) {
 		this.application = application;
 	}
+	
+	public void removeRole() {
+		roles.remove("Applicant");
+	}
 
 }
