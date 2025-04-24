@@ -98,8 +98,8 @@ public class ManagerService {
 			System.out.println("Access Denied");
 			return false;
 		}
-		HDBOfficer officer = new HDBOfficer(user.getName(), user.getUserID(), user.getPassword(), user.getAge(),
-				user.getMaritalStatus(), project);
+		HDBOfficer officer = new HDBOfficer(user.getName(), user.getUserID(), user.getAge(),
+				user.getMaritalStatus(), user.getPassword(), project);
 		boolean success = project.addOfficer(officer);
 		processRegistration(user, project);
 		return success;

@@ -16,8 +16,8 @@ public abstract class ApplicationView {
 	}
 
 	public Applicant applyForProject(String flatType) {
-		Applicant applicant = new Applicant(user.getName(), user.getUserID(), user.getPassword(), user.getAge(),
-				user.getMaritalStatus());
+		Applicant applicant = new Applicant(user.getName(), user.getUserID(), user.getAge(),
+				user.getMaritalStatus(), user.getPassword());
 		if (isEligible(user, flatType)) {
 			application = new Application(applicant, project, flatType, ApplicationStatus.Pending);
 		}
