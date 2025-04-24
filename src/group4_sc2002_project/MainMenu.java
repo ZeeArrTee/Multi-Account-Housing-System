@@ -141,6 +141,7 @@ public class MainMenu {
 				}
 			}
 		}
+		System.out.println();
 	}
 
 	public static void projectsMenu(User user) {
@@ -471,6 +472,12 @@ public class MainMenu {
 		String projectName = s.next();
 		System.out.println("Neighbourhood: ");
 		String neighbourhood = s.next();
+		System.out.println("Number of 2-room flats:");
+		int flattwo = s.nextInt();
+		System.out.println("Number of 3-room flats:");
+		int flatthree = s.nextInt();
+		units.put("2-room", flattwo);
+		units.put("3-room", flatthree);
 		System.out.println("Open Date (YYYY-MM-DD): ");
 		LocalDate openDate = LocalDate.parse(s.next());
 		System.out.println("Close Date (YYYY-MM-DD): ");
@@ -482,7 +489,9 @@ public class MainMenu {
 			System.out.println("Officer Slots (max 10): ");
 			officerSlots = s.nextInt();
 		}
+		System.out.println(units);
 		Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots, manager);
+		System.out.println(project.getAvailableUnitsCount("2-room"));
 		manager.addManagedProject(project);
 		ProjectRepository.createProject(project);
 		UserRepository.updateUsers(user, manager);

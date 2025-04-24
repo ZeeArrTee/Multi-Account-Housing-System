@@ -21,7 +21,7 @@ public class Project {
 	private List<Application> apps;
 	private int enquiryCount;
 
-	public Project(String projectName, String neighbourhood, Map<String, Integer> units, LocalDate openDate,
+	public Project(String projectName, String neighbourhood, Map<String, Integer> unit, LocalDate openDate,
 			LocalDate closeDate, int officerSlots, Manager managerInCharge) {
 		this.isVisible = true;
 		this.enquiryCount = 0;
@@ -33,7 +33,7 @@ public class Project {
 		this.managerInCharge = managerInCharge;
 		this.apps = new ArrayList<Application>();
 		this.enquiries = new ArrayList<Enquiry>();
-		this.units = new HashMap<String, Integer>();
+		this.units = unit;
 		this.assignedOfficers = new ArrayList<Officer>();
 	}
 
