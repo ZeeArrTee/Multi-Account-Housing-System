@@ -128,7 +128,7 @@ public class MainMenu {
 			}
 		}
 		else {
-			for (Project project: projects) {
+			for (Project project: projects) {	
 				Map<String, Integer> units = project.getUnits();
 				boolean visible = project.getVisibility();
 				for (String key : units.keySet()) {
