@@ -18,11 +18,11 @@ public class AuthenticationService {
 		regRepo = new RegistrationRepository();
 
 	}
-	
-	public List<User> getUsers(){
+
+	public List<User> getUsers() {
 		return users;
 	}
-	
+
 	public void SaveAll() {
 		userRepo.overwriteAllUsers(users);
 		projRepo.saveProjects();
@@ -47,7 +47,7 @@ public class AuthenticationService {
 		}
 
 		if (user.getPassword().equals(password)) {
-			System.out.println("Login successful. Role: " + user.getRole().get(user.getRole().size()-1));
+			System.out.println("Login successful. Role: " + user.getRole().get(user.getRole().size() - 1));
 			return user;
 		} else {
 			System.out.println("Incorrect password.");
