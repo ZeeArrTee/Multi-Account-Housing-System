@@ -6,7 +6,7 @@ public class Enquiry {
 	private String content;
 	private String reply;
 
-	public Enquiry(int id, Applicant applicant, Project project, String message) {
+	public Enquiry(int id, Applicant applicant, String message) {
 		this.id = id;
 		this.applicant = applicant;
 		this.content = message;
