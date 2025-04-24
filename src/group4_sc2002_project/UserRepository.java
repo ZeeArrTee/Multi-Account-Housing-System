@@ -59,7 +59,7 @@ public class UserRepository {
 				} else {
 					role = parts[5];
 				}
-				loaded.add(new User(name, id, pw, age, status, role));
+				loaded.add(new User(name, id, age, status, pw, role));
 			}
 		} catch (IOException e) {
 			System.out.println("Failed to load: " + fileName);
@@ -79,8 +79,8 @@ public class UserRepository {
 		}
 		file = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 		try (FileWriter fw = new FileWriter(file, true)) {
-			fw.write(String.join(",", user.getName(), user.getUserID(), user.getPassword(),
-					String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)) + "\n");
+			fw.write(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
+					user.getMaritalStatus(), user.getPassword(), user.getRole().get(1)) + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

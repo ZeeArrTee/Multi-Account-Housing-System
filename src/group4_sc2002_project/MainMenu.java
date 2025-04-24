@@ -13,7 +13,7 @@ public class MainMenu {
 		User check = null;
 		int choice;
 		do {
-			System.out.println("Enter your choice:\n1) Login\n2) Create User\n3) Reset Password\n4) Exit");
+			System.out.println("Login Page:\nEnter your choice:\n1) Login\n2) Create User\n3) Reset Password\n4) Exit");
 			choice = s.nextInt();
 			switch (choice) {
 			case 1:
@@ -27,7 +27,7 @@ public class MainMenu {
 					password = s.next();
 					check = service.loginUser(userID, password);
 					if (check != null) {
-						break;
+						return check;
 					}
 				}
 				break;
@@ -56,8 +56,10 @@ public class MainMenu {
 						System.out.println("Invalid marital status!");
 					}
 				}
-				service.createUser(name, userID, password, age, maritalStatus, "User");
-				break;
+				check = service.createUser(name, userID, age, maritalStatus, password,"User");
+				if (check != null) {
+					return check;
+				}
 			case 3:
 				System.out.println("Key in your userID: (Key in # to go back)");
 				userID = s.next();
@@ -89,10 +91,27 @@ public class MainMenu {
 		int choice;
 		User user = null;
 		do {
-			System.out.println("Enter your choice:\n1) Login\n2) Projects\n3) Applications\n4) Exit");
+			System.out.println("Main Page:\nEnter your choice:\n1) Login\n2) Projects\n3) Applications\n4) Exit\n");
+			if (user == null) {
+				System.out.println("Currently logged out.");
+			}
+			else {
+				System.out.println("Currently logged in as: " + user.getName());
+				System.out.println("Role: " + user.getRole().get(user.getRole().size()-1));
+			}
 			choice = s.nextInt();
+			String log; 
 			switch (choice) {
 			case 1:
+				if (user != null) {
+					System.out.println("Already logged in. Do you want to log out? (y/n)");
+					log = s.next();
+					if (log.equals("y")) {
+						user = null;
+						System.out.println("Logging out...");
+					}
+					break;
+				}
 				user = Login();
 				break;
 			case 2:

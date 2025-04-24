@@ -7,7 +7,7 @@ public class HDBManager extends User {
 	private List<Project> managedProjects;
 
 	public HDBManager(String name, String userID, String password, int age, String maritalStatus) {
-		super(name, userID, password, age, maritalStatus, "Manager");
+		super(name, userID, age, maritalStatus, password, "Manager");
 		managedProjects = new ArrayList<Project>();
 	}
 

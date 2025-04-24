@@ -11,7 +11,7 @@ public class User implements Account {
 	private String maritalStatus;
 	private List<String> roles;
 
-	public User(String name, String userID, String password, int age, String maritalStatus, String role) {
+	public User(String name, String userID, int age, String maritalStatus, String password, String role) {
 		this.name = name;
 		this.userID = userID;
 		this.password = password;
