@@ -45,9 +45,9 @@ public class EnquiryRepository {
 				Applicant applicant = (Applicant) UserRepository.getUser(parts[1]);
 				String content = parts[2];
 				String reply = parts[3];
-
 				Enquiry enquiry = new Enquiry(id, applicant, content);
 				enquiry.setReply(reply);
+				applicant.getApplication().getProject().addEnquiry(enquiry);
 
 			}
 
