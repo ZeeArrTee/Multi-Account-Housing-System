@@ -460,7 +460,8 @@ public class MainMenu {
 			System.out.println("1) Apply for a Project as an Applicant");
 			System.out.println("2) Project Officer Registration");
 			System.out.println("3) Project Menu");
-			System.out.println("4) Exit");
+			System.out.println("4) Generate Receipt");
+			System.out.println("5) Exit");
 			choice = menu.nextInt();
 			switch (choice) {
 			case 1:
@@ -473,10 +474,26 @@ public class MainMenu {
 				OfficerProjectMenu(officer);
 				break;
 			case 4:
+				List<Application> apps = ApplicationRepository.getApplications();
+				for (int i = 1; i <= apps.size(); i++) {
+					Application app = apps.get(i - 1);
+					System.out.println(i - 1 + ". Applicant: " + app.getApplicant().getUserID() + " Project: "
+							+ app.getProject().getProjectName());
+
+				}
+				int appId = menu.nextInt();
+				while (appId < 1 || appId > apps.size()) {
+					System.out.println("Invalid option");
+					appId = menu.nextInt();
+				}
+				Receipt receipt = display.generateReceipt(apps.get(appId - 1));
+				receipt.display();
+				break;
+			case 5:
 				System.out.println("Returning to main menu...");
 				break;
 			}
-		} while (choice < 4);
+		} while (choice < 5);
 	}
 
 	public static Manager projectCreation(User user) {

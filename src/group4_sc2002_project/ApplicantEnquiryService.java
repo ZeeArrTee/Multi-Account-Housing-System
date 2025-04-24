@@ -24,6 +24,7 @@ public class ApplicantEnquiryService implements ApplicantEnquiryView {
 
 	public void deleteEnquiry(int enquiryId) {
 		project.removeEnquiry(enquiryId);
+
 	}
 
 }
