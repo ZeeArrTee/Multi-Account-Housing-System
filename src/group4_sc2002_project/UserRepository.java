@@ -67,7 +67,6 @@ public class UserRepository {
 				case "User":
 					loaded.add(new User(name, id, age, status, pw, role));
 					break;
-
 				case "Applicant":
 					loaded.add(new Applicant(name, id, age, pw, status));
 					break;
@@ -98,8 +97,8 @@ public class UserRepository {
 		}
 		file = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 		try (FileWriter fw = new FileWriter(file, true)) {
-			fw.write(String.join(",", user.getName(), user.getUserID(), user.getPassword(),
-					String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)) + "\n");
+			fw.write(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
+					user.getMaritalStatus(), user.getPassword(), user.getRole().get(user.getRole().size()-1)) + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -107,21 +106,20 @@ public class UserRepository {
 
 	public void overwriteAllUsers(List<User> users) {
 		Map<String, List<User>> roleMap = new HashMap<>();
-		roleMap.put(applicantFile, new ArrayList<>());
-		roleMap.put(officerFile, new ArrayList<>());
-		roleMap.put(managerFile, new ArrayList<>());
-
+		roleMap.put(applicantFile, new ArrayList<User>());
+		roleMap.put(officerFile, new ArrayList<User>());
+		roleMap.put(managerFile, new ArrayList<User>());
+		roleMap.put(userFile, new ArrayList<User>());
 		for (User user : users) {
-			String file = getFileForRole(user.getRole().get(1));
+			String file = getFileForRole(user.getRole().get(user.getRole().size()-1));
 			roleMap.get(file).add(user);
 		}
-
 		for (String file : roleMap.keySet()) {
 			String filep = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 			try (PrintWriter pw = new PrintWriter(new FileWriter(filep))) {
 				for (User user : roleMap.get(file)) {
-					pw.println(String.join(",", user.getName(), user.getUserID(), user.getPassword(),
-							String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)));
+					pw.println(String.join(",", user.getName(), user.getUserID(), String.valueOf(user.getAge()),
+							user.getMaritalStatus(), user.getPassword(), user.getRole().get(user.getRole().size()-1)));
 				}
 			} catch (IOException e) {
 				e.printStackTrace();

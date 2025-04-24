@@ -9,9 +9,8 @@ import java.util.Scanner;
 
 public class MainMenu {
 	public static Scanner s = new Scanner(System.in);
-
+	public static AuthenticationService service = new AuthenticationService();
 	public static User Login() {
-		AuthenticationService service = new AuthenticationService();
 		String userID, password;
 		User check = null;
 		int choice;
