@@ -4,12 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuthenticationService {
-	private List<User> users = new ArrayList<>();
+	private static List<User> users = new ArrayList<>();
 	private final UserRepository userRepo;
 
 	public AuthenticationService() {
 		userRepo = new UserRepository();
 		users = userRepo.loadAllUsers();
+		ProjectRepository projRepo = new ProjectRepository();
+		ApplicationRepository appRepo = new ApplicationRepository();
+		RegistrationRepository regRepo = new RegistrationRepository();
+
+	}
+
+	public static User getUser(String userId) {
+		for (User user : users) {
+			if (user.getUserID() == userId) {
+				return user;
+			}
+		}
+		return null;
 	}
 
 	public User loginUser(String userID, String password) {
