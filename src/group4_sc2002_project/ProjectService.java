@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class ProjectService implements ProjectView {
 	private static List<Project> projectListing;
@@ -15,7 +14,7 @@ public class ProjectService implements ProjectView {
 
 	@Override
 	public void createProject(String projectName, String neighbourhood, Map<String, Integer> units, LocalDate openDate,
-			LocalDate closeDate, int officerSlots, HDBManager managerInCharge) {
+			LocalDate closeDate, int officerSlots, Manager managerInCharge) {
 		Project project = new Project(projectName, neighbourhood, units, openDate, closeDate, officerSlots,
 				managerInCharge);
 		projectListing.add(project);
@@ -23,10 +22,8 @@ public class ProjectService implements ProjectView {
 	}
 
 	@Override
-	public void editProject(Project project) 
-	{
+	public void editProject(Project project) {
 		// menu style pick which fields to edit
-		Scanner sc = new Scanner(System.in);
 		int choice;
 
 		do {
@@ -40,81 +37,68 @@ public class ProjectService implements ProjectView {
 			System.out.println("7. Toggle Visibility");
 			System.out.println("8. Done Editing");
 			System.out.print("Choose an option: ");
-			choice = sc.nextInt();
-			sc.nextLine(); 
+			choice = MainMenu.s.nextInt();
+			MainMenu.s.nextLine();
 
 			switch (choice) {
-				case 1 -> 
-				{
-					System.out.print("Enter new project name: ");
-					String newName = sc.nextLine();
-					project.setProjectName(newName);
-					System.out.println("Project name updated.");
-				}
-				case 2 -> 
-				{
-					System.out.print("Enter new neighbourhood: ");
-					String newNeighbourhood = sc.nextLine();
-					project.setNeighbourhood(newNeighbourhood);
-					System.out.println("Neighbourhood updated.");
-				}
-				case 3 -> 
-				{
-					System.out.println("Edit units by flat type. Enter '#' to stop.");
-					while (true) {
-						System.out.print("Enter flat type (e.g., 2-Room, 3-Room): ");
-						String flatType = sc.nextLine();
-						if (flatType.equals("#")) break;
-				
-						System.out.print("Enter number of units for " + flatType + ": ");
-						try 
-						{
-							int count = Integer.parseInt(sc.nextLine());
-							project.setUnits(flatType, count);
-							System.out.println("Updated " + flatType + " to " + count + " units.");
-						} 
-						catch (NumberFormatException e) 
-						{
-							System.out.println("Invalid number. Try again.");
-						}
+			case 1 -> {
+				System.out.print("Enter new project name: ");
+				String newName = MainMenu.s.nextLine();
+				project.setProjectName(newName);
+				System.out.println("Project name updated.");
+			}
+			case 2 -> {
+				System.out.print("Enter new neighbourhood: ");
+				String newNeighbourhood = MainMenu.s.nextLine();
+				project.setNeighbourhood(newNeighbourhood);
+				System.out.println("Neighbourhood updated.");
+			}
+			case 3 -> {
+				System.out.println("Edit units by flat type. Enter '#' to stop.");
+				while (true) {
+					System.out.print("Enter flat type (e.g., 2-Room, 3-Room): ");
+					String flatType = MainMenu.s.nextLine();
+					if (flatType.equals("#"))
+						break;
+
+					System.out.print("Enter number of units for " + flatType + ": ");
+					try {
+						int count = Integer.parseInt(MainMenu.s.nextLine());
+						project.setUnits(flatType, count);
+						System.out.println("Updated " + flatType + " to " + count + " units.");
+					} catch (NumberFormatException e) {
+						System.out.println("Invalid number. Try again.");
 					}
 				}
-				case 4 -> 
-				{
-					System.out.print("Enter new open date (yyyy-mm-dd): ");
-					LocalDate open = LocalDate.parse(sc.nextLine());
-					project.setOpenDate(open);
-					System.out.println("Open date updated.");
-				}
-				case 5 -> 
-				{
-					System.out.print("Enter new close date (yyyy-mm-dd): ");
-					LocalDate close = LocalDate.parse(sc.nextLine());
-					project.setCloseDate(close);
-					System.out.println("Close date updated.");
-				}
-				case 6 -> 
-				{
-					System.out.print("Enter new officer slot count: ");
-					int slots = sc.nextInt();
-					sc.nextLine();
-					project.setOfficerSlots(slots);
-					System.out.println("Officer slots updated.");
-				}
-				case 7 -> 
-				{
-					project.toggleVisibility();
-					System.out.println("Visibility toggled.");
-				}
-				case 8 -> System.out.println("Exiting edit menu...");
-				default -> System.out.println("Invalid choice. Try again.");
+			}
+			case 4 -> {
+				System.out.print("Enter new open date (yyyy-mm-dd): ");
+				LocalDate open = LocalDate.parse(MainMenu.s.nextLine());
+				project.setOpenDate(open);
+				System.out.println("Open date updated.");
+			}
+			case 5 -> {
+				System.out.print("Enter new close date (yyyy-mm-dd): ");
+				LocalDate close = LocalDate.parse(MainMenu.s.nextLine());
+				project.setCloseDate(close);
+				System.out.println("Close date updated.");
+			}
+			case 6 -> {
+				System.out.print("Enter new officer slot count: ");
+				int slots = MainMenu.s.nextInt();
+				MainMenu.s.nextLine();
+				project.setOfficerSlots(slots);
+				System.out.println("Officer slots updated.");
+			}
+			case 7 -> {
+				project.toggleVisibility();
+				System.out.println("Visibility toggled.");
+			}
+			case 8 -> System.out.println("Exiting edit menu...");
+			default -> System.out.println("Invalid choice. Try again.");
 			}
 		} while (choice != 8);
-
-		sc.close();
 	}
-
-
 
 	public static List<Project> getProjectListing() {
 		return projectListing;
@@ -129,7 +113,7 @@ public class ProjectService implements ProjectView {
 		return null;
 	}
 
-	public void addOfficer(String projectName, HDBOfficer officer) {
+	public void addOfficer(String projectName, Officer officer) {
 		for (Project project : projectListing) {
 			if (project.getProjectName() == projectName) {
 				project.addOfficer(officer);
@@ -137,7 +121,7 @@ public class ProjectService implements ProjectView {
 		}
 	}
 
-	public void removeOfficer(String projectName, HDBOfficer officer) {
+	public void removeOfficer(String projectName, Officer officer) {
 		for (Project project : projectListing) {
 			if (project.getProjectName() == projectName) {
 				project.removeOfficer(officer);

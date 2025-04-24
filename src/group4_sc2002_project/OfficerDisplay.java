@@ -3,10 +3,10 @@ package group4_sc2002_project;
 import java.util.Map;
 
 public abstract class OfficerDisplay extends Display {
-	private HDBOfficer officer;
+	private Officer officer;
 	private Project project;
 
-	OfficerDisplay(HDBOfficer officer) {
+	OfficerDisplay(Officer officer) {
 		this.officer = officer;
 		this.project = officer.getHandledProject();
 	}

@@ -7,13 +7,13 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ManagerService {
-	private HDBManager manager;
+	private Manager manager;
 	private Project project;
 	private List<Application> apps;
 
 	private static Map<Project, ArrayList<User>> registrations;
 
-	ManagerService(HDBManager manager, Project project) {
+	ManagerService(Manager manager, Project project) {
 		this.manager = manager;
 		this.project = project;
 		this.apps = project.getApplications();
@@ -98,7 +98,7 @@ public class ManagerService {
 			System.out.println("Access Denied");
 			return false;
 		}
-		HDBOfficer officer = new HDBOfficer(user.getName(), user.getUserID(), user.getPassword(), user.getAge(),
+		Officer officer = new Officer(user.getName(), user.getUserID(), user.getPassword(), user.getAge(),
 				user.getMaritalStatus(), project);
 		boolean success = project.addOfficer(officer);
 		processRegistration(user, project);

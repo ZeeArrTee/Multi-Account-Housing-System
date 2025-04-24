@@ -15,14 +15,14 @@ public class Project {
 	private LocalDate closeDate;
 	private boolean isVisible;
 	private int officerSlots;
-	private List<HDBOfficer> assignedOfficers;
-	private HDBManager managerInCharge;
+	private List<Officer> assignedOfficers;
+	private Manager managerInCharge;
 	private List<Enquiry> enquiries;
 	private List<Application> apps;
 	private int enquiryCount;
 
 	public Project(String projectName, String neighbourhood, Map<String, Integer> units, LocalDate openDate,
-			LocalDate closeDate, int officerSlots, HDBManager managerInCharge) {
+			LocalDate closeDate, int officerSlots, Manager managerInCharge) {
 		this.isVisible = true;
 		this.enquiryCount = 0;
 		this.openDate = openDate;
@@ -34,7 +34,7 @@ public class Project {
 		this.apps = new ArrayList<Application>();
 		this.enquiries = new ArrayList<Enquiry>();
 		this.units = new HashMap<String, Integer>();
-		this.assignedOfficers = new ArrayList<HDBOfficer>();
+		this.assignedOfficers = new ArrayList<Officer>();
 	}
 
 	public void toggleVisibility() {
@@ -86,7 +86,7 @@ public class Project {
 		closeDate = date;
 	}
 
-	public boolean addOfficer(HDBOfficer officer) {
+	public boolean addOfficer(Officer officer) {
 		boolean success = false;
 		if (officerSlots > 0) {
 			assignedOfficers.add(officer);
@@ -96,8 +96,8 @@ public class Project {
 		return success;
 	}
 
-	public void removeOfficer(HDBOfficer officer) {
-		for (HDBOfficer off : assignedOfficers) {
+	public void removeOfficer(Officer officer) {
+		for (Officer off : assignedOfficers) {
 			if (off.getUserID().compareTo(officer.getUserID()) == 0) {
 				assignedOfficers.remove(off);
 			}
@@ -133,11 +133,11 @@ public class Project {
 		return closeDate;
 	}
 
-	public HDBManager getManager() {
+	public Manager getManager() {
 		return managerInCharge;
 	}
 
-	public List<HDBOfficer> getOfficers() {
+	public List<Officer> getOfficers() {
 		return assignedOfficers;
 	}
 

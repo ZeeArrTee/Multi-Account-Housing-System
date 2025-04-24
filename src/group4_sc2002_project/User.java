@@ -18,12 +18,10 @@ public class User implements Account {
 		this.age = age;
 		this.maritalStatus = maritalStatus;
 		this.roles = new ArrayList<String>();
-		this.roles.add("User");
 		this.roles.add(role);
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		return name;
 	}
 

@@ -53,13 +53,23 @@ public class UserRepository {
 				int age = Integer.parseInt(parts[2]);
 				String status = parts[3];
 				String pw = parts[4];
-				String role;
-				if (parts.length == 5) {
-					role = "User";
-				} else {
-					role = parts[5];
+				String role = parts[5];
+				switch (role) {
+				case "User":
+					loaded.add(new User(name, id, pw, age, status, role));
+					break;
+
+				case "Applicant":
+					loaded.add(new Applicant(name, id, pw, age, status));
+					break;
+				case "Officer":
+					loaded.add(new Officer(name, id, pw, age, status, null)); // add code to find their project
+					break;
+				case "Manager":
+					loaded.add(new Manager(name, id, pw, age, status));
+					break;
 				}
-				loaded.add(new User(name, id, pw, age, status, role));
+
 			}
 		} catch (IOException e) {
 			System.out.println("Failed to load: " + fileName);
@@ -80,7 +90,8 @@ public class UserRepository {
 		file = System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + file;
 		try (FileWriter fw = new FileWriter(file, true)) {
 			fw.write(String.join(",", user.getName(), user.getUserID(), user.getPassword(),
-					String.valueOf(user.getAge()), user.getMaritalStatus(), user.getRole().get(1)) + "\n");
+					String.valueOf(user.getAge()), user.getMaritalStatus(),
+					user.getRole().get(user.getRole().size() - 1)) + "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -114,8 +125,8 @@ public class UserRepository {
 		return switch (role) {
 		case "User" -> userFile;
 		case "Applicant" -> applicantFile;
-		case "HDBOfficer" -> officerFile;
-		case "HDBManager" -> managerFile;
+		case "Officer" -> officerFile;
+		case "Manager" -> managerFile;
 		default -> throw new IllegalArgumentException("Invalid role: " + role);
 		};
 	}

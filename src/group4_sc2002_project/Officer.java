@@ -1,12 +1,12 @@
 package group4_sc2002_project;
 
-public class HDBOfficer extends Applicant {
+public class Officer extends Applicant {
 	private Project handledProject;
 	private String registrationStatus;
 
-	public HDBOfficer(String name, String userID, String password, int age, String maritalStatus, Project project) {
+	public Officer(String name, String userID, String password, int age, String maritalStatus, Project project) {
 		super(name, userID, password, age, maritalStatus);
-		super.modifyRole("HDBOfficer");
+		super.modifyRole("Officer");
 		handledProject = project;
 		registrationStatus = null;
 	}

@@ -7,7 +7,7 @@ public interface ProjectView {
 	public void displayProject(String name);
 
 	public void createProject(String projectName, String neighbourhood, Map<String, Integer> units, LocalDate openDate,
-			LocalDate closeDate, int officerSlots, HDBManager managerInCharge);
+			LocalDate closeDate, int officerSlots, Manager managerInCharge);
 
 	public void editProject(Project project);
 }

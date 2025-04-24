@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class OfficerService extends OfficerDisplay {
-	private HDBOfficer officer;
+	private Officer officer;
 
-	OfficerService(HDBOfficer officer) {
+	OfficerService(Officer officer) {
 		super(officer);
 		this.officer = officer;
 
@@ -20,7 +20,7 @@ public class OfficerService extends OfficerDisplay {
 		ManagerService.getRegistrations().put(project, temp);
 	}
 
-	public boolean canRegister(HDBOfficer officer, Project project) {
+	public boolean canRegister(Officer officer, Project project) {
 		if (officer.getHandledProject().isWithinApplicationPeriod(project.getOpeningDate())) {
 			return false;
 		} else {
