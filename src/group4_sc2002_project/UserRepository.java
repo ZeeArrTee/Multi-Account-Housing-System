@@ -16,6 +16,9 @@ public class UserRepository {
 	private static final String managerFile = "ManagerList.csv";
 	private static final String userFile = "UserList.csv";
 	private static List<User> users;
+	private static List<User> applicants;
+	private static List<User> officers;
+	private static List<User> managers;
 
 	public List<User> loadAllUsers() {
 		users = new ArrayList<>();
@@ -23,6 +26,9 @@ public class UserRepository {
 		users.addAll(loadUsersFromFile(officerFile));
 		users.addAll(loadUsersFromFile(managerFile));
 		users.addAll(loadUsersFromFile(userFile));
+		applicants.addAll(loadUsersFromFile(applicantFile));
+		managers.addAll(loadUsersFromFile(managerFile));
+		officers.addAll(loadUsersFromFile(managerFile));
 		return users;
 	}
 
