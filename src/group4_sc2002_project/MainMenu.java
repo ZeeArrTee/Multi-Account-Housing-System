@@ -15,7 +15,7 @@ public class MainMenu {
 	public static User Login() {
 		String userID, password;
 		User check = null;
-		int choice;
+		int choice = 4;
 		do {
 			System.out.println("Login Page:");
 			System.out.println("Enter your choice:");
@@ -98,10 +98,8 @@ public class MainMenu {
 			for (Project project : projects) {
 				Map<String, Integer> units = project.getUnits();
 				boolean visible = project.getVisibility();
-				for (String key : units.keySet()) {
-					if (off.getMaritalStatus() == "Single" && units.keySet().contains("3-Room")) {
-						visible = false;
-					}
+				if (off.getMaritalStatus() == "Single" && units.keySet().contains("3-Room")) {
+					visible = false;
 				}
 				if (!visible) {
 					visible = off.getHandledProjects().contains(project);
