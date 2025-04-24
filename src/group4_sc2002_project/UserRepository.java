@@ -56,17 +56,17 @@ public class UserRepository {
 				String role = parts[5];
 				switch (role) {
 				case "User":
-					loaded.add(new User(name, id, pw, age, status, role));
+					loaded.add(new User(name, id, age, status, pw, role));
 					break;
 
 				case "Applicant":
-					loaded.add(new Applicant(name, id, pw, age, status));
+					loaded.add(new Applicant(name, id, age, pw, status));
 					break;
 				case "Officer":
-					loaded.add(new Officer(name, id, pw, age, status, null)); // add code to find their project
+					loaded.add(new Officer(name, id, age, pw, status, null)); // add code to find their project
 					break;
 				case "Manager":
-					loaded.add(new Manager(name, id, pw, age, status));
+					loaded.add(new Manager(name, id, age, pw, status));
 					break;
 				}
 
