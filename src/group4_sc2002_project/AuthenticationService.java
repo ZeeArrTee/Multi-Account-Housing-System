@@ -12,6 +12,8 @@ public class AuthenticationService {
 		users = userRepo.loadAllUsers();
 		ProjectRepository projRepo = new ProjectRepository();
 		ApplicationRepository appRepo = new ApplicationRepository();
+		RegistrationRepository regRepo = new RegistrationRepository();
+
 	}
 
 	public static User getUser(String userId) {

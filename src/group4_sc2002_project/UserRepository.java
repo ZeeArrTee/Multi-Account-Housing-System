@@ -31,6 +31,15 @@ public class UserRepository {
 		users.add(newUser);
 	}
 
+	public static User getUser(String userId) {
+		for (User user : users) {
+			if (user.getUserID() == userId) {
+				return user;
+			}
+		}
+		return null;
+	}
+
 	private List<User> loadUsersFromFile(String fileName) {
 		List<User> loaded = new ArrayList<>();
 
