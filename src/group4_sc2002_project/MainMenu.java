@@ -127,6 +127,20 @@ public class MainMenu {
 				}
 			}
 		}
+		else {
+			for (Project project: projects) {
+				Map<String, Integer> units = project.getUnits();
+				boolean visible = project.getVisibility();
+				for (String key : units.keySet()) {
+					if (user.getMaritalStatus() == "Single" && units.keySet().contains("3-Room")) {
+						visible = false;
+					}
+				}
+				if (visible) {
+					ProjectService.displayProject(project);
+				}
+			}
+		}
 	}
 
 	public static void projectsMenu(User user) {

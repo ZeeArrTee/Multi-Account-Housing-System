@@ -29,9 +29,6 @@ public class UserRepository {
 		users.addAll(loadUsersFromFile(officerFile));
 		users.addAll(loadUsersFromFile(managerFile));
 		users.addAll(loadUsersFromFile(userFile));
-		applicants.addAll(loadUsersFromFile(applicantFile));
-		managers.addAll(loadUsersFromFile(managerFile));
-		officers.addAll(loadUsersFromFile(managerFile));
 		return users;
 	}
 

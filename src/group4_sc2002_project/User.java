@@ -9,7 +9,7 @@ public class User implements Account {
 	private String password = "password";
 	private int age;
 	private String maritalStatus;
-	private List<String> roles;
+	protected List<String> roles;
 
 	public User(String name, String userID, int age, String maritalStatus, String password, String role) {
 		this.name = name;
@@ -51,6 +51,10 @@ public class User implements Account {
 
 	public void modifyRole(String role) {
 		roles.add(role);
+	}
+	
+	public void removeRole(String role) {
+		roles.remove(role);
 	}
 
 }
