@@ -94,62 +94,60 @@ public class MainMenu {
 		String userID, password;
 		Manager manager = (Manager) user;
 		ManagerDisplay display = new ManagerDisplay(manager);
+		ManagerService service = null;
 		int choice;
+		Project chosen = null;
 		do {
 			System.out.println("Manager Dashboard:");
 			System.out.println("Enter your choice:");
-			System.out.println("1) Project Menu");
-			System.out.println("2) Officer Registration Menu");
-			System.out.println("3) Application Menu");
-			System.out.println("4) Enquiry Menu");
-			System.out.println("5) Exit");
+			System.out.println("1) Choose Current Project");
+			System.out.println("2) Project Menu");
+			System.out.println("3) Process Officer Registration");
+			System.out.println("4) Process Application");
+			System.out.println("5) Process Withdrawal Requests");
+			System.out.println("6) View Enquiries");
+			System.out.println("7) Reply to Enquiries");
+			System.out.println("8) Generate Applicant List");
+			System.out.println("9) Exit");
 			choice = s.nextInt();
 			switch (choice) {
 			case 1:
-
+				display.displayProjects();
+				chosen = display.chooseCurrentProject();
+				service = new ManagerService(manager, chosen);
 				break;
 			case 2:
-				List<String> married = new ArrayList<String>(2);
-				married.add("Married");
-				married.add("Single");
-				int age = 0;
-				String name = "\0";
-				String maritalStatus = "\0";
-				System.out.println("Key in your Name: (Key in # to go back)");
-				name = s.next();
-				if (name.equals("#")) {
-					break;
-				}
-				System.out.println("Key in your userID: ");
-				userID = s.next();
-				System.out.println("Key in your password:");
-				password = s.next();
-				System.out.println("Key in your age:");
-				age = s.nextInt();
-				while (!married.contains(maritalStatus)) {
-					System.out.println("Key in your marital status(Single/Married):");
-					maritalStatus = s.next();
-					if (!married.contains(maritalStatus)) {
-						System.out.println("Invalid marital status!");
-					}
-				}
-				check = service.createUser(name, userID, age, maritalStatus, password, "User");
-				if (check != null) {
-					return check;
-				}
+				System.out.println("Project Menu");
+				System.out.println("Enter your choice:");
+				System.out.println("1) Create Project");
+				System.out.println("2) Edit Project");
+				System.out.println("3) Delete Project");
+				System.out.println("4) Change Project Visibility");
+				System.out.println("5) View Created Projects");
+				System.out.println("6) Exit");
+				choice = s.nextInt();
+				break;
 			case 3:
-				System.out.println("Key in your userID: (Key in # to go back)");
-				userID = s.next();
-				if (userID.equals("#")) {
-					break;
-				}
-				System.out.println("Key in your new password:");
-				password = s.next();
-				service.changePassword(userID, password);
+				display.processRegistrations();
 				break;
 			case 4:
+				display.applicationMenu();
 				break;
 			case 5:
+				display.withdrawalMenu();
+				break;
+			case 6:
+				for (Project project : ProjectService.getProjectListing()) {
+					OfficerEnquiryService.displayEnquiries(project);
+				}
+			case 7:
+				if (chosen == null) {
+					System.out.println("Choose a project first");
+					break;
+				}
+				display.enquiryMenu();
+				break;
+			case 8:
 				System.out.println("Returning to main menu...");
 				break;
 			}
