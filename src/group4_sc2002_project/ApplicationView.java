@@ -20,10 +20,14 @@ public class ApplicationView {
 				user.getPassword());
 		if (isEligible(user, flatType)) {
 			application = new Application(applicant, project, flatType, ApplicationStatus.Pending);
+			applicant.setApplication(application);
+			project.addApplication(application);
+
+			user = applicant;
+			return applicant;
 		}
-		applicant.setApplication(application);
-		project.addApplication(application);
-		return applicant;
+
+		return null;
 	}
 
 	public static void displayApplication(Application app) {
