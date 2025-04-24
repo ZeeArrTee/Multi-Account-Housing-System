@@ -48,9 +48,11 @@ public class ApplicationRepository {
 					}
 				}
 				String projectName = parts[4];
-				Application app = new Application((Applicant) AuthenticationService.getUser(userId),
-						ProjectRepository.getProject(projectName), flatType, status);
+				Applicant applicant = (Applicant) AuthenticationService.getUser(userId);
+				Application app = new Application(applicant, ProjectRepository.getProject(projectName), flatType,
+						status);
 				app.setPendingWithdrawal(pendingWithdrawal);
+				applicant.setApplication(app);
 				applications.add(app);
 				ProjectRepository.getProject(projectName).addApplication(app);
 
