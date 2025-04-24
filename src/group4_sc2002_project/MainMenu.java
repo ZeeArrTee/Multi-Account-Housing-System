@@ -298,11 +298,28 @@ public class MainMenu {
 							System.out.println("Invalid number. Try again.");
 						}
 					}
-
-					System.out.print("Enter open date (yyyy-mm-dd): ");
-					LocalDate open = LocalDate.parse(MainMenu.s.nextLine());
-					System.out.print("Enter close date (yyyy-mm-dd): ");
-					LocalDate close = LocalDate.parse(MainMenu.s.nextLine());
+					LocalDate close = null;
+					LocalDate open = null;
+					boolean done = false;
+					while (!done) {
+						try {
+							System.out.print("Enter open date (yyyy-mm-dd): ");
+							open = LocalDate.parse(s.nextLine());
+							done = true;
+						} catch (Exception e) {
+							System.out.print("Invalid format");
+						}
+					}
+					done = false;
+					while (!done) {
+						try {
+							System.out.print("Enter close date (yyyy-mm-dd): ");
+							close = LocalDate.parse(s.nextLine());
+							done = true;
+						} catch (Exception e) {
+							System.out.print("Invalid format");
+						}
+					}
 					System.out.print("Enter officer slot count: ");
 					int slots = MainMenu.s.nextInt();
 					ProjectService.createProject(name, neighbourhood, units, open, close, slots, manager);
