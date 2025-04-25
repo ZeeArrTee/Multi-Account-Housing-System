@@ -171,7 +171,7 @@ public class ProjectService implements ProjectView {
 
 	public static boolean deleteProject(String projectName) {
 		for (Project project : projectListing) {
-			if (project.getProjectName() == projectName) {
+			if (project.getProjectName().compareTo(projectName) == 0) {
 				projectListing.remove(project);
 				return true;
 			}
