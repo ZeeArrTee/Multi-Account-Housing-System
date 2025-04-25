@@ -20,7 +20,11 @@ public class OfficerService extends OfficerDisplay {
 
 	public static void createRegistration(User user, Project project) {
 		ArrayList<User> temp = RegistrationRepository.getRegistrations().get(project);
+		if (temp == null) {
+			temp = new ArrayList<User>();
+		}
 		temp.add(user);
+
 		RegistrationRepository.getRegistrations().put(project, temp);
 	}
 

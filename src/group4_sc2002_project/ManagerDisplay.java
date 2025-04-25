@@ -144,7 +144,7 @@ public class ManagerDisplay extends Display {
 				.toList();
 		System.out.println("Choose application number");
 		for (int i = 1; i <= pending.size(); i++) {
-			System.out.println(i + ". " + pending.get(i).getApplicant().getName());
+			System.out.println(i + ". " + pending.get(i - 1).getApplicant().getName());
 		}
 		int choice = MainMenu.s.nextInt() - 1;
 		while (choice > pending.size() - 1 || choice < 0) {
