@@ -24,7 +24,7 @@ public class OfficerService extends OfficerDisplay {
 			temp = new ArrayList<User>();
 		}
 		temp.add(user);
-
+		UserRepository.getUser(user.getUserID()).modifyRole("Officer");
 		RegistrationRepository.getRegistrations().put(project, temp);
 	}
 

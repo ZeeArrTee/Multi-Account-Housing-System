@@ -1,5 +1,6 @@
 package group4_sc2002_project;
 
+import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -15,7 +16,7 @@ public class RegistrationRepository {
 	private static Map<Project, ArrayList<User>> registrations;
 
 	RegistrationRepository() {
-		registrations = Collections.emptyMap();
+		registrations = new HashMap<Project, ArrayList<User>>();
 		registrations = loadRegistrationsFromFile(regFile);
 	}
 

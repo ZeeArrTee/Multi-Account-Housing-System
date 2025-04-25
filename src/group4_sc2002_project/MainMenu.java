@@ -199,8 +199,9 @@ public class MainMenu {
 				System.out.println("Project Name: ");
 				projectName = s.next();
 				Project project2 = ProjectRepository.getProject(projectName);
-				if (user.getRole().getLast().compareTo("User")==0) {
-					Officer officer =  new Officer(user.getName(),user.getUserID(),user.getAge(),user.getMaritalStatus(),user.getPassword(),project2);
+				if (user.getRole().get(user.getRole().size()-1).compareTo("User")==0) {
+					Officer officer =  new Officer(user.getName(),user.getUserID(),user.getAge(), 
+							user.getMaritalStatus(),user.getPassword(),project2);
 
 					Project proj = ProjectRepository.getProject(projectName);
 					officer.addProject(proj);
@@ -478,13 +479,13 @@ public class MainMenu {
 				break;
 			case 2:
 				System.out.println("Your registration status is currently: " + officer.getRegistrationStatus());
-				choice = s.nextInt();
 				do {
 					System.out.println("Select your desired action: ");
 					System.out.println("1) View project details");
 					System.out.println("2) Handle project enquiries");
 					System.out.println("3) Handle application matters");
 					System.out.println("4) Back");
+					choice = s.nextInt();
 					switch (choice) {
 					case 1:
 						display.displayProjectDetails();
