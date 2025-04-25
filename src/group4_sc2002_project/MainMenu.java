@@ -203,6 +203,7 @@ public class MainMenu {
 		ApplicantDisplay display = new ApplicantDisplay(applicant);
 		ApplicantEnquiryService service = new ApplicantEnquiryService(applicant.getApplication().getProject(),
 				applicant);
+		ApplicationView view = new ApplicationView(applicant.getApplication().getProject(), applicant);
 		String message = "";
 		int id;
 		do {
@@ -214,7 +215,8 @@ public class MainMenu {
 			System.out.println("4) View Enquiry");
 			System.out.println("5) View All Enquiries");
 			System.out.println("6) Delete Enquiry");
-			System.out.println("7) Exit");
+			System.out.println("7) Withdraw Application");
+			System.out.println("8) Exit");
 			choice = s.nextInt();
 			switch (choice) {
 			case 1:
@@ -244,11 +246,15 @@ public class MainMenu {
 				System.out.println("Enquiry ID:");
 				id = s.nextInt();
 				service.deleteEnquiry(id);
+			case 7:
+				view.requestWithdrawal();
+				System.out.println("Application Withdrawal sent");
+				break;
 			default:
 				System.out.println("Invalid option, exiting");
 				break;
 			}
-		} while (choice < 7);
+		} while (choice < 8);
 	}
 
 	public static void managerDashboard(User user) {
