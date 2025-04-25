@@ -198,7 +198,7 @@ public class MainMenu {
 				System.out.println("Project Name: ");
 				projectName = s.next();
 				Project project2 = ProjectRepository.getProject(projectName);
-				if (user.getRole().getLast().compareTo("User") == 0) {
+				if (user.getRole().get(user.getRole().size() - 1).compareTo("User") == 0) {
 					Officer officer = (Officer) user;
 					Project proj = ProjectRepository.getProject(projectName);
 					officer.addProject(proj);
