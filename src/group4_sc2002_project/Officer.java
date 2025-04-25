@@ -11,7 +11,7 @@ public class Officer extends Applicant {
 		super(name, userID, age, maritalStatus, password);
 		super.modifyRole("Officer");
 		handledProject.add(project);
-		registrationStatus = null;
+		registrationStatus = "Pending";
 	}
 
 	public String getRegistrationStatus() {
