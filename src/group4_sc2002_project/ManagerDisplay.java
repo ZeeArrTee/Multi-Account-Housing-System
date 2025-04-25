@@ -21,7 +21,8 @@ public class ManagerDisplay extends Display {
 	public void displayProjects() {
 		System.out.println("Filter projects? (Y/N)");
 		String choice = MainMenu.s.next();
-		if (choice == "Y") {
+
+		if (choice.compareToIgnoreCase("Y") == 0) {
 			System.out.println("Choose Field");
 			System.out.println("1. Name");
 			System.out.println("2. Neighbourhood");

@@ -94,6 +94,7 @@ public class MainMenu {
 
 	public static void viewProjects(User user) {
 		List<Project> projects = ProjectRepository.getProjects();
+		System.out.println(user.getRole());
 		if (user.getRole().contains("Manager")) {
 			for (Project project : projects) {
 				ProjectService.displayProject(project);
