@@ -19,9 +19,9 @@ public class OfficerService extends OfficerDisplay {
 	}
 
 	public static void createRegistration(User user, Project project) {
-		ArrayList<User> temp = ManagerService.getRegistrations().get(project);
+		ArrayList<User> temp = RegistrationRepository.getRegistrations().get(project);
 		temp.add(user);
-		ManagerService.getRegistrations().put(project, temp);
+		RegistrationRepository.getRegistrations().put(project, temp);
 	}
 
 	public boolean canRegister(Officer officer, Project project) {
@@ -57,7 +57,7 @@ public class OfficerService extends OfficerDisplay {
 			List<String> flatTypes = new ArrayList<String>();
 			flatTypes.add("2-room");
 			flatTypes.add("3-room");
-			Project project = projects.get(choice-1);
+			Project project = projects.get(choice - 1);
 			ApplicationView app = new ApplicationView(project, officer);
 			String room;
 
