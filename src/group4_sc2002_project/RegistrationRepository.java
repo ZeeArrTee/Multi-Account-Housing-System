@@ -6,7 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -15,7 +15,7 @@ public class RegistrationRepository {
 	private static Map<Project, ArrayList<User>> registrations;
 
 	RegistrationRepository() {
-		registrations = Collections.emptyMap();
+		registrations = new HashMap<Project, ArrayList<User>>();
 		registrations = loadRegistrationsFromFile(regFile);
 	}
 

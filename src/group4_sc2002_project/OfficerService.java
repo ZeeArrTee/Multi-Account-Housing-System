@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class OfficerService extends OfficerDisplay {
 	private Officer officer;
@@ -24,7 +25,6 @@ public class OfficerService extends OfficerDisplay {
 			temp = new ArrayList<User>();
 		}
 		temp.add(user);
-
 		RegistrationRepository.getRegistrations().put(project, temp);
 	}
 
@@ -116,7 +116,7 @@ public class OfficerService extends OfficerDisplay {
 		System.out.print("Name: " + project.getProjectName() + " Neighbourhood: " + project.getNeighbourhood()
 				+ " Opening Date: " + project.getOpeningDate() + " Closing Date: " + project.getClosingDate()
 				+ " Remaining Officer Slots: " + project.getOfficerSlots() + " Flats "
-				+ units.keySet().stream().map(key -> key + ": " + units.get(key)));
+				+ units.keySet().stream().map(key -> key + ": " + units.get(key)).collect(Collectors.joining(" ")));
 
 	}
 
