@@ -119,16 +119,15 @@ public class MainMenu {
 			for (Project project : projects) {
 				Map<String, Integer> units = project.getUnits();
 				boolean visible = project.getVisibility();
-				for (String key : units.keySet()) {
-					if (app.getMaritalStatus() == "Single" && units.keySet().contains("3-Room")) {
-						visible = false;
-					}
-					if (app.getMaritalStatus() == "Single" && app.getAge() < 35) {
-						visible = false;
-					}
-					if (app.getMaritalStatus() == "Married" && app.getAge() < 21) {
-						visible = false;
-					}
+				if (app.getMaritalStatus().compareTo("Single") == 0 && units.keySet().contains("3-Room")
+						&& units.get("3-Room") > 0) {
+					visible = false;
+				}
+				if (app.getMaritalStatus().compareTo("Single") == 0 && app.getAge() < 35) {
+					visible = false;
+				}
+				if (app.getMaritalStatus().compareTo("Married") == 0 && app.getAge() < 21) {
+					visible = false;
 				}
 				if (!visible) {
 					visible = project.getApplications().contains(app.getApplication());
@@ -199,9 +198,9 @@ public class MainMenu {
 				System.out.println("Project Name: ");
 				projectName = s.next();
 				Project project2 = ProjectRepository.getProject(projectName);
-				if (user.getRole().get(user.getRole().size()-1).compareTo("User")==0) {
-					Officer officer =  new Officer(user.getName(),user.getUserID(),user.getAge(), 
-							user.getMaritalStatus(),user.getPassword(),project2);
+				if (user.getRole().get(user.getRole().size() - 1).compareTo("User") == 0) {
+					Officer officer = new Officer(user.getName(), user.getUserID(), user.getAge(),
+							user.getMaritalStatus(), user.getPassword(), project2);
 
 					Project proj = ProjectRepository.getProject(projectName);
 					officer.addProject(proj);
@@ -453,7 +452,7 @@ public class MainMenu {
 				System.out.println("Returning to main menu...");
 				break;
 			}
-		} while (choice < 4);
+		} while (choice < 9);
 
 	}
 
@@ -652,7 +651,7 @@ public class MainMenu {
 					System.out.println("Login to access!");
 					break;
 				}
-				if (user.getRole().contains("Applicant") || user.getRole().contains("Officer")) {
+				if (user.getRole().contains("Applicant")) {
 					applicantMenu((Applicant) user);
 				} else {
 					System.out.println("Not an applicant");

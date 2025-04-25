@@ -51,7 +51,7 @@ public class ProjectRepository {
 					continue;
 				}
 				String[] parts = line.split(",");
-				if (parts.length < 5)
+				if (parts.length < 7)
 					continue;
 
 				String projectName = parts[0];

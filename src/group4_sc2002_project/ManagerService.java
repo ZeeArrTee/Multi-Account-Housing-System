@@ -1,9 +1,7 @@
 package group4_sc2002_project;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 public class ManagerService {
@@ -11,13 +9,13 @@ public class ManagerService {
 	private Project project;
 	private List<Application> apps;
 
-	private static Map<Project, ArrayList<User>> registrations;
+	private static ArrayList<User> registrations;
 
 	ManagerService(Manager manager, Project project) {
 		this.manager = manager;
 		this.project = project;
 		this.apps = project.getApplications();
-		registrations = new HashMap<Project, ArrayList<User>>();
+		registrations = RegistrationRepository.getRegistration(project);
 	}
 
 	public boolean processWithdrawal(Application application) {
@@ -41,20 +39,14 @@ public class ManagerService {
 
 	}
 
-	public static Map<Project, ArrayList<User>> getRegistrations() {
+	public static ArrayList<User> getRegistrations() {
 		return registrations;
 	}
 
 	public static void processRegistration(User user, Project project) {
-		ArrayList<User> temp = registrations.get(project);
-		temp.remove(user);
-		registrations.put(project, temp);
+		registrations.remove(user);
 		UserRepository.updateUsers(user, new Officer(user.getName(), user.getUserID(), user.getAge(),
 				user.getMaritalStatus(), user.getPassword(), project));
-	}
-
-	public static List<User> getPendingRegistration(Project project) {
-		return registrations.get(project);
 	}
 
 	public boolean processApplication(Application application, boolean decision) {
