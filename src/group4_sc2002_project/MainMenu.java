@@ -201,6 +201,10 @@ public class MainMenu {
 	public static void applicantMenu(Applicant applicant) {
 		int choice = 7;
 		ApplicantDisplay display = new ApplicantDisplay(applicant);
+		if (applicant.getApplication() == null) {
+			System.out.println("No application found");
+			return;
+		}
 		ApplicantEnquiryService service = new ApplicantEnquiryService(applicant.getApplication().getProject(),
 				applicant);
 		ApplicationView view = new ApplicationView(applicant.getApplication().getProject(), applicant);
