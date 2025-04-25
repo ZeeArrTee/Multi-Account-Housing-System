@@ -108,7 +108,7 @@ public class ManagerDisplay extends Display {
 	}
 
 	public void processRegistrations() {
-		List<User> pending = ManagerService.getPendingRegistration(project);
+		List<User> pending = RegistrationRepository.getRegistration(project);
 		if (pending == null) {
 			System.out.println("No pending registrations");
 			return;
