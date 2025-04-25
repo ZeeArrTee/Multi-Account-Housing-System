@@ -199,8 +199,9 @@ public class MainMenu {
 				System.out.println("Project Name: ");
 				projectName = s.next();
 				Project project2 = ProjectRepository.getProject(projectName);
-				if (user.getRole().get(user.getRole().size() - 1).compareTo("User") == 0) {
-					Officer officer = (Officer) user;
+				if (user.getRole().getLast().compareTo("User")==0) {
+					Officer officer =  new Officer(user.getName(),user.getUserID(),user.getAge(),user.getMaritalStatus(),user.getPassword(),project2);
+
 					Project proj = ProjectRepository.getProject(projectName);
 					officer.addProject(proj);
 					OfficerService.createRegistration(user, proj);
