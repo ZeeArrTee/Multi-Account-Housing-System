@@ -47,7 +47,7 @@ public class OfficerService extends OfficerDisplay {
 			i++;
 		}
 		choice = MainMenu.s.nextInt();
-		while (choice < 1 || choice > i || choice != 0 || !canRegister(officer, projects.get(choice))) {
+		while ((choice < 0 || choice > i) && !canRegister(officer, projects.get(choice))) {
 			System.out.println("Invalid Choice!");
 			choice = MainMenu.s.nextInt();
 		}
