@@ -119,16 +119,15 @@ public class MainMenu {
 			for (Project project : projects) {
 				Map<String, Integer> units = project.getUnits();
 				boolean visible = project.getVisibility();
-				for (String key : units.keySet()) {
-					if (app.getMaritalStatus() == "Single" && units.keySet().contains("3-Room")) {
-						visible = false;
-					}
-					if (app.getMaritalStatus() == "Single" && app.getAge() < 35) {
-						visible = false;
-					}
-					if (app.getMaritalStatus() == "Married" && app.getAge() < 21) {
-						visible = false;
-					}
+				if (app.getMaritalStatus().compareTo("Single") == 0 && units.keySet().contains("3-Room")
+						&& units.get("3-Room") > 0) {
+					visible = false;
+				}
+				if (app.getMaritalStatus().compareTo("Single") == 0 && app.getAge() < 35) {
+					visible = false;
+				}
+				if (app.getMaritalStatus().compareTo("Married") == 0 && app.getAge() < 21) {
+					visible = false;
 				}
 				if (!visible) {
 					visible = project.getApplications().contains(app.getApplication());
