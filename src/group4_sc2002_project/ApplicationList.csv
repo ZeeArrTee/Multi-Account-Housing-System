@@ -1,3 +1,4 @@
 UserID, Flat Type, Withdrawal Requested?, Withdrawal Status, Project Name
-S1234567A,2-Room,false,Pending,a
-a,2-Room,false,Pending,a
+S1234567A,2-Room,FALSE,Pending,a
+b,2-Room,FALSE,Pending,a
+a,2-Room,FALSE,Pending,a

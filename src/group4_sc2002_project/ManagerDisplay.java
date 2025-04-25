@@ -215,14 +215,14 @@ public class ManagerDisplay extends Display {
 
 	public void enquiryMenu() {
 		List<Enquiry> enquiries = project.getEnquiries().stream().filter(enq -> enq.getReply().isEmpty()).toList();
-		for (int i = 1; i <= enquiries.size(); i++) {
+		for (int i = 0; i < enquiries.size(); i++) {
 			Enquiry enquiry = enquiries.get(i - 1);
 			System.out.println("Enquiry ID: " + enquiry.getId() + ", Applicant: " + enquiry.getApplicant().getUserID()
 					+ ", Enquiry:" + enquiry.getContent());
 		}
 		System.out.println("Choose enquiryID to reply to");
 		int choice = MainMenu.s.nextInt();
-		while (choice < 1 || choice > enquiries.size()) {
+		while (choice < 0 || choice >= enquiries.size()) {
 			System.out.println("Invalid Choice");
 			choice = MainMenu.s.nextInt();
 		}

@@ -13,6 +13,7 @@ public class ApplicantEnquiryService implements ApplicantEnquiryView {
 	public void submitEnquiry(String message) {
 		Enquiry enquiry = new Enquiry(project.getEnquiryCount(), applicant, message);
 		project.addEnquiry(enquiry);
+		applicant.addEnquiryId(project.getEnquiryCount());
 		project.incrementEnquiryCount();
 		EnquiryRepository.addEnquiry(enquiry);
 	}
@@ -20,7 +21,7 @@ public class ApplicantEnquiryService implements ApplicantEnquiryView {
 	public void editEnquiry(int enquiryId, String message) {
 		Enquiry enquiry = project.getEnquiry(enquiryId);
 		enquiry.setContent(message);
-	}
+	}	
 
 	public void deleteEnquiry(int enquiryId) {
 		project.removeEnquiry(enquiryId);
