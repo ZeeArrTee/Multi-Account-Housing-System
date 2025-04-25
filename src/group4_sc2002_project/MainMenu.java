@@ -54,6 +54,11 @@ public class MainMenu {
 				}
 				System.out.println("Key in your userID: ");
 				userID = s.next();
+				while (!userID.matches("^[STFG]\\d{7}[A-Z]$")) {
+					System.out.println("Invalid NRIC format");
+					System.out.println("Key in your userID: ");
+					userID = s.next();
+				}
 				System.out.println("Key in your password:");
 				password = s.next();
 				System.out.println("Key in your age:");
@@ -162,6 +167,12 @@ public class MainMenu {
 				Project project = ProjectRepository.getProject(projectName);
 				ProjectService.displayProject(project);
 				ApplicationView appView = new ApplicationView(project, user);
+				if (user instanceof Applicant) {
+					if (((Applicant) user).getApplication().getStatus() == ApplicationStatus.Booked) {
+						System.out.println("You already have a flat booked");
+						break;
+					}
+				}
 				System.out.println("Choose the flat type");
 				String flatType = s.next();
 				while (!project.getUnits().keySet().contains(flatType)) {
