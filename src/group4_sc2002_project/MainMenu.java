@@ -54,6 +54,11 @@ public class MainMenu {
 				}
 				System.out.println("Key in your userID: ");
 				userID = s.next();
+				while (!userID.matches("^[STFG]\\d{7}[A-Z]$")) {
+					System.out.println("Invalid NRIC format");
+					System.out.println("Key in your userID: ");
+					userID = s.next();
+				}
 				System.out.println("Key in your password:");
 				password = s.next();
 				System.out.println("Key in your age:");
@@ -117,6 +122,9 @@ public class MainMenu {
 					if (app.getMaritalStatus() == "Single" && units.keySet().contains("3-Room")) {
 						visible = false;
 					}
+					if (app.getMaritalStatus() == "Single" && app.getAge() < 35) {
+						visible = false;
+					}
 				}
 				if (!visible) {
 					visible = project.getApplications().contains(app.getApplication());
@@ -142,7 +150,7 @@ public class MainMenu {
 		System.out.println();
 	}
 
-	public static void projectsMenu(User user) {
+	public static User projectsMenu(User user) {
 		int choice;
 		String projectName;
 		do {
@@ -156,13 +164,19 @@ public class MainMenu {
 			switch (choice) {
 			case 1:
 				viewProjects(user);
-				break;
+				return user;
 			case 2:
 				System.out.println("Project Name: ");
 				projectName = s.next();
 				Project project = ProjectRepository.getProject(projectName);
 				ProjectService.displayProject(project);
 				ApplicationView appView = new ApplicationView(project, user);
+				if (user instanceof Applicant) {
+					if (((Applicant) user).getApplication().getStatus() == ApplicationStatus.Booked) {
+						System.out.println("You already have a flat booked");
+						break;
+					}
+				}
 				System.out.println("Choose the flat type");
 				String flatType = s.next();
 				while (!project.getUnits().keySet().contains(flatType)) {
@@ -205,10 +219,13 @@ public class MainMenu {
 				}
 				
 				break;
+				
 			default:
-				return;
+				return user;
 			}
 		} while (choice < 4);
+		return user;
+
 	}
 
 	public static void viewApplications(Applicant applicant) {
@@ -219,8 +236,13 @@ public class MainMenu {
 	public static void applicantMenu(Applicant applicant) {
 		int choice = 7;
 		ApplicantDisplay display = new ApplicantDisplay(applicant);
+		if (applicant.getApplication() == null) {
+			System.out.println("No application found");
+			return;
+		}
 		ApplicantEnquiryService service = new ApplicantEnquiryService(applicant.getApplication().getProject(),
 				applicant);
+		ApplicationView view = new ApplicationView(applicant.getApplication().getProject(), applicant);
 		String message = "";
 		int id;
 		do {
@@ -232,7 +254,8 @@ public class MainMenu {
 			System.out.println("4) View Enquiry");
 			System.out.println("5) View All Enquiries");
 			System.out.println("6) Delete Enquiry");
-			System.out.println("7) Exit");
+			System.out.println("7) Withdraw Application");
+			System.out.println("8) Exit");
 			choice = s.nextInt();
 			switch (choice) {
 			case 1:
@@ -262,11 +285,15 @@ public class MainMenu {
 				System.out.println("Enquiry ID:");
 				id = s.nextInt();
 				service.deleteEnquiry(id);
+			case 7:
+				view.requestWithdrawal();
+				System.out.println("Application Withdrawal sent");
+				break;
 			default:
 				System.out.println("Invalid option, exiting");
 				break;
 			}
-		} while (choice < 7);
+		} while (choice < 8);
 	}
 
 	public static void managerDashboard(User user) {
@@ -489,7 +516,8 @@ public class MainMenu {
 			System.out.println("1) Apply for a Project as an Applicant");
 			System.out.println("2) Project Officer Registration");
 			System.out.println("3) Project Menu");
-			System.out.println("4) Exit");
+			System.out.println("4) Generate Receipt");
+			System.out.println("5) Exit");
 			choice = menu.nextInt();
 			switch (choice) {
 			case 1:
@@ -502,10 +530,26 @@ public class MainMenu {
 				OfficerProjectMenu(officer);
 				break;
 			case 4:
+				List<Application> apps = ApplicationRepository.getApplications();
+				for (int i = 1; i <= apps.size(); i++) {
+					Application app = apps.get(i - 1);
+					System.out.println(i - 1 + ". Applicant: " + app.getApplicant().getUserID() + " Project: "
+							+ app.getProject().getProjectName());
+
+				}
+				int appId = menu.nextInt();
+				while (appId < 1 || appId > apps.size()) {
+					System.out.println("Invalid option");
+					appId = menu.nextInt();
+				}
+				Receipt receipt = display.generateReceipt(apps.get(appId - 1));
+				receipt.display();
+				break;
+			case 5:
 				System.out.println("Returning to main menu...");
 				break;
 			}
-		} while (choice < 4);
+		} while (choice < 5);
 	}
 
 	public static Manager projectCreation(User user) {
@@ -593,7 +637,7 @@ public class MainMenu {
 					System.out.println("Login to access!");
 					break;
 				}
-				projectsMenu(user);
+				user = projectsMenu(user);
 				break;
 			case 3:
 				if (user == null) {

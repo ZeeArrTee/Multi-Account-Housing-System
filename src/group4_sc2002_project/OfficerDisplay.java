@@ -124,9 +124,6 @@ public class OfficerDisplay extends Display {
 					int flatCount = project.getAvailableUnitsCount(flatType);
 
 					application.setStatus(ApplicationStatus.Booked);
-					Applicant app = application.getApplicant();
-					UserRepository.updateUsers(app, new User(app.getName(), app.getUserID(), app.getAge(),
-							app.getMaritalStatus(), app.getPassword(), "User"));
 					project.setUnits(flatType, flatCount - 1);
 				}
 			}

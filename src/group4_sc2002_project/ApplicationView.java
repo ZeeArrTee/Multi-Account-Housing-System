@@ -9,6 +9,10 @@ public class ApplicationView {
 		this.project = project;
 		this.user = user;
 		this.application = null;
+		if (user instanceof Applicant) {
+			application = ((Applicant) user).getApplication();
+		}
+
 	}
 
 	public void requestWithdrawal() {
@@ -31,13 +35,13 @@ public class ApplicationView {
 	}
 
 	public static void displayApplication(Application app) {
-		System.out.println("Project: " + app.getProject().getProjectName() + "Flat Type: " + app.getFlatType()
+		System.out.println("Project: " + app.getProject().getProjectName() + " Flat Type: " + app.getFlatType()
 				+ " Pending Withdrawal: " + app.getPendingWithdrawal() + " Status: " + app.getStatus());
 	}
 
 	public static boolean isEligible(User user, String flatType) {
 		if (user.getMaritalStatus().compareTo("Single") == 0 && user.getAge() >= 35) {
-			return flatType.compareTo("2-Room")==0;
+			return flatType.compareTo("2-Room") == 0;
 		} else if (user.getMaritalStatus().compareTo("Married") == 0 && user.getAge() >= 21) {
 			return true;
 		} else {

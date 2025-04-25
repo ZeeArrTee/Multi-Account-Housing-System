@@ -25,6 +25,10 @@ public class EnquiryRepository {
 		enquiries.add(enquiry);
 	}
 
+	public static void removeEnquiry(Enquiry enquiry) {
+		enquiries.remove(enquiry);
+	}
+
 	public List<Enquiry> loadEnquiriesFromFile(String fileName) {
 		try (BufferedReader br = new BufferedReader(
 				new FileReader(System.getProperty("user.dir") + "\\src\\group4_sc2002_project\\" + fileName))) {

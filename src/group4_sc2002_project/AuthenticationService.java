@@ -32,7 +32,6 @@ public class AuthenticationService {
 		appRepo.saveApplications();
 		regRepo.saveregistrations();
 		enqRepo.saveEnquiries();
-		
 	}
 
 	public static User getUser(String userId) {
