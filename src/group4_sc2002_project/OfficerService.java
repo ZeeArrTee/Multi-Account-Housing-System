@@ -99,7 +99,7 @@ public class OfficerService extends OfficerDisplay {
 		if (choice == 0) {
 			System.out.println("Returning to menu...");
 		} else {
-			createRegistration(officer, projects.get(choice));
+			createRegistration(officer, projects.get(choice-1));
 			System.out.println("Successfully registered for project!");
 
 		}
