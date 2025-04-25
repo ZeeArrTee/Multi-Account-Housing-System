@@ -335,7 +335,7 @@ public class MainMenu {
 				System.out.println("4) Change Project Visibility");
 				System.out.println("5) View Created Projects");
 				System.out.println("6) Exit");
-				int choice2 = s.nextInt();
+				int choice2 = menu.nextInt();
 				switch (choice2) {
 				case 1:
 					System.out.print("Enter project name: ");
@@ -441,9 +441,12 @@ public class MainMenu {
 				display.enquiryMenu();
 				break;
 			case 8:
+				if (service == null) {
+					System.out.println("Choose a project first");
+					break;
+				}
 				for (Applicant app : service.getApplicants()) {
 					service.displayApplicant(app);
-
 				}
 				break;
 			case 9:
@@ -675,6 +678,7 @@ public class MainMenu {
 					break;
 				}
 				managerDashboard(user);
+				break;
 			case 6:
 				if (user == null) {
 					System.out.println("Login to access!");

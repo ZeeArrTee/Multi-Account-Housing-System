@@ -188,8 +188,7 @@ public class ManagerDisplay extends Display {
 				}
 			}
 			for (int i = 1; i <= apps.size(); i++) {
-				Application application = apps.get(i-1);
-
+				Application application = apps.get(i - 1);
 				System.out.println(i + ". " + application.getApplicant().getUserID()
 						+ application.getApplicant().getAge() + application.getFlatType());
 			}

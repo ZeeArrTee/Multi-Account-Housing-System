@@ -76,9 +76,9 @@ public class ManagerService {
 	}
 
 	public void displayApplicant(Applicant applicant) {
+		String a = (applicant.getApplication() == null) ? "Yes" : "No";
 		System.out.println("Name: " + applicant.getName() + " ID: " + applicant.getUserID() + " Marital Status: "
-				+ applicant.getMaritalStatus() + "Age: " + applicant.getAge() + " Has pending application: "
-				+ (applicant.getApplication() == null) != null ? "Yes" : "No");
+				+ applicant.getMaritalStatus() + "Age: " + applicant.getAge() + " Has pending application: " + a);
 	}
 
 	public List<Application> getApplications() {

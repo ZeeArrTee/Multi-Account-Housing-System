@@ -18,6 +18,10 @@ public class Officer extends Applicant {
 		return registrationStatus;
 	}
 
+	public void setRegistrationStatus(String status) {
+		registrationStatus = status;
+	}
+
 	public List<Project> getHandledProjects() {
 		return handledProject;
 	}
