@@ -160,7 +160,7 @@ public class MainMenu {
 		do {
 			System.out.println("Projects Page:");
 			System.out.println("Enter your choice:");
-			System.out.println("1) View Projects");
+			System.out.println("1) View Projects");	
 			System.out.println("2) Apply for project");
 			System.out.println("3) Register as an officer for a project");
 			System.out.println("4) Exit");
@@ -581,12 +581,12 @@ public class MainMenu {
 			officerSlots = s.nextInt();
 		}
 		while (true) {
-			System.out.print("Enter flat type (e.g., 2-Room, 3-Room): ");
+			System.out.print("Enter flat type (e.g., 2-Room, 3-Room): (Enter # to exit)");
 			String flatType = s.next();
 			if (flatType.equals("#"))
 				break;
 
-			System.out.print("Enter number of units for " + flatType + ": (Enter # to exit)");
+			System.out.print("Enter number of units for " + flatType + ": ");
 			try {
 				int count = Integer.parseInt(s.next());
 				units.put(flatType, count);

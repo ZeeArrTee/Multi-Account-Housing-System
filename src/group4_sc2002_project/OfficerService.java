@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class OfficerService extends OfficerDisplay {
 	private Officer officer;
 	private List<Project> projects = new ArrayList<Project>();
-	private List<Project> handledProject = new ArrayList<Project>();
+	private static List<Project> handledProject = new ArrayList<Project>();
 
 	OfficerService(Officer officer) {
 		super(officer);
@@ -25,6 +25,7 @@ public class OfficerService extends OfficerDisplay {
 			temp = new ArrayList<User>();
 		}
 		temp.add(user);
+		handledProject.add(project);
 		UserRepository.getUser(user.getUserID()).modifyRole("Officer");
 		RegistrationRepository.getRegistrations().put(project, temp);
 	}

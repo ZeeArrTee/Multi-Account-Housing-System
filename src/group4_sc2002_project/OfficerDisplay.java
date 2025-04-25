@@ -22,7 +22,7 @@ public class OfficerDisplay extends Display {
 		System.out.println("Select your project:");
 		int i = 1;
 		int choice = Integer.MAX_VALUE;
-
+		
 		for (Project project : projects) {
 			System.out.println(i + ": " + project.getProjectName());
 			i++;
@@ -107,7 +107,7 @@ public class OfficerDisplay extends Display {
 		for (Project project : outprojects) {
 			List<Application> apps = project.getApplications();
 			for (int i = 1; i <= apps.size(); i++) {
-				Application application = apps.get(i);
+				Application application = apps.get(i-1);
 				System.out.println(i + ". " + application.getApplicant().getUserID()
 						+ application.getApplicant().getAge() + application.getFlatType());
 

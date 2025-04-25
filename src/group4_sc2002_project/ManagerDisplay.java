@@ -200,12 +200,12 @@ public class ManagerDisplay extends Display {
 			}
 			System.out.println("Approve? (Y/N)");
 			String decision = MainMenu.s.next();
-			while (!(decision == "Y" || decision == "N")) {
+			while (!(decision.compareTo("Y") == 0|| decision.compareTo("N") == 0)) {
 				System.out.println("Invalid Choice");
 				System.out.println("Approve? (Y/N)");
 				decision = MainMenu.s.next();
 			}
-			service.processApplication(apps.get(chosen), (decision == "Y"));
+			service.processApplication(apps.get(chosen), (decision.compareTo("Y") == 0));
 			break;
 		default:
 			System.out.println("Invalid choice");
