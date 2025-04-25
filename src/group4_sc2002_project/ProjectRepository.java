@@ -72,8 +72,10 @@ public class ProjectRepository {
 						managerInCharge);
 				if (parts.length == 8) {
 					String[] officerIds = parts[7].split(";");
+
 					for (String id : officerIds) {
 						Officer officer = (Officer) UserRepository.getUser(id);
+
 						project.addOfficer(officer);
 						officer.addProject(project);
 					}

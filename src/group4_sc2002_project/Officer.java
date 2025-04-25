@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Officer extends Applicant {
-	private List<Project> handledProject = new ArrayList<Project>();
+	private List<Project> handledProject;
 	private String registrationStatus;
 
 	public Officer(String name, String userID, int age, String maritalStatus, String password, Project project) {
 		super(name, userID, age, maritalStatus, password);
 		super.modifyRole("Officer");
-		handledProject.add(project);
+		handledProject = new ArrayList<Project>();
+
+		if (project != null) {
+			handledProject.add(project);
+		}
 		registrationStatus = "Pending";
 	}
 

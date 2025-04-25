@@ -76,7 +76,7 @@ public class UserRepository {
 					loaded.add(new Applicant(name, id, age, status, pw));
 					break;
 				case "Officer":
-					loaded.add(new Officer(name, id, age, status, pw, null)); // add code to find their project
+					loaded.add(new Officer(name, id, age, status, pw, null));
 					break;
 				case "Manager":
 					loaded.add(new Manager(name, id, age, status, pw));

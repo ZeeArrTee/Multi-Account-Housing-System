@@ -200,11 +200,9 @@ public class ManagerDisplay extends Display {
 			}
 			System.out.println("Approve? (Y/N)");
 			String decision = MainMenu.s.next();
-<<<<<<< HEAD
-			while (!(decision.compareTo("Y") == 0|| decision.compareTo("N") == 0)) {
-=======
+
 			while (!(decision.compareTo("Y") == 0 || decision.compareTo("N") == 0)) {
->>>>>>> e6b504d375f3433d78c5f563b92c15cf9dee8ec3
+
 				System.out.println("Invalid Choice");
 				System.out.println("Approve? (Y/N)");
 				decision = MainMenu.s.next();
