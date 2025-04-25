@@ -57,7 +57,7 @@ public class OfficerService extends OfficerDisplay {
 			List<String> flatTypes = new ArrayList<String>();
 			flatTypes.add("2-room");
 			flatTypes.add("3-room");
-			Project project = projects.get(choice);
+			Project project = projects.get(choice-1);
 			ApplicationView app = new ApplicationView(project, officer);
 			String room;
 
