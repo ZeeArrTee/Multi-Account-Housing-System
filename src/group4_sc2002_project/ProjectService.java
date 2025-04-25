@@ -115,7 +115,7 @@ public class ProjectService implements ProjectView {
 
 	public void addOfficer(String projectName, Officer officer) {
 		for (Project project : projectListing) {
-			if (project.getProjectName() == projectName) {
+			if (project.getProjectName().compareTo(projectName) == 0) {
 				project.addOfficer(officer);
 			}
 		}
@@ -123,7 +123,7 @@ public class ProjectService implements ProjectView {
 
 	public void removeOfficer(String projectName, Officer officer) {
 		for (Project project : projectListing) {
-			if (project.getProjectName() == projectName) {
+			if (project.getProjectName().compareTo(projectName) == 0) {
 				project.removeOfficer(officer);
 			}
 		}
@@ -131,7 +131,7 @@ public class ProjectService implements ProjectView {
 
 	public void toggleVisibility(String projectName) {
 		for (Project project : projectListing) {
-			if (project.getProjectName() == projectName) {
+			if (project.getProjectName().compareTo(projectName) == 0) {
 				project.toggleVisibility();
 			}
 		}
@@ -139,7 +139,7 @@ public class ProjectService implements ProjectView {
 
 	public void setProjectName(String projectName, String newName) {
 		for (Project project : projectListing) {
-			if (project.getProjectName() == projectName) {
+			if (project.getProjectName().compareTo(projectName) == 0) {
 				project.setProjectName(newName);
 			}
 		}
@@ -147,7 +147,7 @@ public class ProjectService implements ProjectView {
 
 	public void setUnits(String projectName, String flatType, int count) {
 		for (Project project : projectListing) {
-			if (project.getProjectName() == projectName) {
+			if (project.getProjectName().compareTo(projectName) == 0) {
 				project.setUnits(flatType, count);
 			}
 		}
@@ -155,7 +155,7 @@ public class ProjectService implements ProjectView {
 
 	public void setOpenDate(String projectName, LocalDate date) {
 		for (Project project : projectListing) {
-			if (project.getProjectName() == projectName) {
+			if (project.getProjectName().compareTo(projectName) == 0) {
 				project.setOpenDate(date);
 			}
 		}
@@ -163,7 +163,7 @@ public class ProjectService implements ProjectView {
 
 	public void setCloseDate(String projectName, LocalDate date) {
 		for (Project project : projectListing) {
-			if (project.getProjectName() == projectName) {
+			if (project.getProjectName().compareTo(projectName) == 0) {
 				project.setCloseDate(date);
 			}
 		}
