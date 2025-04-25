@@ -583,7 +583,7 @@ public class MainMenu {
 			if (flatType.equals("#"))
 				break;
 
-			System.out.print("Enter number of units for " + flatType + ": ");
+			System.out.print("Enter number of units for " + flatType + ": (Enter # to exit)");
 			try {
 				int count = Integer.parseInt(s.next());
 				units.put(flatType, count);
