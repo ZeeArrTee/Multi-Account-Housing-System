@@ -199,9 +199,9 @@ public class MainMenu {
 				System.out.println("Project Name: ");
 				projectName = s.next();
 				Project project2 = ProjectRepository.getProject(projectName);
-				if (user.getRole().get(user.getRole().size()-1).compareTo("User")==0) {
-					Officer officer =  new Officer(user.getName(),user.getUserID(),user.getAge(), 
-							user.getMaritalStatus(),user.getPassword(),project2);
+				if (user.getRole().get(user.getRole().size() - 1).compareTo("User") == 0) {
+					Officer officer = new Officer(user.getName(), user.getUserID(), user.getAge(),
+							user.getMaritalStatus(), user.getPassword(), project2);
 
 					Project proj = ProjectRepository.getProject(projectName);
 					officer.addProject(proj);
@@ -652,7 +652,7 @@ public class MainMenu {
 					System.out.println("Login to access!");
 					break;
 				}
-				if (user.getRole().contains("Applicant") || user.getRole().contains("Officer")) {
+				if (user.getRole().contains("Applicant")) {
 					applicantMenu((Applicant) user);
 				} else {
 					System.out.println("Not an applicant");
