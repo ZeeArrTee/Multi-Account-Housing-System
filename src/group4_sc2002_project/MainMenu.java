@@ -54,7 +54,7 @@ public class MainMenu {
 				}
 				System.out.println("Key in your userID: ");
 				userID = s.next();
-				while (!userID.matches("^[STFG]\\d{7}[A-Z]$")) {
+				while (!userID.matches("(?i)^[STFG]\\d{7}[A-Z]$")) {
 					System.out.println("Invalid NRIC format");
 					System.out.println("Key in your userID: ");
 					userID = s.next();
@@ -198,31 +198,30 @@ public class MainMenu {
 				System.out.println("Project Name: ");
 				projectName = s.next();
 				Project project2 = ProjectRepository.getProject(projectName);
-				if (user.getRole().getLast().compareTo("User")==0) {
+				if (user.getRole().getLast().compareTo("User") == 0) {
 					Officer officer = (Officer) user;
 					Project proj = ProjectRepository.getProject(projectName);
 					officer.addProject(proj);
 					OfficerService.createRegistration(user, proj);
 					user = officer;
-				}
-				else {
+				} else {
 					Applicant appli = (Applicant) user;
 					Project pro = appli.getApplication().getProject();
 					if (project2.isWithinApplicationPeriod(pro.getOpeningDate())) {
 						System.out.println("Unable to register for project! (Clashing dates!!)");
 						break;
-					}
-					else {
+					} else {
 						OfficerService.createRegistration(user, project2);
-						Officer officer = new Officer(user.getName(),user.getUserID(),user.getAge(),user.getMaritalStatus(),user.getPassword(),project2);
+						Officer officer = new Officer(user.getName(), user.getUserID(), user.getAge(),
+								user.getMaritalStatus(), user.getPassword(), project2);
 						UserRepository.updateUsers(user, officer);
 						user = officer;
 						break;
 					}
 				}
-				
+
 				break;
-				
+
 			default:
 				return user;
 			}
