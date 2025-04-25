@@ -125,6 +125,9 @@ public class MainMenu {
 					if (app.getMaritalStatus() == "Single" && app.getAge() < 35) {
 						visible = false;
 					}
+					if (app.getMaritalStatus() == "Married" && app.getAge() < 21) {
+						visible = false;
+					}
 				}
 				if (!visible) {
 					visible = project.getApplications().contains(app.getApplication());
@@ -259,7 +262,7 @@ public class MainMenu {
 				break;
 			default:
 				System.out.println("Invalid option, exiting");
-				break;
+				return;
 			}
 		} while (choice < 8);
 	}
