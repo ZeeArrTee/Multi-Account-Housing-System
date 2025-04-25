@@ -122,6 +122,9 @@ public class MainMenu {
 					if (app.getMaritalStatus() == "Single" && units.keySet().contains("3-Room")) {
 						visible = false;
 					}
+					if (app.getMaritalStatus() == "Single" && app.getAge() < 35) {
+						visible = false;
+					}
 				}
 				if (!visible) {
 					visible = project.getApplications().contains(app.getApplication());
