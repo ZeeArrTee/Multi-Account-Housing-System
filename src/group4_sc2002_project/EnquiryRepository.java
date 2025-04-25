@@ -41,7 +41,7 @@ public class EnquiryRepository {
 					continue;
 				}
 				String[] parts = line.split(",");
-				if (parts.length < 5) {
+				if (parts.length < 4) {
 					continue;
 				}
 

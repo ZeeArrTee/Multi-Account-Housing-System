@@ -452,7 +452,7 @@ public class MainMenu {
 				System.out.println("Returning to main menu...");
 				break;
 			}
-		} while (choice < 4);
+		} while (choice < 9);
 
 	}
 

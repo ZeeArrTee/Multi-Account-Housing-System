@@ -1,6 +1,5 @@
 package group4_sc2002_project;
 
-import java.util.HashMap;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -41,7 +40,7 @@ public class RegistrationRepository {
 					continue;
 				}
 				String[] parts = line.split(",");
-				if (parts.length < 5)
+				if (parts.length < 2)
 					continue;
 
 				String projectName = parts[0];
