@@ -150,7 +150,8 @@ public class MainMenu {
 			System.out.println("Enter your choice:");
 			System.out.println("1) View Projects");
 			System.out.println("2) Apply for project");
-			System.out.println("3) Exit");
+			System.out.println("3) Register as an officer for a project");
+			System.out.println("4) Exit");
 			choice = s.nextInt();
 			switch (choice) {
 			case 1:
@@ -176,10 +177,38 @@ public class MainMenu {
 				UserRepository.updateUsers(user, applicant);
 				user = applicant;
 				break;
+			case 3:
+				System.out.println("Project Name: ");
+				projectName = s.next();
+				Project project2 = ProjectRepository.getProject(projectName);
+				if (user.getRole().getLast().compareTo("User")==0) {
+					Officer officer = (Officer) user;
+					Project proj = ProjectRepository.getProject(projectName);
+					officer.addProject(proj);
+					OfficerService.createRegistration(user, proj);
+					user = officer;
+				}
+				else {
+					Applicant appli = (Applicant) user;
+					Project pro = appli.getApplication().getProject();
+					if (project2.isWithinApplicationPeriod(pro.getOpeningDate())) {
+						System.out.println("Unable to register for project! (Clashing dates!!)");
+						break;
+					}
+					else {
+						OfficerService.createRegistration(user, project2);
+						Officer officer = new Officer(user.getName(),user.getUserID(),user.getAge(),user.getMaritalStatus(),user.getPassword(),project2);
+						UserRepository.updateUsers(user, officer);
+						user = officer;
+						break;
+					}
+				}
+				
+				break;
 			default:
 				return;
 			}
-		} while (choice < 3);
+		} while (choice < 4);
 	}
 
 	public static void viewApplications(Applicant applicant) {
