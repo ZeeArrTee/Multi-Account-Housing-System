@@ -45,8 +45,10 @@ public class ManagerService {
 
 	public static void processRegistration(User user, Project project) {
 		registrations.remove(user);
-		UserRepository.updateUsers(user, new Officer(user.getName(), user.getUserID(), user.getAge(),
-				user.getMaritalStatus(), user.getPassword(), project));
+		Officer officer = new Officer(user.getName(), user.getUserID(), user.getAge(),
+				user.getMaritalStatus(), user.getPassword(), project)
+		UserRepository.updateUsers(user, officer);
+		project.addOfficer(officer);
 	}
 
 	public boolean processApplication(Application application, boolean decision) {
